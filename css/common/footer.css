@@ -1,0 +1,22 @@
+footer{
+    background-color: var(--green-dark);
+}
+
+img{
+    height: 75px;
+}
+.container{
+    display: flex;
+    justify-content:space-around;
+}
+.extra{
+    width: 200px;
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
