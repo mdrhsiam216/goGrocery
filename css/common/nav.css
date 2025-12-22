@@ -1,0 +1,32 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+nav{
+    background-color:var(--green-dark) ;
+    height: 75px;
+    display: flex;
+    gap: 60px;
+}
+nav img{
+    height: 75px;
+}
+nav div{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+nav div ul{
+    display: flex;
+    list-style: none;
+    gap: 50px;
+}
+
+nav div ul li a{
+    text-decoration: none;
+    color: white;
+}
+nav a{
+    font-size: 24px;
+}

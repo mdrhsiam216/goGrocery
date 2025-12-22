@@ -1,0 +1,53 @@
+/* Color palette (CSS variables) */
+:root {
+    /* primary */
+    --green-primary: #2ECC71;   /* Fresh leafy green (main brand color) */
+    --green-dark:    #27AE60;   /* For hover states / emphasis */
+
+    /* secondary */
+    --teal-secondary: #16A085;  /* Clean & healthy feel */
+    --mint-light:     #E8F8F5;  /* Backgrounds / sections */
+
+    /* accent color  */
+    --yellow-accent: #F4D03F;   /* Adds energy, CTA buttons, highlights */
+
+    /* neutral  */
+    --text-dark:   #2C3E50;     /* Main text */
+    --text-muted:  #7F8C8D;     /* Secondary text */
+    --bg-white:    #FFFFFF;
+    --border-light:#ECF0F1;
+}
+
+/* ===== Reusable utility classes for colors ===== */
+
+/* Background utilities */
+.bg-primary        { background-color: var(--green-primary) !important; color: var(--bg-white); }
+.bg-primary-dark   { background-color: var(--green-dark) !important; color: var(--bg-white); }
+.bg-secondary      { background-color: var(--teal-secondary) !important; color: var(--bg-white); }
+.bg-mint           { background-color: var(--mint-light) !important; color: var(--text-dark); }
+.bg-accent         { background-color: var(--yellow-accent) !important; color: var(--text-dark); }
+.bg-white          { background-color: var(--bg-white) !important; color: var(--text-dark); }
+
+/* Text color utilities */
+.text-primary      { color: var(--green-primary) !important; }
+.text-primary-dark { color: var(--green-dark) !important; }
+.text-secondary    { color: var(--teal-secondary) !important; }
+.text-muted        { color: var(--text-muted) !important; }
+.text-dark         { color: var(--text-dark) !important; }
+
+/* Border utilities */
+.border-light      { border-color: var(--border-light) !important; }
+.border-primary    { border-color: var(--green-primary) !important; }
+
+/* Small component example */
+.btn-primary {
+    background-color: var(--green-primary);
+    color: var(--bg-white);
+    border: 1px solid var(--green-dark);
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    display: inline-block;
+    text-decoration: none;
+}
+.btn-primary:hover { background-color: var(--green-dark); }
+
