@@ -16,17 +16,11 @@ nav div{
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-nav div ul{
-    display: flex;
-    list-style: none;
     gap: 50px;
+    
 }
-
-nav div ul li a{
+nav div a{
     text-decoration: none;
     color: white;
-}
-nav a{
     font-size: 24px;
 }
