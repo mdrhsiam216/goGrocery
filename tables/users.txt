@@ -1,0 +1,5 @@
+-id [pk]
+-name
+-email
+-password
+-role [admin,customer(default), manager, rider, shop]
