@@ -13,33 +13,10 @@
     <!-- Header -->
     <header class="header">
       <div class="header-container">
-        <a href="home.html" class="header-logo">
+        <a href="../../index.html" class="header-logo">
           <img src="../../assets/images/logo.png" alt="GoGrocery" />
         </a>
-        <div class="header-search">
-          <form class="search-form" action="search.html" method="GET">
-            <input
-              type="text"
-              class="search-input"
-              name="q"
-              placeholder="Search for products..."
-            />
-            <button type="submit" class="search-btn">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </svg>
-            </button>
-          </form>
-        </div>
+        
         <div class="header-actions">
           <a href="cart.html" class="header-link cart-link">
             <svg
@@ -116,18 +93,6 @@
                 </p>
               </div>
 
-              <div class="address-card">
-                <div class="address-card-header">
-                  <span class="address-label">Office</span>
-                </div>
-                <p>
-                  John Doe<br />
-                  456 Business Ave, Floor 12<br />
-                  New York, NY 10002<br />
-                  +1 (555) 987-6543
-                </p>
-              </div>
-
               <div class="add-address-btn">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -152,29 +117,6 @@
             <h3><span class="step">2</span> Payment Method</h3>
 
             <div class="payment-methods">
-              <label class="payment-option selected">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="card"
-                  checked
-                />
-                <img
-                  src="/placeholder.svg?height=24&width=40"
-                  alt="Credit Card"
-                />
-                <span>Credit / Debit Card</span>
-              </label>
-
-              <label class="payment-option">
-                <input type="radio" name="payment" value="paypal" />
-                <img
-                  src="/placeholder.svg?height=24&width=60"
-                  alt="PayPal"
-                />
-                <span>PayPal</span>
-              </label>
-
               <label class="payment-option">
                 <input type="radio" name="payment" value="cod" />
                 <svg
@@ -194,65 +136,10 @@
               </label>
             </div>
 
-            <!-- Card Details (shown when card is selected) -->
-            <div class="card-details mt-3">
-              <div class="form-group">
-                <label class="form-label">Card Number</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="1234 5678 9012 3456"
-                />
-              </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
-                <div class="form-group">
-                  <label class="form-label">Expiry Date</label>
-                  <input type="text" class="form-control" placeholder="MM/YY" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">CVV</label>
-                  <input type="text" class="form-control" placeholder="123" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Cardholder Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="John Doe"
-                />
-              </div>
-            </div>
+            
           </div>
 
-          <!-- Delivery Time -->
-          <div class="checkout-section">
-            <h3><span class="step">3</span> Delivery Time</h3>
-
-            <div class="form-group">
-              <label class="form-label">Preferred Delivery Date</label>
-              <input type="date" class="form-control" />
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Preferred Time Slot</label>
-              <select class="form-control form-select">
-                <option value="">Select a time slot</option>
-                <option value="morning">Morning (9 AM - 12 PM)</option>
-                <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
-                <option value="evening">Evening (4 PM - 8 PM)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Delivery Instructions (Optional)</label>
-              <textarea
-                class="form-control"
-                rows="3"
-                placeholder="Any special instructions for delivery..."
-              ></textarea>
-            </div>
-          </div>
+          
         </div>
 
         <!-- Order Summary -->
