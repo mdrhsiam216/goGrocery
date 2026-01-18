@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fresh Mart - GoGrocery</title>
+    <link rel="stylesheet" href="../../assets/css/common/base.css" />
+    <link rel="stylesheet" href="../../assets/css/common/components.css" />
+    <link rel="stylesheet" href="../../assets/css/customer/layout.css" />
+    <link rel="stylesheet" href="../../assets/css/customer/shop.css" />
+    <link rel="stylesheet" href="../../assets/css/customer/home.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="home.html" class="header-logo">
+          <img src="../../assets/images/logo.png" alt="GoGrocery" />
+        </a>
+        <div class="header-search">
+          <form class="search-form" action="search.html" method="GET">
+            <input
+              type="text"
+              class="search-input"
+              name="q"
+              placeholder="Search in this shop..."
+            />
+            <button type="submit" class="search-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+        <div class="header-actions">
+          <a href="cart.html" class="header-link cart-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+            <span class="cart-badge">3</span>
+          </a>
+          <div class="user-menu">
+            <button class="user-menu-btn">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>John</span>
+            </button>
+            <div class="user-menu-dropdown">
+              <a href="../common/profile.html">My Profile</a>
+              <a href="orders.html">My Orders</a>
+              <a href="#" class="logout">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Shop Detail Header -->
+    <div class="shop-detail-header">
+      <div
+        class="shop-banner"
+        style="
+          background-image: url('/placeholder.svg?height=200&width=1200');
+        "
+      ></div>
+      <div class="shop-detail-info">
+        <div class="shop-detail-logo">
+          <img
+            src="/placeholder.svg?height=120&width=120"
+            alt="Fresh Mart"
+          />
+        </div>
+        <div class="shop-detail-content">
+          <h1>Fresh Mart Organic Store</h1>
+          <div class="shop-detail-meta">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                style="color: var(--accent-yellow)"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                ></polygon>
+              </svg>
+              4.8 (245 reviews)
+            </span>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              2.5 km away
+            </span>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              Open until 10:00 PM
+            </span>
+            <span>Delivery: $2.99</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shop Tabs -->
+      <div class="shop-tabs">
+        <button class="shop-tab active">All Products</button>
+        <button class="shop-tab">Fruits & Vegetables</button>
+        <button class="shop-tab">Dairy & Eggs</button>
+        <button class="shop-tab">Bakery</button>
+        <button class="shop-tab">Beverages</button>
+        <button class="shop-tab">About</button>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <main class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>All Products</h2>
+          <select class="sort-select form-select" style="width: auto">
+            <option value="popular">Most Popular</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="newest">Newest</option>
+          </select>
+        </div>
+
+        <div class="products-grid">
+          <!-- PHP: Loop through shop products -->
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Apples"
+              />
+              <span class="product-discount">-15%</span>
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Fruits</span>
+              <h3>Fresh Red Apples</h3>
+              <div class="product-price">
+                <span class="current">$3.49</span>
+                <span class="original">$4.10</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Bananas"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Fruits</span>
+              <h3>Organic Bananas (1kg)</h3>
+              <div class="product-price">
+                <span class="current">$2.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Broccoli"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Vegetables</span>
+              <h3>Fresh Broccoli</h3>
+              <div class="product-price">
+                <span class="current">$1.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Organic Milk"
+              />
+              <span class="product-discount">-10%</span>
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Dairy</span>
+              <h3>Organic Whole Milk</h3>
+              <div class="product-price">
+                <span class="current">$4.49</span>
+                <span class="original">$4.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Farm Fresh Eggs"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Dairy & Eggs</span>
+              <h3>Farm Fresh Eggs (12)</h3>
+              <div class="product-price">
+                <span class="current">$5.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Strawberries"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Fruits</span>
+              <h3>Fresh Strawberries</h3>
+              <div class="product-price">
+                <span class="current">$4.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Spinach"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Vegetables</span>
+              <h3>Organic Spinach (200g)</h3>
+              <div class="product-price">
+                <span class="current">$2.49</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Greek Yogurt"
+              />
+              <span class="product-discount">-20%</span>
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Dairy</span>
+              <h3>Greek Yogurt (500g)</h3>
+              <div class="product-price">
+                <span class="current">$3.99</span>
+                <span class="original">$4.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Orange Juice"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Beverages</span>
+              <h3>Fresh Orange Juice (1L)</h3>
+              <div class="product-price">
+                <span class="current">$4.49</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Ripe Avocados"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Fruits</span>
+              <h3>Ripe Avocados (3 pack)</h3>
+              <div class="product-price">
+                <span class="current">$5.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button class="pagination-btn" disabled>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </button>
+          <button class="pagination-btn active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <button class="pagination-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section footer-about">
+          <div class="footer-logo">
+            <img src="../../assets/images/logo.png" alt="GoGrocery" />
+          </div>
+          <p class="footer-description">
+            Your favorite local grocery stores, delivered fresh to your
+            doorstep.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="shops.html">Browse Shops</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 GoGrocery. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

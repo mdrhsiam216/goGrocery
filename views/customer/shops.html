@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse Shops - GoGrocery</title>
+    <link rel="stylesheet" href="../../assets/css/common/base.css" />
+    <link rel="stylesheet" href="../../assets/css/common/components.css" />
+    <link rel="stylesheet" href="../../assets/css/customer/layout.css" />
+    <link rel="stylesheet" href="../../assets/css/customer/shop.css" />
+  </head>
+  <body>
+    <!-- Header (Same as home.html) -->
+    <header class="header">
+      <div class="header-container">
+        <a href="home.html" class="header-logo">
+          <img src="../../assets/images/logo.png" alt="GoGrocery" />
+        </a>
+        <div class="header-search">
+          <form class="search-form" action="search.html" method="GET">
+            <input
+              type="text"
+              class="search-input"
+              name="q"
+              placeholder="Search for products, shops..."
+            />
+            <button type="submit" class="search-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+        <div class="header-actions">
+          <a href="cart.html" class="header-link cart-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+            <span class="cart-badge">3</span>
+          </a>
+          <div class="user-menu">
+            <button class="user-menu-btn">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>John</span>
+            </button>
+            <div class="user-menu-dropdown">
+              <a href="../common/profile.html">My Profile</a>
+              <a href="orders.html">My Orders</a>
+              <a href="#" class="logout">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="home.html">Home</a>
+          <span>/</span>
+          <span>Shops</span>
+        </div>
+        <h1>Browse Shops</h1>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+      <div class="shop-listing-container">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+          <div class="filter-section">
+            <h4>Categories</h4>
+            <!-- PHP: Loop through categories -->
+            <div class="filter-option">
+              <label>
+                <input type="checkbox" name="category[]" value="1" />
+                Grocery & Supermarket
+              </label>
+              <span class="filter-count">24</span>
+            </div>
+            <div class="filter-option">
+              <label>
+                <input type="checkbox" name="category[]" value="2" />
+                Bakery
+              </label>
+              <span class="filter-count">12</span>
+            </div>
+            <div class="filter-option">
+              <label>
+                <input type="checkbox" name="category[]" value="3" />
+                Butcher & Meat
+              </label>
+              <span class="filter-count">8</span>
+            </div>
+            <div class="filter-option">
+              <label>
+                <input type="checkbox" name="category[]" value="4" />
+                Dairy & Eggs
+              </label>
+              <span class="filter-count">15</span>
+            </div>
+            <div class="filter-option">
+              <label>
+                <input type="checkbox" name="category[]" value="5" />
+                Organic & Health
+              </label>
+              <span class="filter-count">6</span>
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <h4>Rating</h4>
+            <div class="filter-option">
+              <label>
+                <input type="checkbox" name="rating[]" value="4" />
+                <span class="rating-option">
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star empty">★</span>
+                  &amp; Up
+                </span>
+              </label>
+            </div>
+            <div class="filter-option">
+              <label>
+                <input type="checkbox" name="rating[]" value="3" />
+                <span class="rating-option">
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star empty">★</span>
+                  <span class="star empty">★</span>
+                  &amp; Up
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <h4>Distance</h4>
+            <div class="filter-option">
+              <label>
+                <input type="radio" name="distance" value="2" />
+                Within 2 km
+              </label>
+            </div>
+            <div class="filter-option">
+              <label>
+                <input type="radio" name="distance" value="5" />
+                Within 5 km
+              </label>
+            </div>
+            <div class="filter-option">
+              <label>
+                <input type="radio" name="distance" value="10" />
+                Within 10 km
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block">Apply Filters</button>
+        </aside>
+
+        <!-- Shop Listing -->
+        <div class="shop-listing">
+          <div class="listing-header">
+            <p class="results-count">
+              Showing <strong>1-10</strong> of <strong>48</strong> shops
+            </p>
+            <select class="sort-select form-select">
+              <option value="popular">Most Popular</option>
+              <option value="rating">Highest Rated</option>
+              <option value="distance">Nearest</option>
+              <option value="newest">Newest</option>
+            </select>
+          </div>
+
+          <!-- PHP: Loop through shops -->
+          <a href="shop-detail.html?id=1" class="shop-list-card">
+            <div class="shop-list-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Mart"
+              />
+            </div>
+            <div class="shop-list-content">
+              <div class="shop-list-header">
+                <h3>Fresh Mart Organic Store</h3>
+                <span class="shop-status open">Open</span>
+              </div>
+              <div class="shop-list-meta">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    style="color: var(--accent-yellow)"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  4.8 (245 reviews)
+                </span>
+                <span>2.5 km away</span>
+                <span>Delivery: $2.99</span>
+              </div>
+              <p class="shop-list-description">
+                Premium organic groceries and fresh produce. We source directly
+                from local farms for the freshest quality.
+              </p>
+              <div class="shop-list-footer">
+                <div class="shop-categories">
+                  <span>Organic</span>
+                  <span>Fruits</span>
+                  <span>Vegetables</span>
+                </div>
+                <span class="btn btn-secondary" style="padding: 8px 16px"
+                  >Visit Shop</span
+                >
+              </div>
+            </div>
+          </a>
+
+          <a href="shop-detail.html?id=2" class="shop-list-card">
+            <div class="shop-list-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Golden Bakery"
+              />
+            </div>
+            <div class="shop-list-content">
+              <div class="shop-list-header">
+                <h3>Golden Bakery & Pastries</h3>
+                <span class="shop-status open">Open</span>
+              </div>
+              <div class="shop-list-meta">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    style="color: var(--accent-yellow)"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  4.6 (189 reviews)
+                </span>
+                <span>1.8 km away</span>
+                <span>Delivery: $1.99</span>
+              </div>
+              <p class="shop-list-description">
+                Artisan breads, pastries, and cakes baked fresh daily. Family
+                recipes passed down through generations.
+              </p>
+              <div class="shop-list-footer">
+                <div class="shop-categories">
+                  <span>Bakery</span>
+                  <span>Pastries</span>
+                  <span>Cakes</span>
+                </div>
+                <span class="btn btn-secondary" style="padding: 8px 16px"
+                  >Visit Shop</span
+                >
+              </div>
+            </div>
+          </a>
+
+          <a href="shop-detail.html?id=3" class="shop-list-card">
+            <div class="shop-list-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Prime Meats"
+              />
+            </div>
+            <div class="shop-list-content">
+              <div class="shop-list-header">
+                <h3>Prime Meats & Butchery</h3>
+                <span class="shop-status closed">Closed</span>
+              </div>
+              <div class="shop-list-meta">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    style="color: var(--accent-yellow)"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  4.9 (312 reviews)
+                </span>
+                <span>3.2 km away</span>
+                <span>Delivery: $3.49</span>
+              </div>
+              <p class="shop-list-description">
+                Premium cuts of beef, pork, lamb, and poultry. All meats are
+                sourced from trusted local farms.
+              </p>
+              <div class="shop-list-footer">
+                <div class="shop-categories">
+                  <span>Meat</span>
+                  <span>Poultry</span>
+                  <span>Seafood</span>
+                </div>
+                <span class="btn btn-secondary" style="padding: 8px 16px"
+                  >Visit Shop</span
+                >
+              </div>
+            </div>
+          </a>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <button class="pagination-btn" disabled>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m15 18-6-6 6-6"></path>
+              </svg>
+            </button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">5</button>
+            <button class="pagination-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section footer-about">
+          <div class="footer-logo">
+            <img src="../../assets/images/logo.png" alt="GoGrocery" />
+          </div>
+          <p class="footer-description">
+            Your favorite local grocery stores, delivered fresh to your
+            doorstep.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="shops.html">Browse Shops</a></li>
+            <li><a href="products.html">Products</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 GoGrocery. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - GoGrocery Manager</title>
+    <link rel="stylesheet" href="../../assets/css/common/base.css">
+    <link rel="stylesheet" href="../../assets/css/common/components.css">
+    <link rel="stylesheet" href="../../assets/css/manager/layout.css">
+    <link rel="stylesheet" href="../../assets/css/manager/reports.css">
+</head>
+<body>
+    <div class="manager-dashboard">
+        <!-- Sidebar -->
+        <aside class="manager-sidebar">
+            <div class="manager-sidebar-header">
+                <a href="dashboard.html" class="manager-sidebar-logo">
+                    <img src="../../assets/images/logo.png" alt="GoGrocery">
+                </a>
+                <span class="manager-badge">Manager</span>
+            </div>
+
+            <nav class="manager-sidebar-nav">
+                <div class="manager-nav-section">
+                    <div class="manager-nav-title">Overview</div>
+                    <a href="dashboard.html" class="manager-nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        Dashboard
+                    </a>
+                </div>
+
+                <div class="manager-nav-section">
+                    <div class="manager-nav-title">Management</div>
+                    <a href="shops.html" class="manager-nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        Shop Oversight
+                        <span class="manager-nav-badge warning">5</span>
+                    </a>
+                    <a href="orders.html" class="manager-nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                        Orders Overview
+                    </a>
+                </div>
+
+                <div class="manager-nav-section">
+                    <div class="manager-nav-title">Analytics</div>
+                    <a href="reports.html" class="manager-nav-link active">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        Reports
+                    </a>
+                </div>
+
+                <div class="manager-nav-section">
+                    <div class="manager-nav-title">Account</div>
+                    <a href="../common/profile.html" class="manager-nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        My Profile
+                    </a>
+                    <a href="../common/login.html" class="manager-nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                        Logout
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Sidebar Overlay -->
+        <div class="manager-sidebar-overlay"></div>
+
+        <!-- Main Content -->
+        <main class="manager-main">
+            <!-- Top Header -->
+            <header class="manager-top-header">
+                <div class="manager-header-left">
+                    <button class="manager-sidebar-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <h1 class="manager-page-title">Reports</h1>
+                </div>
+
+                <div class="manager-header-right">
+                    <div class="manager-search">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" placeholder="Search...">
+                    </div>
+
+                    <button class="manager-notification-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        <span class="manager-notification-badge">3</span>
+                    </button>
+
+                    <div class="manager-header-profile">
+                        <img src="/placeholder.svg?height=40&width=40" alt="Manager" class="manager-avatar">
+                        <div class="manager-profile-info">
+                            <div class="manager-profile-name">Sarah Manager</div>
+                            <div class="manager-profile-role">Manager</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="manager-content">
+                <!-- Page Header -->
+                <div class="manager-page-header">
+                    <div class="manager-page-header-info">
+                        <h1>Analytics & Reports</h1>
+                        <p>Platform performance metrics and shop analytics</p>
+                    </div>
+                </div>
+
+                <!-- Report Filters -->
+                <div class="manager-report-filters">
+                    <div class="manager-report-filter-group">
+                        <label>From:</label>
+                        <input type="date" class="manager-date-input" value="2026-01-01">
+                    </div>
+                    <div class="manager-report-filter-group">
+                        <label>To:</label>
+                        <input type="date" class="manager-date-input" value="2026-01-18">
+                    </div>
+                    <div class="manager-report-filter-group">
+                        <label>Shop:</label>
+                        <select class="manager-filter-select">
+                            <option value="">All Shops</option>
+                            <option value="fresh-mart">Fresh Mart</option>
+                            <option value="organic-haven">Organic Haven</option>
+                            <option value="daily-needs">Daily Needs</option>
+                        </select>
+                    </div>
+                    <div class="manager-report-actions">
+                        <button class="btn btn-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                            Refresh
+                        </button>
+                        <button class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Export PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Report Summary -->
+                <div class="manager-report-summary">
+                    <div class="manager-report-card">
+                        <div class="manager-report-card-header">
+                            <span class="manager-report-card-title">Total Revenue</span>
+                            <div class="manager-report-card-icon revenue">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </div>
+                        </div>
+                        <div class="manager-report-value">$48,250</div>
+                        <div class="manager-report-comparison">
+                            <span class="manager-report-change positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                                +18.5%
+                            </span>
+                            <span class="manager-report-period">vs last period</span>
+                        </div>
+                    </div>
+
+                    <div class="manager-report-card">
+                        <div class="manager-report-card-header">
+                            <span class="manager-report-card-title">Total Orders</span>
+                            <div class="manager-report-card-icon orders">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            </div>
+                        </div>
+                        <div class="manager-report-value">1,847</div>
+                        <div class="manager-report-comparison">
+                            <span class="manager-report-change positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                                +12.3%
+                            </span>
+                            <span class="manager-report-period">vs last period</span>
+                        </div>
+                    </div>
+
+                    <div class="manager-report-card">
+                        <div class="manager-report-card-header">
+                            <span class="manager-report-card-title">Active Shops</span>
+                            <div class="manager-report-card-icon shops">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                            </div>
+                        </div>
+                        <div class="manager-report-value">48</div>
+                        <div class="manager-report-comparison">
+                            <span class="manager-report-change positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                                +5
+                            </span>
+                            <span class="manager-report-period">this month</span>
+                        </div>
+                    </div>
+
+                    <div class="manager-report-card">
+                        <div class="manager-report-card-header">
+                            <span class="manager-report-card-title">Avg. Order Value</span>
+                            <div class="manager-report-card-icon growth">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                            </div>
+                        </div>
+                        <div class="manager-report-value">$26.12</div>
+                        <div class="manager-report-comparison">
+                            <span class="manager-report-change positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                                +5.2%
+                            </span>
+                            <span class="manager-report-period">vs last period</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Grid -->
+                <div class="manager-charts-grid">
+                    <!-- Revenue Chart -->
+                    <div class="manager-chart-card">
+                        <div class="manager-chart-header">
+                            <h3 class="manager-chart-title">Revenue Over Time</h3>
+                            <select class="manager-filter-select" style="width: auto;">
+                                <option value="daily">Daily</option>
+                                <option value="weekly" selected>Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                        <div class="manager-chart-body">
+                            <div class="manager-chart-placeholder">
+                                <!-- Chart.js or similar library would render here -->
+                                Revenue chart placeholder - Integrate with Chart.js
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Performing Shops -->
+                    <div class="manager-chart-card">
+                        <div class="manager-chart-header">
+                            <h3 class="manager-chart-title">Top Shops</h3>
+                            <a href="shops.html" class="manager-card-action">View All</a>
+                        </div>
+                        <div class="manager-chart-body">
+                            <div class="manager-top-list">
+                                <div class="manager-top-item">
+                                    <div class="manager-top-rank gold">1</div>
+                                    <img src="/placeholder.svg?height=44&width=44" alt="Shop" class="manager-top-logo">
+                                    <div class="manager-top-info">
+                                        <div class="manager-top-name">Organic Haven</div>
+                                        <div class="manager-top-category">Organic Products</div>
+                                    </div>
+                                    <div class="manager-top-value">
+                                        <div class="manager-top-amount">$8,450</div>
+                                        <div class="manager-top-orders">324 orders</div>
+                                    </div>
+                                </div>
+                                <div class="manager-top-item">
+                                    <div class="manager-top-rank silver">2</div>
+                                    <img src="/placeholder.svg?height=44&width=44" alt="Shop" class="manager-top-logo">
+                                    <div class="manager-top-info">
+                                        <div class="manager-top-name">Fresh Mart</div>
+                                        <div class="manager-top-category">Grocery Store</div>
+                                    </div>
+                                    <div class="manager-top-value">
+                                        <div class="manager-top-amount">$7,820</div>
+                                        <div class="manager-top-orders">298 orders</div>
+                                    </div>
+                                </div>
+                                <div class="manager-top-item">
+                                    <div class="manager-top-rank bronze">3</div>
+                                    <img src="/placeholder.svg?height=44&width=44" alt="Shop" class="manager-top-logo">
+                                    <div class="manager-top-info">
+                                        <div class="manager-top-name">Green Basket</div>
+                                        <div class="manager-top-category">Organic Products</div>
+                                    </div>
+                                    <div class="manager-top-value">
+                                        <div class="manager-top-amount">$6,540</div>
+                                        <div class="manager-top-orders">256 orders</div>
+                                    </div>
+                                </div>
+                                <div class="manager-top-item">
+                                    <div class="manager-top-rank default">4</div>
+                                    <img src="/placeholder.svg?height=44&width=44" alt="Shop" class="manager-top-logo">
+                                    <div class="manager-top-info">
+                                        <div class="manager-top-name">Daily Needs</div>
+                                        <div class="manager-top-category">Convenience Store</div>
+                                    </div>
+                                    <div class="manager-top-value">
+                                        <div class="manager-top-amount">$5,890</div>
+                                        <div class="manager-top-orders">231 orders</div>
+                                    </div>
+                                </div>
+                                <div class="manager-top-item">
+                                    <div class="manager-top-rank default">5</div>
+                                    <img src="/placeholder.svg?height=44&width=44" alt="Shop" class="manager-top-logo">
+                                    <div class="manager-top-info">
+                                        <div class="manager-top-name">Bakery Delight</div>
+                                        <div class="manager-top-category">Bakery</div>
+                                    </div>
+                                    <div class="manager-top-value">
+                                        <div class="manager-top-amount">$4,320</div>
+                                        <div class="manager-top-orders">189 orders</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="manager-report-table-card">
+                    <div class="manager-report-table-header">
+                        <h3 class="manager-report-table-title">Shop Performance Details</h3>
+                        <div class="manager-report-table-actions">
+                            <button class="btn btn-outline btn-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                Export CSV
+                            </button>
+                        </div>
+                    </div>
+                    <div class="manager-report-table-container">
+                        <table class="manager-report-table">
+                            <thead>
+                                <tr>
+                                    <th>Shop Name</th>
+                                    <th>Category</th>
+                                    <th>Orders</th>
+                                    <th>Revenue</th>
+                                    <th>Avg. Order</th>
+                                    <th>Rating</th>
+                                    <th>Growth</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Organic Haven</strong></td>
+                                    <td>Organic Products</td>
+                                    <td>324</td>
+                                    <td>$8,450</td>
+                                    <td>$26.08</td>
+                                    <td>4.9</td>
+                                    <td><span class="status-badge success">+24%</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fresh Mart</strong></td>
+                                    <td>Grocery Store</td>
+                                    <td>298</td>
+                                    <td>$7,820</td>
+                                    <td>$26.24</td>
+                                    <td>4.8</td>
+                                    <td><span class="status-badge success">+18%</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Green Basket</strong></td>
+                                    <td>Organic Products</td>
+                                    <td>256</td>
+                                    <td>$6,540</td>
+                                    <td>$25.55</td>
+                                    <td>4.7</td>
+                                    <td><span class="status-badge success">+15%</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Daily Needs</strong></td>
+                                    <td>Convenience Store</td>
+                                    <td>231</td>
+                                    <td>$5,890</td>
+                                    <td>$25.50</td>
+                                    <td>4.5</td>
+                                    <td><span class="status-badge warning">+5%</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bakery Delight</strong></td>
+                                    <td>Bakery</td>
+                                    <td>189</td>
+                                    <td>$4,320</td>
+                                    <td>$22.86</td>
+                                    <td>4.6</td>
+                                    <td><span class="status-badge success">+12%</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Mobile sidebar toggle
+        const sidebarToggle = document.querySelector('.manager-sidebar-toggle');
+        const sidebar = document.querySelector('.manager-sidebar');
+        const overlay = document.querySelector('.manager-sidebar-overlay');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

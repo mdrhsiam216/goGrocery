@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Settings - Shop Panel | GoGrocery</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/common/base.css">
+    <link rel="stylesheet" href="../../assets/css/common/components.css">
+    <link rel="stylesheet" href="../../assets/css/shop/layout.css">
+    <link rel="stylesheet" href="../../assets/css/shop/settings.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-logo">
+                    <img src="../../assets/images/logo.png" alt="GoGrocery">
+                </a>
+                <div class="sidebar-shop">
+                    <div class="sidebar-shop-name">Fresh Mart Store</div>
+                    <div class="sidebar-shop-status">● Active</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="dashboard.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                    <a href="orders.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        Orders
+                        <span class="nav-badge">5</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Catalog</div>
+                    <a href="products.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                        Products
+                    </a>
+                    <a href="add-product.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Add Product
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Shop</div>
+                    <a href="settings.html" class="nav-link active">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        Shop Settings
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Account</div>
+                    <a href="../common/profile.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        My Profile
+                    </a>
+                    <a href="../common/login.html" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        Logout
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="top-header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                    <h1 class="page-title">Shop Settings</h1>
+                </div>
+                <div class="top-header-right">
+                    <button class="notification-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                        </svg>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <div class="header-user">
+                        <img src="/placeholder.svg?height=36&width=36" alt="User" class="header-user-avatar">
+                        <div class="header-user-info">
+                            <div class="header-user-name">John Doe</div>
+                            <div class="header-user-role">Shop Owner</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <!-- PHP: Handle form submission -->
+                    <div class="settings-content">
+                        <!-- Shop Profile -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3>Shop Profile</h3>
+                                <p>Update your shop's basic information</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <!-- Logo Upload -->
+                                <div class="logo-upload">
+                                    <img src="/placeholder.svg?height=100&width=100" alt="Shop Logo" class="logo-preview" id="logoPreview">
+                                    <div class="logo-upload-actions">
+                                        <input type="file" name="logo" id="shopLogo" accept="image/*" style="display: none;">
+                                        <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('shopLogo').click()">Change Logo</button>
+                                        <p>JPG, PNG. Max 2MB</p>
+                                    </div>
+                                </div>
+
+                                <!-- Banner Upload -->
+                                <div class="banner-upload">
+                                    <label class="form-label">Shop Banner</label>
+                                    <div class="banner-preview" id="bannerPreview">
+                                        <img src="/placeholder.svg?height=200&width=800" alt="Shop Banner">
+                                    </div>
+                                    <input type="file" name="banner" id="shopBanner" accept="image/*" style="display: none;">
+                                    <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('shopBanner').click()">Change Banner</button>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Shop Name *</label>
+                                    <input type="text" class="form-input" name="shop_name" value="Fresh Mart Store" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Shop Description</label>
+                                    <textarea class="form-input" name="description" rows="4">Your one-stop shop for fresh groceries, organic produce, and daily essentials. We deliver quality products right to your doorstep.</textarea>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone Number *</label>
+                                        <input type="tel" class="form-input" name="phone" value="+1 (555) 123-4567" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" class="form-input" name="email" value="contact@freshmart.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Shop Address *</label>
+                                    <textarea class="form-input" name="address" rows="2" required>456 Market Street, Suite 100, New York, NY 10001</textarea>
+                                </div>
+                            </div>
+                            <div class="settings-card-footer">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </div>
+
+                        <!-- Operating Hours -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3>Operating Hours</h3>
+                                <p>Set your shop's working hours</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="operating-hours">
+                                    <div class="hours-row">
+                                        <span class="hours-day">Monday</span>
+                                        <div class="hours-inputs">
+                                            <input type="time" class="form-input time-input" name="mon_open" value="08:00">
+                                            <span>to</span>
+                                            <input type="time" class="form-input time-input" name="mon_close" value="20:00">
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="mon_open_status" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="hours-row">
+                                        <span class="hours-day">Tuesday</span>
+                                        <div class="hours-inputs">
+                                            <input type="time" class="form-input time-input" name="tue_open" value="08:00">
+                                            <span>to</span>
+                                            <input type="time" class="form-input time-input" name="tue_close" value="20:00">
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="tue_open_status" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="hours-row">
+                                        <span class="hours-day">Wednesday</span>
+                                        <div class="hours-inputs">
+                                            <input type="time" class="form-input time-input" name="wed_open" value="08:00">
+                                            <span>to</span>
+                                            <input type="time" class="form-input time-input" name="wed_close" value="20:00">
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="wed_open_status" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="hours-row">
+                                        <span class="hours-day">Thursday</span>
+                                        <div class="hours-inputs">
+                                            <input type="time" class="form-input time-input" name="thu_open" value="08:00">
+                                            <span>to</span>
+                                            <input type="time" class="form-input time-input" name="thu_close" value="20:00">
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="thu_open_status" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="hours-row">
+                                        <span class="hours-day">Friday</span>
+                                        <div class="hours-inputs">
+                                            <input type="time" class="form-input time-input" name="fri_open" value="08:00">
+                                            <span>to</span>
+                                            <input type="time" class="form-input time-input" name="fri_close" value="20:00">
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="fri_open_status" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="hours-row">
+                                        <span class="hours-day">Saturday</span>
+                                        <div class="hours-inputs">
+                                            <input type="time" class="form-input time-input" name="sat_open" value="09:00">
+                                            <span>to</span>
+                                            <input type="time" class="form-input time-input" name="sat_close" value="18:00">
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="sat_open_status" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="hours-row">
+                                        <span class="hours-day">Sunday</span>
+                                        <div class="hours-inputs">
+                                            <input type="time" class="form-input time-input" name="sun_open" value="10:00">
+                                            <span>to</span>
+                                            <input type="time" class="form-input time-input" name="sun_close" value="16:00">
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="sun_open_status">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="settings-card-footer">
+                                <button type="submit" class="btn btn-primary">Save Hours</button>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Settings -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3>Delivery Settings</h3>
+                                <p>Configure your delivery options</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Minimum Order Amount ($) *</label>
+                                        <input type="number" class="form-input" name="min_order" value="15" min="0" step="0.01" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Delivery Fee ($) *</label>
+                                        <input type="number" class="form-input" name="delivery_fee" value="3.99" min="0" step="0.01" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Free Delivery Above ($)</label>
+                                        <input type="number" class="form-input" name="free_delivery_min" value="50" min="0" step="0.01">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Delivery Radius (km)</label>
+                                        <input type="number" class="form-input" name="delivery_radius" value="10" min="1">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Estimated Delivery Time</label>
+                                    <select class="form-input" name="delivery_time">
+                                        <option value="30-45">30-45 minutes</option>
+                                        <option value="45-60" selected>45-60 minutes</option>
+                                        <option value="60-90">60-90 minutes</option>
+                                        <option value="same-day">Same Day</option>
+                                        <option value="next-day">Next Day</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="settings-card-footer">
+                                <button type="submit" class="btn btn-primary">Save Settings</button>
+                            </div>
+                        </div>
+
+                        <!-- Payment Settings -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3>Payment Methods</h3>
+                                <p>Select accepted payment methods</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="payment-methods">
+                                    <label class="payment-method">
+                                        <input type="checkbox" name="payment_cod" checked>
+                                        <span class="payment-method-box">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                            </svg>
+                                            <span>Cash on Delivery</span>
+                                        </span>
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="checkbox" name="payment_card" checked>
+                                        <span class="payment-method-box">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                                            </svg>
+                                            <span>Credit/Debit Card</span>
+                                        </span>
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="checkbox" name="payment_wallet">
+                                        <span class="payment-method-box">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                            </svg>
+                                            <span>Digital Wallet</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="settings-card-footer">
+                                <button type="submit" class="btn btn-primary">Save Methods</button>
+                            </div>
+                        </div>
+
+                        <!-- Notifications -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <h3>Notifications</h3>
+                                <p>Manage notification preferences</p>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="notification-options">
+                                    <div class="notification-option">
+                                        <div class="notification-info">
+                                            <h4>New Order Alerts</h4>
+                                            <p>Get notified when a new order is placed</p>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="notify_new_order" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-option">
+                                        <div class="notification-info">
+                                            <h4>Order Status Updates</h4>
+                                            <p>Notify when order status changes</p>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="notify_order_status" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-option">
+                                        <div class="notification-info">
+                                            <h4>Low Stock Alerts</h4>
+                                            <p>Alert when product stock is running low</p>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="notify_low_stock" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-option">
+                                        <div class="notification-info">
+                                            <h4>Customer Reviews</h4>
+                                            <p>Get notified of new customer reviews</p>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="notify_reviews">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-option">
+                                        <div class="notification-info">
+                                            <h4>Email Notifications</h4>
+                                            <p>Receive notifications via email</p>
+                                        </div>
+                                        <label class="toggle">
+                                            <input type="checkbox" name="notify_email" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="settings-card-footer">
+                                <button type="submit" class="btn btn-primary">Save Preferences</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.querySelector('.dashboard').classList.toggle('sidebar-collapsed');
+        });
+
+        // Logo Preview
+        document.getElementById('shopLogo').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('logoPreview').src = e.target.result;
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        // Banner Preview
+        document.getElementById('shopBanner').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('bannerPreview').querySelector('img').src = e.target.result;
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+    </script>
+</body>
+</html>

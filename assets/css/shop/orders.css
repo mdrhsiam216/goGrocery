@@ -1,0 +1,377 @@
+/* =====================================================
+   GoGrocery - Shop Orders Management
+===================================================== */
+
+/* Order Tabs */
+.order-tabs {
+  display: flex;
+  gap: 4px;
+  background-color: var(--white);
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.order-tab {
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--medium-gray);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.order-tab:hover {
+  color: var(--dark-text);
+}
+
+.order-tab.active {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.order-tab-count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.order-tab.active .order-tab-count {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Orders List */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-fast);
+}
+
+.order-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: #fafafa;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.order-card-id {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.order-card-date {
+  font-size: 13px;
+  color: var(--medium-gray);
+  margin-top: 2px;
+}
+
+.order-card-body {
+  padding: 20px;
+}
+
+.order-customer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.order-customer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.order-customer-info h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.order-customer-info p {
+  font-size: 12px;
+  color: var(--medium-gray);
+  margin-top: 2px;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.order-item-img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.order-item-details {
+  flex: 1;
+}
+
+.order-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.order-item-qty {
+  font-size: 12px;
+  color: var(--medium-gray);
+  margin-top: 2px;
+}
+
+.order-item-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.order-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-gray);
+  background-color: #fafafa;
+}
+
+.order-total {
+  font-size: 14px;
+  color: var(--medium-gray);
+}
+
+.order-total strong {
+  font-size: 18px;
+  color: var(--dark-text);
+  margin-left: 8px;
+}
+
+.order-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Order Detail Page */
+.order-detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.order-detail-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.order-detail-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.order-detail-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.order-detail-body {
+  padding: 20px;
+}
+
+/* Order Timeline */
+.order-timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.order-timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--border-gray);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -26px;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background-color: var(--border-gray);
+  border: 3px solid var(--white);
+}
+
+.timeline-item.completed .timeline-dot {
+  background-color: var(--primary);
+}
+
+.timeline-item.active .timeline-dot {
+  background-color: var(--info);
+  box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.2);
+}
+
+.timeline-content h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.timeline-content p {
+  font-size: 12px;
+  color: var(--medium-gray);
+  margin-top: 4px;
+}
+
+/* Address Card */
+.address-card {
+  background-color: var(--light-gray);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.address-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 8px;
+}
+
+.address-card p {
+  font-size: 13px;
+  color: var(--medium-gray);
+  line-height: 1.6;
+}
+
+/* Summary */
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.summary-row span:first-child {
+  color: var(--medium-gray);
+}
+
+.summary-row span:last-child {
+  color: var(--dark-text);
+  font-weight: 500;
+}
+
+.summary-row.total {
+  padding-top: 12px;
+  border-top: 1px solid var(--border-gray);
+  font-size: 16px;
+}
+
+.summary-row.total span:last-child {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* Status Update Dropdown */
+.status-update {
+  position: relative;
+}
+
+.status-dropdown {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  background-color: var(--white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.status-dropdown:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .order-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .order-card-footer {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .order-actions {
+    justify-content: stretch;
+  }
+
+  .order-actions .btn {
+    flex: 1;
+  }
+}

@@ -1,0 +1,356 @@
+/* =====================================================
+   GoGrocery - Manager Dashboard
+===================================================== */
+
+/* Stats Overview */
+.manager-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.manager-stat-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.manager-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.manager-stat-content h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--medium-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.manager-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--dark-text);
+  line-height: 1;
+}
+
+.manager-stat-change {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.manager-stat-change.positive {
+  color: var(--success);
+}
+
+.manager-stat-change.negative {
+  color: var(--error);
+}
+
+.manager-stat-change svg {
+  width: 14px;
+  height: 14px;
+}
+
+.manager-stat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.manager-stat-icon svg {
+  width: 26px;
+  height: 26px;
+  color: var(--white);
+}
+
+.manager-stat-icon.shops {
+  background: linear-gradient(135deg, #26a69a 0%, #00897b 100%);
+}
+
+.manager-stat-icon.orders {
+  background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%);
+}
+
+.manager-stat-icon.revenue {
+  background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+}
+
+.manager-stat-icon.pending {
+  background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
+}
+
+/* Dashboard Grid */
+.manager-dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+/* Dashboard Cards */
+.manager-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.manager-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.manager-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.manager-card-action {
+  font-size: 13px;
+  color: var(--teal);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.manager-card-action:hover {
+  color: var(--primary-dark);
+}
+
+.manager-card-body {
+  padding: 24px;
+}
+
+/* Recent Shops Table */
+.manager-table-container {
+  overflow-x: auto;
+}
+
+.manager-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.manager-table th,
+.manager-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.manager-table th {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--medium-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: #f8fafc;
+}
+
+.manager-table tbody tr {
+  transition: background-color var(--transition-fast);
+}
+
+.manager-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.manager-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.manager-shop-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.manager-shop-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  background-color: var(--light-gray);
+}
+
+.manager-shop-name {
+  font-weight: 600;
+  color: var(--dark-text);
+  font-size: 14px;
+}
+
+.manager-shop-owner {
+  font-size: 12px;
+  color: var(--medium-gray);
+}
+
+/* Activity Feed */
+.manager-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.manager-activity-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.manager-activity-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.manager-activity-item:first-child {
+  padding-top: 0;
+}
+
+.manager-activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.manager-activity-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.manager-activity-icon.new-shop {
+  background-color: rgba(38, 166, 154, 0.1);
+  color: var(--teal);
+}
+
+.manager-activity-icon.order {
+  background-color: rgba(66, 165, 245, 0.1);
+  color: #42a5f5;
+}
+
+.manager-activity-icon.alert {
+  background-color: rgba(255, 167, 38, 0.1);
+  color: var(--warning);
+}
+
+.manager-activity-icon.success {
+  background-color: rgba(102, 187, 106, 0.1);
+  color: var(--success);
+}
+
+.manager-activity-content {
+  flex: 1;
+}
+
+.manager-activity-text {
+  font-size: 14px;
+  color: var(--dark-text);
+  line-height: 1.5;
+}
+
+.manager-activity-text strong {
+  font-weight: 600;
+}
+
+.manager-activity-time {
+  font-size: 12px;
+  color: var(--medium-gray);
+  margin-top: 4px;
+}
+
+/* Quick Actions */
+.manager-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.manager-quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  background-color: #f8fafc;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.manager-quick-action:hover {
+  background-color: var(--white);
+  border-color: var(--teal);
+  transform: translateY(-2px);
+}
+
+.manager-quick-action svg {
+  width: 28px;
+  height: 28px;
+  color: var(--teal);
+}
+
+.manager-quick-action span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dark-text);
+  text-align: center;
+}
+
+/* Chart Placeholder */
+.manager-chart-placeholder {
+  height: 280px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e8f5f3 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--medium-gray);
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .manager-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .manager-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .manager-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .manager-stat-value {
+    font-size: 26px;
+  }
+
+  .manager-quick-actions {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - GoGrocery</title>
+    <link rel="stylesheet" href="../../assets/css/common/base.css" />
+    <link rel="stylesheet" href="../../assets/css/common/components.css" />
+    <link rel="stylesheet" href="../../assets/css/customer/layout.css" />
+    <link rel="stylesheet" href="../../assets/css/customer/cart.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="home.html" class="header-logo">
+          <img src="../../assets/images/logo.png" alt="GoGrocery" />
+        </a>
+        <div class="header-search">
+          <form class="search-form" action="search.html" method="GET">
+            <input
+              type="text"
+              class="search-input"
+              name="q"
+              placeholder="Search for products..."
+            />
+            <button type="submit" class="search-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+        <div class="header-actions">
+          <a href="cart.html" class="header-link cart-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+            <span class="cart-badge">3</span>
+          </a>
+          <div class="user-menu">
+            <button class="user-menu-btn">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>John</span>
+            </button>
+            <div class="user-menu-dropdown">
+              <a href="../common/profile.html">My Profile</a>
+              <a href="orders.html">My Orders</a>
+              <a href="#" class="logout">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header" style="background-color: var(--white)">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="home.html">Home</a>
+          <span>/</span>
+          <a href="cart.html">Cart</a>
+          <span>/</span>
+          <span>Checkout</span>
+        </div>
+        <h1>Checkout</h1>
+      </div>
+    </div>
+
+    <!-- Checkout Content -->
+    <main class="container">
+      <form class="checkout-container">
+        <!-- Checkout Sections -->
+        <div class="checkout-sections">
+          <!-- Delivery Address -->
+          <div class="checkout-section">
+            <h3><span class="step">1</span> Delivery Address</h3>
+
+            <div class="saved-addresses">
+              <!-- PHP: Loop through saved addresses -->
+              <div class="address-card selected">
+                <div class="address-card-header">
+                  <span class="address-label">Home</span>
+                  <span class="address-default">Default</span>
+                </div>
+                <p>
+                  John Doe<br />
+                  123 Main Street, Apt 4B<br />
+                  New York, NY 10001<br />
+                  +1 (555) 123-4567
+                </p>
+              </div>
+
+              <div class="address-card">
+                <div class="address-card-header">
+                  <span class="address-label">Office</span>
+                </div>
+                <p>
+                  John Doe<br />
+                  456 Business Ave, Floor 12<br />
+                  New York, NY 10002<br />
+                  +1 (555) 987-6543
+                </p>
+              </div>
+
+              <div class="add-address-btn">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M8 12h8"></path>
+                  <path d="M12 8v8"></path>
+                </svg>
+                Add New Address
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Method -->
+          <div class="checkout-section">
+            <h3><span class="step">2</span> Payment Method</h3>
+
+            <div class="payment-methods">
+              <label class="payment-option selected">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="card"
+                  checked
+                />
+                <img
+                  src="/placeholder.svg?height=24&width=40"
+                  alt="Credit Card"
+                />
+                <span>Credit / Debit Card</span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="payment" value="paypal" />
+                <img
+                  src="/placeholder.svg?height=24&width=60"
+                  alt="PayPal"
+                />
+                <span>PayPal</span>
+              </label>
+
+              <label class="payment-option">
+                <input type="radio" name="payment" value="cod" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect width="20" height="12" x="2" y="6" rx="2"></rect>
+                  <circle cx="12" cy="12" r="2"></circle>
+                  <path d="M6 12h.01M18 12h.01"></path>
+                </svg>
+                <span>Cash on Delivery</span>
+              </label>
+            </div>
+
+            <!-- Card Details (shown when card is selected) -->
+            <div class="card-details mt-3">
+              <div class="form-group">
+                <label class="form-label">Card Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="1234 5678 9012 3456"
+                />
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px">
+                <div class="form-group">
+                  <label class="form-label">Expiry Date</label>
+                  <input type="text" class="form-control" placeholder="MM/YY" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">CVV</label>
+                  <input type="text" class="form-control" placeholder="123" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cardholder Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="John Doe"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery Time -->
+          <div class="checkout-section">
+            <h3><span class="step">3</span> Delivery Time</h3>
+
+            <div class="form-group">
+              <label class="form-label">Preferred Delivery Date</label>
+              <input type="date" class="form-control" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Preferred Time Slot</label>
+              <select class="form-control form-select">
+                <option value="">Select a time slot</option>
+                <option value="morning">Morning (9 AM - 12 PM)</option>
+                <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
+                <option value="evening">Evening (4 PM - 8 PM)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Delivery Instructions (Optional)</label>
+              <textarea
+                class="form-control"
+                rows="3"
+                placeholder="Any special instructions for delivery..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+
+          <div class="order-items">
+            <!-- PHP: Loop through cart items -->
+            <div class="order-item">
+              <div class="order-item-image">
+                <img
+                  src="/placeholder.svg?height=50&width=50"
+                  alt="Fresh Red Apples"
+                />
+              </div>
+              <div class="order-item-info">
+                <h4>Fresh Red Apples</h4>
+                <p>1kg x 2</p>
+              </div>
+              <span class="order-item-price">$6.98</span>
+            </div>
+
+            <div class="order-item">
+              <div class="order-item-image">
+                <img
+                  src="/placeholder.svg?height=50&width=50"
+                  alt="Organic Milk"
+                />
+              </div>
+              <div class="order-item-info">
+                <h4>Organic Whole Milk</h4>
+                <p>1L x 1</p>
+              </div>
+              <span class="order-item-price">$4.99</span>
+            </div>
+
+            <div class="order-item">
+              <div class="order-item-image">
+                <img
+                  src="/placeholder.svg?height=50&width=50"
+                  alt="French Baguette"
+                />
+              </div>
+              <div class="order-item-info">
+                <h4>French Baguette</h4>
+                <p>x 2</p>
+              </div>
+              <span class="order-item-price">$5.38</span>
+            </div>
+          </div>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>$17.35</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery Fee</span>
+            <span>$4.98</span>
+          </div>
+          <div class="summary-row discount">
+            <span>Discount (WELCOME20)</span>
+            <span>-$2.00</span>
+          </div>
+
+          <div class="summary-total">
+            <span>Total</span>
+            <span>$20.33</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary place-order-btn">
+            Place Order
+          </button>
+
+          <p
+            class="text-center text-muted mt-2"
+            style="font-size: 12px; line-height: 1.5"
+          >
+            By placing this order, you agree to our
+            <a href="#">Terms of Service</a> and
+            <a href="#">Privacy Policy</a>.
+          </p>
+        </div>
+      </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section footer-about">
+          <div class="footer-logo">
+            <img src="../../assets/images/logo.png" alt="GoGrocery" />
+          </div>
+          <p class="footer-description">
+            Your favorite local grocery stores, delivered fresh to your
+            doorstep.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="shops.html">Browse Shops</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 GoGrocery. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Address selection
+      document.querySelectorAll(".address-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          document
+            .querySelectorAll(".address-card")
+            .forEach((c) => c.classList.remove("selected"));
+          this.classList.add("selected");
+        });
+      });
+
+      // Payment method selection
+      document.querySelectorAll(".payment-option").forEach((option) => {
+        option.addEventListener("click", function () {
+          document
+            .querySelectorAll(".payment-option")
+            .forEach((o) => o.classList.remove("selected"));
+          this.classList.add("selected");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,314 @@
+/* =====================================================
+   GoGrocery - Manager Shop Oversight
+===================================================== */
+
+/* Filters Bar */
+.manager-filters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.manager-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.manager-filter-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--medium-gray);
+}
+
+.manager-filter-select {
+  padding: 10px 36px 10px 14px;
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  background-color: var(--white);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.manager-filter-select:focus {
+  border-color: var(--teal);
+  outline: none;
+}
+
+.manager-search-filter {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+}
+
+.manager-search-filter input {
+  width: 100%;
+  padding: 10px 14px 10px 42px;
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  transition: border-color var(--transition-fast);
+}
+
+.manager-search-filter input:focus {
+  border-color: var(--teal);
+  outline: none;
+}
+
+.manager-search-filter svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--medium-gray);
+}
+
+/* Shops Grid */
+.manager-shops-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.manager-shop-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.manager-shop-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.manager-shop-header {
+  position: relative;
+  height: 120px;
+  background: linear-gradient(135deg, #e8f5f3 0%, #b2dfdb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.manager-shop-header img {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  background-color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.manager-shop-status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.manager-shop-body {
+  padding: 20px;
+}
+
+.manager-shop-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 4px;
+}
+
+.manager-shop-category {
+  font-size: 13px;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+.manager-shop-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.manager-shop-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--medium-gray);
+}
+
+.manager-shop-meta-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--teal);
+}
+
+.manager-shop-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-gray);
+}
+
+.manager-shop-stat {
+  text-align: center;
+}
+
+.manager-shop-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark-text);
+}
+
+.manager-shop-stat-label {
+  font-size: 11px;
+  color: var(--medium-gray);
+  text-transform: uppercase;
+}
+
+.manager-shop-actions {
+  display: flex;
+  gap: 8px;
+  padding: 16px 20px;
+  background-color: #f8fafc;
+  border-top: 1px solid var(--border-gray);
+}
+
+.manager-shop-actions .btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 13px;
+}
+
+/* Shop Detail Modal */
+.manager-shop-detail-header {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.manager-shop-detail-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  background-color: var(--light-gray);
+}
+
+.manager-shop-detail-info {
+  flex: 1;
+}
+
+.manager-shop-detail-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 8px;
+}
+
+.manager-shop-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.manager-shop-detail-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--medium-gray);
+}
+
+.manager-shop-detail-meta-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--teal);
+}
+
+/* Stats in Detail */
+.manager-shop-detail-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.manager-shop-detail-stat {
+  background-color: #f8fafc;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.manager-shop-detail-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark-text);
+}
+
+.manager-shop-detail-stat-label {
+  font-size: 13px;
+  color: var(--medium-gray);
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .manager-shops-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .manager-shop-detail-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .manager-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .manager-filter-group {
+    width: 100%;
+  }
+
+  .manager-filter-select {
+    flex: 1;
+  }
+
+  .manager-search-filter {
+    min-width: 100%;
+  }
+
+  .manager-shops-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .manager-shop-detail-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .manager-shop-detail-meta {
+    justify-content: center;
+  }
+
+  .manager-shop-detail-stats {
+    grid-template-columns: 1fr;
+  }
+}
