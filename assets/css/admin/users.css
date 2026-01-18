@@ -1,0 +1,360 @@
+/* =====================================================
+   GoGrocery - Admin User Management
+===================================================== */
+
+/* Filters Bar */
+.admin-filters-bar {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-filters-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-filter-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--medium-gray);
+}
+
+.admin-filter-select {
+  padding: 10px 36px 10px 14px;
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.admin-filter-select:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.admin-search-input {
+  flex: 1;
+  min-width: 250px;
+  padding: 10px 14px 10px 42px;
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  transition: all var(--transition-fast);
+}
+
+.admin-search-input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.admin-search-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.admin-search-wrapper svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--medium-gray);
+}
+
+/* Users Table */
+.admin-table-wrapper {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  background-color: #f8fafc;
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--medium-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.admin-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-gray);
+  font-size: 14px;
+  color: var(--dark-text);
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+/* User Cell */
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-cell-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.user-cell-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.user-cell-info p {
+  font-size: 12px;
+  color: var(--medium-gray);
+  margin-top: 2px;
+}
+
+/* Role Badge */
+.role-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.role-badge.admin {
+  background-color: rgba(156, 39, 176, 0.1);
+  color: #9c27b0;
+}
+
+.role-badge.manager {
+  background-color: rgba(33, 150, 243, 0.1);
+  color: #2196f3;
+}
+
+.role-badge.shop {
+  background-color: rgba(38, 166, 154, 0.1);
+  color: var(--accent-teal);
+}
+
+.role-badge.customer {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--primary);
+}
+
+/* Status Badge */
+.user-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.user-status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+}
+
+.user-status.active {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--success);
+}
+
+.user-status.active .dot {
+  background-color: var(--success);
+}
+
+.user-status.inactive {
+  background-color: rgba(158, 158, 158, 0.1);
+  color: var(--medium-gray);
+}
+
+.user-status.inactive .dot {
+  background-color: var(--medium-gray);
+}
+
+.user-status.banned {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var(--error);
+}
+
+.user-status.banned .dot {
+  background-color: var(--error);
+}
+
+/* Actions */
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.table-action-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  background-color: transparent;
+}
+
+.table-action-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.table-action-btn.view {
+  color: var(--info);
+}
+
+.table-action-btn.view:hover {
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+.table-action-btn.edit {
+  color: var(--primary);
+}
+
+.table-action-btn.edit:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.table-action-btn.delete {
+  color: var(--error);
+}
+
+.table-action-btn.delete:hover {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* Table Pagination */
+.table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-gray);
+}
+
+.pagination-info {
+  font-size: 14px;
+  color: var(--medium-gray);
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-gray);
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  font-size: 14px;
+  color: var(--dark-text);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+.pagination-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .admin-filters-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-filter-group {
+    width: 100%;
+  }
+
+  .admin-filter-select {
+    flex: 1;
+  }
+
+  .admin-search-wrapper {
+    width: 100%;
+  }
+
+  .admin-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .admin-table {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 576px) {
+  .table-pagination {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

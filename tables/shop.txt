@@ -1,4 +1,0 @@
--id [pk]
--userID
--location
--available [true/false]

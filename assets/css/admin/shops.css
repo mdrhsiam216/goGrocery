@@ -1,0 +1,318 @@
+/* =====================================================
+   GoGrocery - Admin Shop Management
+===================================================== */
+
+/* Shop Cards Grid */
+.shops-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.shop-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.shop-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.shop-card-banner {
+  height: 120px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent-teal) 100%);
+  position: relative;
+}
+
+.shop-card-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-card-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.shop-card-status.approved {
+  background-color: var(--success);
+  color: var(--white);
+}
+
+.shop-card-status.pending {
+  background-color: var(--warning);
+  color: var(--white);
+}
+
+.shop-card-status.rejected {
+  background-color: var(--error);
+  color: var(--white);
+}
+
+.shop-card-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-md);
+  border: 3px solid var(--white);
+  object-fit: cover;
+  margin: -36px auto 0;
+  display: block;
+  position: relative;
+  z-index: 1;
+  background-color: var(--white);
+}
+
+.shop-card-body {
+  padding: 16px 20px 20px;
+  text-align: center;
+}
+
+.shop-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 4px;
+}
+
+.shop-card-category {
+  font-size: 13px;
+  color: var(--medium-gray);
+  margin-bottom: 16px;
+}
+
+.shop-card-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--border-gray);
+  margin-bottom: 16px;
+}
+
+.shop-stat {
+  text-align: center;
+}
+
+.shop-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark-text);
+}
+
+.shop-stat-label {
+  font-size: 12px;
+  color: var(--medium-gray);
+  margin-top: 2px;
+}
+
+.shop-card-owner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.shop-card-owner img {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.shop-card-owner span {
+  font-size: 13px;
+  color: var(--medium-gray);
+}
+
+.shop-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.shop-card-actions .btn {
+  flex: 1;
+  font-size: 13px;
+  padding: 10px;
+}
+
+/* Shop Detail Modal/Page Styles */
+.shop-detail-header {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.shop-detail-banner {
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.shop-detail-info {
+  flex: 1;
+}
+
+.shop-detail-info h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 8px;
+}
+
+.shop-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.shop-detail-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--medium-gray);
+}
+
+.shop-detail-meta svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Pending Shops Section */
+.pending-shops-section {
+  background-color: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.pending-shops-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.pending-shops-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pending-shops-header h2 svg {
+  width: 24px;
+  height: 24px;
+  color: var(--warning);
+}
+
+.pending-count {
+  background-color: var(--warning);
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pending-shops-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pending-shop-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+}
+
+.pending-shop-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.pending-shop-info {
+  flex: 1;
+}
+
+.pending-shop-info h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.pending-shop-info p {
+  font-size: 13px;
+  color: var(--medium-gray);
+  margin-top: 4px;
+}
+
+.pending-shop-date {
+  font-size: 12px;
+  color: var(--medium-gray);
+}
+
+.pending-shop-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .shops-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .shops-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-detail-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .shop-detail-meta {
+    justify-content: center;
+  }
+
+  .pending-shop-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pending-shop-actions {
+    width: 100%;
+  }
+
+  .pending-shop-actions .btn {
+    flex: 1;
+  }
+}

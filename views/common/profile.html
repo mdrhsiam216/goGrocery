@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - GoGrocery</title>
+    <link rel="stylesheet" href="../../assets/css/common/base.css">
+    <link rel="stylesheet" href="../../assets/css/common/components.css">
+    <link rel="stylesheet" href="../../assets/css/common/profile.css">
+</head>
+<body>
+    <div class="profile-wrapper">
+        <!-- Header -->
+        <header class="profile-header">
+            <div class="container">
+                <div class="profile-header-logo">
+                    <a href="/">
+                        <img src="../../assets/images/logo.png" alt="GoGrocery Logo">
+                    </a>
+                </div>
+                <nav class="profile-header-nav">
+                    <a href="#">Dashboard</a>
+                    <a href="#" class="active">Profile</a>
+                    <a href="login.html">Logout</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Content -->
+        <main class="profile-content">
+            <div class="container">
+                <div class="profile-grid">
+                    <!-- Sidebar -->
+                    <aside class="profile-sidebar">
+                        <div class="profile-avatar">
+                            <img 
+                                src="/placeholder.svg?height=100&width=100" 
+                                alt="User Avatar" 
+                                class="profile-avatar-img"
+                            >
+                            <h3 class="profile-avatar-name">John Doe</h3>
+                            <span class="profile-avatar-role">Customer</span>
+                        </div>
+                        
+                        <ul class="profile-menu">
+                            <li>
+                                <a href="#profile-info" class="active">
+                                    <span class="profile-menu-icon">👤</span>
+                                    <span>Profile Info</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#edit-profile">
+                                    <span class="profile-menu-icon">✏️</span>
+                                    <span>Edit Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#change-password">
+                                    <span class="profile-menu-icon">🔒</span>
+                                    <span>Change Password</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#delete-account">
+                                    <span class="profile-menu-icon">🗑️</span>
+                                    <span>Delete Account</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+                    
+                    <!-- Main Content -->
+                    <div class="profile-main">
+                        <!-- Profile Info Section -->
+                        <section id="profile-info" class="profile-section">
+                            <div class="profile-section-header">
+                                <h2 class="profile-section-title">Profile Information</h2>
+                            </div>
+                            
+                            <div class="info-row">
+                                <span class="info-label">Full Name</span>
+                                <span class="info-value">John Doe</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Email Address</span>
+                                <span class="info-value">john.doe@example.com</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Role</span>
+                                <span class="info-value">Customer</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">123 Main Street, City</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Member Since</span>
+                                <span class="info-value">January 15, 2025</span>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

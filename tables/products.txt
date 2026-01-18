@@ -1,6 +1,0 @@
--id [pk]
--name
--shopId [fk]
--price
--discount
--available [true/false]

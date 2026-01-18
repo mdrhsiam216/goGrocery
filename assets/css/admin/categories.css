@@ -1,0 +1,250 @@
+/* =====================================================
+   GoGrocery - Admin Category Management
+===================================================== */
+
+/* Category Grid */
+.categories-container {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+}
+
+/* Add Category Form */
+.category-form-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.category-form-card .admin-card-body {
+  padding: 24px;
+}
+
+.category-icon-upload {
+  width: 100%;
+  height: 120px;
+  border: 2px dashed var(--border-gray);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: 20px;
+}
+
+.category-icon-upload:hover {
+  border-color: var(--primary);
+  background-color: rgba(76, 175, 80, 0.02);
+}
+
+.category-icon-upload svg {
+  width: 32px;
+  height: 32px;
+  color: var(--medium-gray);
+}
+
+.category-icon-upload span {
+  font-size: 13px;
+  color: var(--medium-gray);
+}
+
+.category-icon-preview {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+/* Categories List */
+.categories-list-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.categories-tree {
+  padding: 16px;
+}
+
+.category-tree-item {
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.category-tree-item:last-child {
+  margin-bottom: 0;
+}
+
+.category-parent {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background-color: #f8fafc;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.category-parent:hover {
+  background-color: #f1f5f9;
+}
+
+.category-expand-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.category-expand-btn svg {
+  width: 16px;
+  height: 16px;
+  color: var(--medium-gray);
+  transition: transform var(--transition-fast);
+}
+
+.category-expand-btn.expanded svg {
+  transform: rotate(90deg);
+}
+
+.category-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.category-info {
+  flex: 1;
+}
+
+.category-info h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark-text);
+}
+
+.category-info p {
+  font-size: 12px;
+  color: var(--medium-gray);
+  margin-top: 2px;
+}
+
+.category-count {
+  background-color: var(--light-gray);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--medium-gray);
+}
+
+.category-actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* Subcategories */
+.subcategories {
+  display: none;
+  padding: 0 16px 16px 72px;
+}
+
+.subcategories.expanded {
+  display: block;
+}
+
+.subcategory-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.subcategory-item:hover {
+  background-color: #f8fafc;
+}
+
+.subcategory-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.subcategory-info {
+  flex: 1;
+}
+
+.subcategory-info h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.subcategory-info span {
+  font-size: 12px;
+  color: var(--medium-gray);
+}
+
+/* Empty State */
+.category-empty {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.category-empty svg {
+  width: 64px;
+  height: 64px;
+  color: var(--border-gray);
+  margin-bottom: 16px;
+}
+
+.category-empty h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 8px;
+}
+
+.category-empty p {
+  font-size: 14px;
+  color: var(--medium-gray);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .categories-container {
+    grid-template-columns: 1fr;
+  }
+
+  .category-form-card {
+    position: static;
+  }
+}
+
+@media (max-width: 576px) {
+  .category-parent {
+    padding: 12px;
+  }
+
+  .subcategories {
+    padding-left: 52px;
+  }
+}

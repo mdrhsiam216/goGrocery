@@ -1,23 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="/css/common/nav.css">
-    <link rel="stylesheet" href="/css/common/styles.css">
-</head>
-<body>
-    <nav class="">
-        <img src="/resources/logo/logo.png" alt="">
-        
-        <div>
-            <a href="/view/customer/dashboard.html">Dashboard</a>
-            <a href="/view/common/about.html">About Us</a>
-            <a href="#"><img src="/resources/logo/cart.png" alt=""></a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoGrocery - Fresh Groceries Delivered</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="./assets/css/common/base.css" />
+    <link rel="stylesheet" href="./assets/css/common/components.css" />
+    <link rel="stylesheet" href="./assets/css/customer/layout.css" />
+    <link rel="stylesheet" href="./assets/css/customer/home.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="header-logo">
+          <img src="./assets/images/logo.png" alt="GoGrocery" />
+        </a>
+
+        <div class="header-search">
+          <form class="search-form" action="search.html" method="GET">
+            <input
+              type="text"
+              class="search-input"
+              name="q"
+              placeholder="Search for products, shops..."
+            />
+            <button type="submit" class="search-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </button>
+          </form>
         </div>
-    </nav>
-    
-    <button class="btn-primary">submit</button>
-</body>
+
+        <div class="header-actions">
+          <a href="cart.html" class="header-link cart-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+            <!-- PHP: Display cart count -->
+            <span class="cart-badge">3</span>
+          </a>
+
+          <!-- User Menu (Logged In) -->
+          <div class="user-menu">
+            <button class="user-menu-btn">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>John</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </button>
+            <div class="user-menu-dropdown">
+              <a href="../common/profile.html">My Profile</a>
+              <a href="orders.html">My Orders</a>
+              <a href="../common/change-password.html">Change Password</a>
+              <a href="#" class="logout">Logout</a>
+            </div>
+          </div>
+
+          <!-- Guest Menu (Not Logged In) - PHP: Show based on session -->
+          <!--
+                    <a href="../common/login.html" class="header-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Login</span>
+                    </a>
+                    -->
+
+          <button class="mobile-menu-toggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-container container">
+        <div class="hero-content">
+          <h1>Fresh Groceries Delivered to Your Door</h1>
+          <p>
+            Shop from your favorite local stores and get everything delivered in
+            minutes.
+          </p>
+          <div class="hero-search">
+            <input
+              type="text"
+              placeholder="Search for products or shops..."
+            />
+            <button type="button">Search</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img
+            src="/placeholder.svg?height=350&width=450"
+            alt="Grocery Delivery"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Shop by Category</h2>
+          <a href="categories.html" class="section-link">
+            View All
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </a>
+        </div>
+
+        <div class="categories-grid">
+          <!-- PHP: Loop through categories -->
+          <a href="products.html?category=1" class="category-card">
+            <div class="category-icon">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="Fruits"
+              />
+            </div>
+            <h3>Fruits</h3>
+          </a>
+          <a href="products.html?category=1" class="category-card">
+            <div class="category-icon">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="Vegetables"
+              />
+            </div>
+            <h3>Vegetables</h3>
+          </a>
+
+          <a href="products.html?category=2" class="category-card">
+            <div class="category-icon">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="Dairy"
+              />
+            </div>
+            <h3>Dairy</h3>
+          </a>
+
+          <a href="products.html?category=3" class="category-card">
+            <div class="category-icon">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="Meat"
+              />
+            </div>
+            <h3>Meat</h3>
+          </a>
+
+          <a href="products.html?category=4" class="category-card">
+            <div class="category-icon">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="Bakery"
+              />
+            </div>
+            <h3>Bakery</h3>
+          </a>
+
+          <a href="products.html?category=5" class="category-card">
+            <div class="category-icon">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="Beverages"
+              />
+            </div>
+            <h3>Beverages</h3>
+          </a>
+
+          <a href="products.html?category=6" class="category-card">
+            <div class="category-icon">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="Snacks"
+              />
+            </div>
+            <h3>Snacks</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Shops -->
+    <section class="section" style="background-color: var(--white)">
+      <div class="container">
+        <div class="section-header">
+          <h2>Featured Shops</h2>
+          <a href="shops.html" class="section-link">
+            View All
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </a>
+        </div>
+
+        <div class="shops-grid">
+          <!-- PHP: Loop through featured shops -->
+          <a href="shop-detail.html?id=1" class="shop-card">
+            <div class="shop-image">
+              <img
+                src="/placeholder.svg?height=140&width=280"
+                alt="Fresh Mart"
+              />
+              <span class="shop-badge">Featured</span>
+            </div>
+            <div class="shop-info">
+              <h3>Fresh Mart</h3>
+              <div class="shop-meta">
+                <span class="shop-rating">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <span>4.8</span>
+                </span>
+                <span>2.5 km</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="shop-detail.html?id=2" class="shop-card">
+            <div class="shop-image">
+              <img
+                src="/placeholder.svg?height=140&width=280"
+                alt="Golden Bakery"
+              />
+            </div>
+            <div class="shop-info">
+              <h3>Golden Bakery</h3>
+              <div class="shop-meta">
+                <span class="shop-rating">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <span>4.6</span>
+                </span>
+                <span>1.8 km</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="shop-detail.html?id=3" class="shop-card">
+            <div class="shop-image">
+              <img
+                src="/placeholder.svg?height=140&width=280"
+                alt="Prime Meats"
+              />
+            </div>
+            <div class="shop-info">
+              <h3>Prime Meats</h3>
+              <div class="shop-meta">
+                <span class="shop-rating">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <span>4.9</span>
+                </span>
+                <span>3.2 km</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="shop-detail.html?id=4" class="shop-card">
+            <div class="shop-image">
+              <img
+                src="/placeholder.svg?height=140&width=280"
+                alt="Dairy Delights"
+              />
+            </div>
+            <div class="shop-info">
+              <h3>Dairy Delights</h3>
+              <div class="shop-meta">
+                <span class="shop-rating">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    ></polygon>
+                  </svg>
+                  <span>4.7</span>
+                </span>
+                <span>2.1 km</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promo Banner -->
+    <section class="section">
+      <div class="container">
+        <div class="promo-banner">
+          <div class="promo-content">
+            <h2>Get 20% Off Your First Order!</h2>
+            <p>Use code at checkout to save on your groceries</p>
+          </div>
+          <div class="promo-code">WELCOME20</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" style="background-color: var(--white)">
+      <div class="container">
+        <div class="section-header">
+          <h2>Popular Products</h2>
+          <a href="products.html" class="section-link">
+            View All
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </a>
+        </div>
+
+        <div class="products-grid">
+          <!-- PHP: Loop through featured products -->
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Apples"
+              />
+              <span class="product-discount">-15%</span>
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Fruits</span>
+              <h3>Fresh Red Apples</h3>
+              <div class="product-price">
+                <span class="current">$3.49</span>
+                <span class="original">$4.10</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Organic Milk"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Dairy</span>
+              <h3>Organic Whole Milk</h3>
+              <div class="product-price">
+                <span class="current">$4.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Fresh Baguette"
+              />
+              <span class="product-discount">-10%</span>
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Bakery</span>
+              <h3>French Baguette</h3>
+              <div class="product-price">
+                <span class="current">$2.69</span>
+                <span class="original">$2.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Chicken Breast"
+              />
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Meat</span>
+              <h3>Chicken Breast (1kg)</h3>
+              <div class="product-price">
+                <span class="current">$8.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="/placeholder.svg?height=160&width=200"
+                alt="Orange Juice"
+              />
+              <span class="product-discount">-20%</span>
+              <button class="product-wishlist">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Beverages</span>
+              <h3>Fresh Orange Juice</h3>
+              <div class="product-price">
+                <span class="current">$3.99</span>
+                <span class="original">$4.99</span>
+              </div>
+              <button class="product-add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section footer-about">
+          <div class="footer-logo">
+            <img src="../../assets/images/logo.png" alt="GoGrocery" />
+          </div>
+          <p class="footer-description">
+            Your favorite local grocery stores, delivered fresh to your
+            doorstep. Shop smarter, live better.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="shops.html">Browse Shops</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Shipping Info</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 GoGrocery. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
 </html>

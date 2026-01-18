@@ -1,0 +1,123 @@
+/* =====================================================
+   GoGrocery - Base Styles
+   Color Palette derived from logo:
+   - Primary Green: #4CAF50
+   - Dark Green: #2E7D32
+   - Teal Accent: #26A69A
+   - Orange Accent: #FF7043
+   - Yellow Accent: #FFC107
+   - Light Gray: #F5F5F5
+   - White: #FFFFFF
+   - Dark Text: #333333
+   - Medium Gray: #666666
+   - Border Gray: #E0E0E0
+===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Primary Colors */
+  --primary: #4caf50;
+  --primary-dark: #2e7d32;
+  --primary-light: #81c784;
+
+  /* Accent Colors */
+  --accent-teal: #26a69a;
+  --accent-orange: #ff7043;
+  --accent-yellow: #ffc107;
+
+  /* Neutral Colors */
+  --white: #ffffff;
+  --light-gray: #f5f5f5;
+  --border-gray: #e0e0e0;
+  --medium-gray: #666666;
+  --dark-text: #333333;
+
+  /* Status Colors */
+  --success: #4caf50;
+  --error: #f44336;
+  --warning: #ff9800;
+  --info: #2196f3;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 50%;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--dark-text);
+  background-color: var(--light-gray);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Utility Classes */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-muted {
+  color: var(--medium-gray);
+}
+
+.mt-1 {
+  margin-top: 8px;
+}
+.mt-2 {
+  margin-top: 16px;
+}
+.mt-3 {
+  margin-top: 24px;
+}
+.mb-1 {
+  margin-bottom: 8px;
+}
+.mb-2 {
+  margin-bottom: 16px;
+}
+.mb-3 {
+  margin-bottom: 24px;
+}
