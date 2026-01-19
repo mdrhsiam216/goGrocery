@@ -159,6 +159,7 @@ if (isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == 'update_product') {
     $sql .= " where id = :id";
 
     $ok = $DB->write($sql, $params);
+    $info->success = $ok ? true : false;
     $info->message = $ok ? 'Product updated' : 'No changes or update failed';
     echo json_encode($info);
     die;
@@ -187,6 +188,7 @@ if (isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == 'delete_product') {
     }
 
     $ok = $DB->write("delete from products where id = :id", ['id' => $id]);
+    $info->success = $ok ? true : false;
     $info->message = $ok ? 'Product deleted' : 'Delete failed';
     echo json_encode($info);
     die;

@@ -280,13 +280,13 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            data_type: 'update_product',
-            productId: productId,
-            name: name,
-            categoryId: categoryId,
-            price: price,
-            quantity: quantity
-          })
+              data_type: 'update_product',
+              id: productId,
+              name: name,
+              category_id: categoryId,
+              price: price,
+              quantity: quantity
+            })
         });
         const result = await response.json();
         
@@ -316,9 +316,9 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            data_type: 'delete_product',
-            productId: productId
-          })
+              data_type: 'delete_product',
+              id: productId
+            })
         });
         const result = await response.json();
         
