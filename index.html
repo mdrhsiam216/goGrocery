@@ -1,417 +1,483 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoGrocery - Fresh Groceries Delivered</title>
+    <link rel="stylesheet" href="./assets/css/common/base.css" />
+    <link rel="stylesheet" href="./assets/css/common/components.css" />
+    <link rel="stylesheet" href="./assets/css/customer/layout.css" />
+    <link rel="stylesheet" href="./assets/css/customer/home.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoGrocery - Fresh Groceries Delivered</title>
-  <!-- CSS Files -->
-  <link rel="stylesheet" href="./assets/css/common/base.css" />
-  <link rel="stylesheet" href="./assets/css/common/components.css" />
-  <link rel="stylesheet" href="./assets/css/customer/layout.css" />
-  <link rel="stylesheet" href="./assets/css/customer/home.css" />
-</head>
-
-<body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-container">
-      <a href="index.html" class="header-logo">
-        <img src="./assets/images/logo.png" alt="GoGrocery" />
-      </a>
-
-      <div class="header-search">
-        <form class="search-form" action="search.html" method="GET">
-          <input type="text" class="search-input" name="q" placeholder="Search for products" />
-          <button type="submit" class="search-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path>
-            </svg>
-          </button>
-        </form>
-      </div>
-
-      <div class="header-actions">
-        <a href="./views/customer/cart.html" class="header-link cart-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="8" cy="21" r="1"></circle>
-            <circle cx="19" cy="21" r="1"></circle>
-            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-          </svg>
-          <!-- PHP: Display cart count -->
-          <span class="cart-badge">3</span>
-        </a>
-
-        <!-- User Menu (Logged In) -->
-        <div class="user-menu">
-          <button class="user-menu-btn">
-            <img src="/placeholder.svg?height=32&width=32" alt="User" class="user-avatar" />
-            <span>John</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m6 9 6 6 6-6"></path>
-            </svg>
-          </button>
-          <div class="user-menu-dropdown">
-            <a href="./views/common/profile.html">My Profile</a>
-            <a href="./views/customer/orders.html">My Orders</a>
-            <a href="./views/common/change-password.html">Change Password</a>
-            <a href="#" class="logout">Logout</a>
-          </div>
-        </div>
-
-        <!-- Guest Menu (Not Logged In) - PHP: Show based on session -->
-        <!--
-                    <a href="../common/login.html" class="header-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        <span>Login</span>
-                    </a>
-                    -->
-
-        <button class="mobile-menu-toggle">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="4" x2="20" y1="12" y2="12"></line>
-            <line x1="4" x2="20" y1="6" y2="6"></line>
-            <line x1="4" x2="20" y1="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <script>
-    async function apiPost(body) {
-      try {
-        const res = await fetch('./backend/api.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body)
-        });
-        return await res.json();
-      } catch (e) {
-        return null;
-      }
-    }
-
-    async function updateHeaderAndCart() {
-      const j = await apiPost({ data_type: 'user_info' });
-      const headerActions = document.querySelector('.header-actions');
-      const cartLink = headerActions ? headerActions.querySelector('.cart-link') : null;
-      const cartBadge = cartLink ? cartLink.querySelector('.cart-badge') : null;
-
-      // Show cart only if logged in
-      if (j && j.logged_in) {
-        if (cartLink) cartLink.style.display = 'flex';
-        // ensure cart count is fetched
-        const cartRes = await apiPost({ data_type: 'cart_count' });
-        if (cartBadge && cartRes && cartRes.count !== undefined) {
-          cartBadge.textContent = cartRes.count;
-        }
-      } else {
-        if (cartLink) cartLink.style.display = 'none';
-      }
-
-      if (!headerActions) return;
-
-      const mobile = headerActions.querySelector('.mobile-menu-toggle');
-      headerActions.innerHTML = '';
-      if (cartLink) headerActions.appendChild(cartLink);
-
-      if (j && j.logged_in) {
-        const user = j.user || {};
-        const userMenu = document.createElement('div');
-        userMenu.className = 'user-menu';
-
-        const btn = document.createElement('button');
-        btn.className = 'user-menu-btn';
-
-        const img = document.createElement('img');
-        img.className = 'user-avatar';
-        if (user.image) { img.src = user.image; img.alt = user.name || 'User'; }
-        else { img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.2"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>'); img.alt = 'Avatar'; }
-
-        const span = document.createElement('span');
-        span.textContent = user.name || 'User';
-
-        btn.appendChild(img);
-        btn.appendChild(span);
-
-        const caret = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        caret.setAttribute('width', '16'); caret.setAttribute('height', '16'); caret.setAttribute('viewBox', '0 0 24 24');
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path'); path.setAttribute('d', 'm6 9 6 6 6-6'); caret.appendChild(path);
-        btn.appendChild(caret);
-
-        userMenu.appendChild(btn);
-
-        const dropdown = document.createElement('div');
-        dropdown.className = 'user-menu-dropdown';
-        dropdown.innerHTML = '<a href="views/common/profile.html">My Profile</a><a href="views/customer/orders.html">My Orders</a><a href="views/common/change-password.html">Change Password</a><a href="#" class="logout">Logout</a>';
-        userMenu.appendChild(dropdown);
-
-        headerActions.appendChild(userMenu);
-      } else {
-        const a = document.createElement('a');
-        a.href = 'views/common/login.html';
-        a.className = 'header-link';
-        a.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Login</span>';
-        headerActions.appendChild(a);
-      }
-
-      if (mobile) headerActions.appendChild(mobile);
-
-      const logoutBtn = document.querySelector('.logout');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', async (e) => {
-          e.preventDefault(); await apiPost({ data_type: 'logout' }); window.location.href = './index.html';
-        });
-      }
-    }
-
-    // function createCategoryCard(cat){
-    //   const a = document.createElement('a');
-    //   a.href = '#';
-    //   a.className = 'category-card';
-    //   a.dataset.id = cat.id;
-    //   const icon = document.createElement('div'); icon.className='category-icon';
-    //   const img = document.createElement('img'); img.src = cat.image ? cat.image : './assets/images/category-placeholder.png'; img.alt = cat.name;
-    //   icon.appendChild(img);
-    //   const h3 = document.createElement('h3'); h3.textContent = cat.name;
-    //   a.appendChild(icon); a.appendChild(h3);
-    //   a.addEventListener('click', (e)=>{ e.preventDefault(); loadProducts(cat.id); });
-    //   return a;
-    // }
-
-    function createProductCard(p) {
-      const card = document.createElement('div'); card.className = 'product-card';
-      const imgWrap = document.createElement('div'); imgWrap.className = 'product-image';
-      let imgSrc = '/goGrocery/assets/images/placeholder.svg?height=160&width=200';
-      if (p.image && p.image.trim()) {
-        imgSrc = p.image;
-      }
-      const img = document.createElement('img'); img.src = imgSrc; img.alt = p.name; imgWrap.appendChild(img);
-      const info = document.createElement('div'); info.className = 'product-info';
-      const catSpan = document.createElement('span'); catSpan.className = 'product-category'; catSpan.textContent = p.category_name || '';
-      const h3 = document.createElement('h3'); h3.textContent = p.name;
-      const price = document.createElement('div'); price.className = 'product-price'; const curr = document.createElement('span'); curr.className = 'current'; curr.textContent = ('$' + (parseFloat(p.price).toFixed(2) || '0.00'));
-      price.appendChild(curr);
-      const btn = document.createElement('button'); btn.className = 'product-add-btn'; btn.textContent = 'Add to Cart'; btn.dataset.id = p.id;
-      btn.addEventListener('click', async () => {
-        const res = await apiPost({ data_type: 'add_to_cart', productId: p.id, quantity: 1 });
-        if (res && res.data_type === 'add_to_cart') {
-          // update cart count
-          const cnt = await apiPost({ data_type: 'cart_count' });
-          const badge = document.querySelector('.cart-badge'); if (badge && cnt && cnt.count !== undefined) badge.textContent = cnt.count;
-          alert('Added to cart');
-        } else if (res && res.logged_in === false) {
-          window.location.href = 'views/common/login.html';
-        } else {
-          alert(res && res.message ? res.message : 'Could not add to cart');
-        }
-      });
-
-      info.appendChild(catSpan); info.appendChild(h3); info.appendChild(price); info.appendChild(btn);
-      card.appendChild(imgWrap); card.appendChild(info);
-      return card;
-    }
-
-    // async function loadCategories(){
-    //   const res = await apiPost({data_type:'get_categories'});
-    //   const grid = document.querySelector('.categories-grid');
-    //   if(!grid) return;
-    //   grid.innerHTML = '';
-    //   if(res && res.categories && res.categories.length){
-    //     res.categories.forEach(c => grid.appendChild(createCategoryCard(c)));
-    //   } else {
-    //     grid.innerHTML = '<p>No categories found</p>';
-    //   }
-    // }
-
-    async function loadProducts(category = 0) {
-      const res = await apiPost({ data_type: 'get_products', category: category });
-      const grid = document.querySelector('.products-grid');
-      if (!grid) return;
-      grid.innerHTML = '';
-      if (res && res.products && res.products.length) {
-        res.products.forEach(p => grid.appendChild(createProductCard(p)));
-      } else {
-        grid.innerHTML = '<p>No products found</p>';
-      }
-    }
-
-    async function loadPopularProducts() {
-      const res = await apiPost({ data_type: 'get_products', limit: 5, random: 1 });
-      const grid = document.querySelector('.products-grid');
-      if (!grid) return;
-      grid.innerHTML = '';
-      if (res && res.products && res.products.length) {
-        res.products.forEach(p => grid.appendChild(createProductCard(p)));
-      } else {
-        grid.innerHTML = '<p>No products found</p>';
-      }
-    }
-
-    // Initialize page
-    (function () {
-      updateHeaderAndCart();
-      loadPopularProducts();
-    })();
-  </script>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-container container">
-      <div class="hero-content">
-        <h1>Fresh Groceries Delivered to Your Door</h1>
-        <p>
-          Shop from your favorite local stores and get everything delivered in
-          minutes.
-        </p>
-        <div class="hero-search">
-          <input type="text" placeholder="Search for shops..." />
-          <button type="button">Search</button>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="./assets/images/hero.png" alt="Grocery Delivery" />
-      </div>
-    </div>
-  </section>
-
-  <!-- Categories Section -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Shop by Category</h2>
-      </div>
-
-      <div class="categories-grid">
-        <a href="products.html?category=1" class="category-card">
-          <div class="category-icon">
-            <img src="./assets/images/fruits.png" alt="Fruits" />
-          </div>
-          <h3>Fruits</h3>
-        </a>
-        <a href="products.html?category=1" class="category-card">
-          <div class="category-icon">
-            <img src="./assets/images/vegetable.png" alt="Vegetables" />
-          </div>
-          <h3>Vegetables</h3>
-        </a>
-
-        <a href="products.html?category=2" class="category-card">
-          <div class="category-icon">
-            <img src="./assets/images/dairy.png" alt="Dairy" />
-          </div>
-          <h3>Dairy</h3>
-        </a>
-
-        <a href="products.html?category=3" class="category-card">
-          <div class="category-icon">
-            <img src="./assets/images/meat.png" alt="Meat" />
-          </div>
-          <h3>Meat</h3>
-        </a>
-
-        <a href="products.html?category=4" class="category-card">
-          <div class="category-icon">
-            <img src="./assets/images/bakery.png" alt="Bakery" />
-          </div>
-          <h3>Bakery</h3>
-        </a>
-
-        <a href="products.html?category=5" class="category-card">
-          <div class="category-icon">
-            <img src="./assets/images/beverage.png" alt="Beverages" />
-          </div>
-          <h3>Beverages</h3>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Promo Banner -->
-  <section class="section">
-    <div class="container">
-      <div class="promo-banner">
-        <div class="promo-content">
-          <h2>Get 10% using Asad's promo!</h2>
-          <p>Use code at checkout to save on your groceries</p>
-        </div>
-        <div class="promo-code">OI LOO</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Products -->
-  <section class="section" style="background-color: var(--white)">
-    <div class="container">
-      <div class="section-header">
-        <h2>Popular Products</h2>
-        <a href="./views/customer/shops-and-products.html" class="section-link">
-          View All
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m9 18 6-6-6-6"></path>
-          </svg>
-        </a>
-      </div>
-
-      <div class="products-grid">
-        <!-- Dynamically loaded popular products (first 5) -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-section footer-about">
-        <div class="footer-logo">
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <a href="index.html" class="header-logo">
           <img src="./assets/images/logo.png" alt="GoGrocery" />
+        </a>
+
+        <div class="header-search">
+          <form class="search-form" action="search.html" method="GET">
+            <input
+              type="text"
+              class="search-input"
+              name="q"
+              placeholder="Search for products"
+            />
+            <button type="submit" class="search-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </button>
+          </form>
         </div>
-        <p class="footer-description">
-          Your favorite local grocery stores, delivered fresh to your
-          doorstep. Shop smarter, live better.
-        </p>
+
+        <div class="header-actions">
+          <a href="./views/customer/cart.html" class="header-link cart-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+            <span class="cart-badge">3</span>
+          </a>
+
+          <div class="user-menu">
+            <button class="user-menu-btn">
+              <img
+                src="/placeholder.svg?height=32&width=32"
+                alt="User"
+                class="user-avatar"
+              />
+              <span>John</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </button>
+            <div class="user-menu-dropdown">
+              <a href="./views/common/profile.html">My Profile</a>
+              <a href="./views/customer/orders.html">My Orders</a>
+              <a href="./views/common/change-password.html">Change Password</a>
+              <a href="#" class="logout">Logout</a>
+            </div>
+          </div>
+          <button class="mobile-menu-toggle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <script>
+      async function apiPost(body) {
+        try {
+          const res = await fetch("./backend/api.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          return await res.json();
+        } catch (e) {
+          return null;
+        }
+      }
+
+      async function updateHeaderAndCart() {
+        const j = await apiPost({ data_type: "user_info" });
+        const headerActions = document.querySelector(".header-actions");
+        const cartLink = headerActions
+          ? headerActions.querySelector(".cart-link")
+          : null;
+        const cartBadge = cartLink
+          ? cartLink.querySelector(".cart-badge")
+          : null;
+
+        if (j && j.logged_in) {
+          if (cartLink) cartLink.style.display = "flex";
+          const cartRes = await apiPost({ data_type: "cart_count" });
+          if (cartBadge && cartRes && cartRes.count !== undefined) {
+            cartBadge.textContent = cartRes.count;
+          }
+        } else {
+          if (cartLink) cartLink.style.display = "none";
+        }
+
+        if (!headerActions) return;
+
+        const mobile = headerActions.querySelector(".mobile-menu-toggle");
+        headerActions.innerHTML = "";
+        if (cartLink) headerActions.appendChild(cartLink);
+
+        if (j && j.logged_in) {
+          const user = j.user || {};
+          const userMenu = document.createElement("div");
+          userMenu.className = "user-menu";
+
+          const btn = document.createElement("button");
+          btn.className = "user-menu-btn";
+
+          const img = document.createElement("img");
+          img.className = "user-avatar";
+          if (user.image) {
+            img.src = user.image;
+            img.alt = user.name || "User";
+          } else {
+            img.src =
+              "data:image/svg+xml;utf8," +
+              encodeURIComponent(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.2"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>',
+              );
+            img.alt = "Avatar";
+          }
+
+          const span = document.createElement("span");
+          span.textContent = user.name || "User";
+
+          btn.appendChild(img);
+          btn.appendChild(span);
+
+          const caret = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "svg",
+          );
+          caret.setAttribute("width", "16");
+          caret.setAttribute("height", "16");
+          caret.setAttribute("viewBox", "0 0 24 24");
+          const path = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path",
+          );
+          path.setAttribute("d", "m6 9 6 6 6-6");
+          caret.appendChild(path);
+          btn.appendChild(caret);
+
+          userMenu.appendChild(btn);
+
+          const dropdown = document.createElement("div");
+          dropdown.className = "user-menu-dropdown";
+          dropdown.innerHTML =
+            '<a href="views/common/profile.html">My Profile</a><a href="views/customer/orders.html">My Orders</a><a href="views/common/change-password.html">Change Password</a><a href="#" class="logout">Logout</a>';
+          userMenu.appendChild(dropdown);
+
+          headerActions.appendChild(userMenu);
+        } else {
+          const a = document.createElement("a");
+          a.href = "views/common/login.html";
+          a.className = "header-link";
+          a.innerHTML =
+            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Login</span>';
+          headerActions.appendChild(a);
+        }
+
+        if (mobile) headerActions.appendChild(mobile);
+
+        const logoutBtn = document.querySelector(".logout");
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            await apiPost({ data_type: "logout" });
+            window.location.href = "./index.html";
+          });
+        }
+      }
+
+      function createProductCard(p) {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "product-image";
+        let imgSrc =
+          "/goGrocery/assets/images/placeholder.svg?height=160&width=200";
+        if (p.image && p.image.trim()) {
+          imgSrc = p.image;
+        }
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = p.name;
+        imgWrap.appendChild(img);
+        const info = document.createElement("div");
+        info.className = "product-info";
+        const catSpan = document.createElement("span");
+        catSpan.className = "product-category";
+        catSpan.textContent = p.category_name || "";
+        const h3 = document.createElement("h3");
+        h3.textContent = p.name;
+        const price = document.createElement("div");
+        price.className = "product-price";
+        const curr = document.createElement("span");
+        curr.className = "current";
+        curr.textContent = "$" + (parseFloat(p.price).toFixed(2) || "0.00");
+        price.appendChild(curr);
+        const btn = document.createElement("button");
+        btn.className = "product-add-btn";
+        btn.textContent = "Add to Cart";
+        btn.dataset.id = p.id;
+        btn.addEventListener("click", async () => {
+          const res = await apiPost({
+            data_type: "add_to_cart",
+            productId: p.id,
+            quantity: 1,
+          });
+          if (res && res.data_type === "add_to_cart") {
+            // update cart count
+            const cnt = await apiPost({ data_type: "cart_count" });
+            const badge = document.querySelector(".cart-badge");
+            if (badge && cnt && cnt.count !== undefined)
+              badge.textContent = cnt.count;
+            alert("Added to cart");
+          } else if (res && res.logged_in === false) {
+            window.location.href = "views/common/login.html";
+          } else {
+            alert(res && res.message ? res.message : "Could not add to cart");
+          }
+        });
+
+        info.appendChild(catSpan);
+        info.appendChild(h3);
+        info.appendChild(price);
+        info.appendChild(btn);
+        card.appendChild(imgWrap);
+        card.appendChild(info);
+        return card;
+      }
+
+      async function loadProducts(category = 0) {
+        const res = await apiPost({
+          data_type: "get_products",
+          category: category,
+        });
+        const grid = document.querySelector(".products-grid");
+        if (!grid) return;
+        grid.innerHTML = "";
+        if (res && res.products && res.products.length) {
+          res.products.forEach((p) => grid.appendChild(createProductCard(p)));
+        } else {
+          grid.innerHTML = "<p>No products found</p>";
+        }
+      }
+
+      async function loadPopularProducts() {
+        const res = await apiPost({
+          data_type: "get_products",
+          limit: 5,
+          random: 1,
+        });
+        const grid = document.querySelector(".products-grid");
+        if (!grid) return;
+        grid.innerHTML = "";
+        if (res && res.products && res.products.length) {
+          res.products.forEach((p) => grid.appendChild(createProductCard(p)));
+        } else {
+          grid.innerHTML = "<p>No products found</p>";
+        }
+      }
+
+      (function () {
+        updateHeaderAndCart();
+        loadPopularProducts();
+      })();
+    </script>
+
+    <section class="hero">
+      <div class="hero-container container">
+        <div class="hero-content">
+          <h1>Fresh Groceries Delivered to Your Door</h1>
+          <p>
+            Shop from your favorite local stores and get everything delivered in
+            minutes.
+          </p>
+          <div class="hero-search">
+            <input type="text" placeholder="Search for shops..." />
+            <button type="button">Search</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="./assets/images/hero.png" alt="Grocery Delivery" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Shop by Category</h2>
+        </div>
+
+        <div class="categories-grid">
+          <a href="#" class="category-card">
+            <div class="category-icon">
+              <img src="./assets/images/fruits.png" alt="Fruits" />
+            </div>
+            <h3>Fruits</h3>
+          </a>
+          <a href="#" class="category-card">
+            <div class="category-icon">
+              <img src="./assets/images/vegetable.png" alt="Vegetables" />
+            </div>
+            <h3>Vegetables</h3>
+          </a>
+
+          <a href="#" class="category-card">
+            <div class="category-icon">
+              <img src="./assets/images/dairy.png" alt="Dairy" />
+            </div>
+            <h3>Dairy</h3>
+          </a>
+
+          <a href="#" class="category-card">
+            <div class="category-icon">
+              <img src="./assets/images/meat.png" alt="Meat" />
+            </div>
+            <h3>Meat</h3>
+          </a>
+
+          <a href="#" class="category-card">
+            <div class="category-icon">
+              <img src="./assets/images/bakery.png" alt="Bakery" />
+            </div>
+            <h3>Bakery</h3>
+          </a>
+
+          <a href="#" class="category-card">
+            <div class="category-icon">
+              <img src="./assets/images/beverage.png" alt="Beverages" />
+            </div>
+            <h3>Beverages</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="promo-banner">
+          <div class="promo-content">
+            <h2>Get 10% using Asad's promo!</h2>
+            <p>Use code at checkout to save on your groceries</p>
+          </div>
+          <div class="promo-code">OI LOO</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background-color: var(--white)">
+      <div class="container">
+        <div class="section-header">
+          <h2>Popular Products</h2>
+          <a
+            href="./views/customer/shops-and-products.html"
+            class="section-link"
+          >
+            View All
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </a>
+        </div>
+
+        <div class="products-grid"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section footer-about">
+          <div class="footer-logo">
+            <img src="./assets/images/logo.png" alt="GoGrocery" />
+          </div>
+          <p class="footer-description">
+            Your favorite local grocery stores, delivered fresh to your
+            doorstep. Shop smarter, live better.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="footer-section">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="orders.html">My Orders</a></li>
-        </ul>
+      <div class="footer-bottom">
+        <p>&copy; 2025 GoGrocery. All rights reserved.</p>
       </div>
-
-      <div class="footer-section">
-        <h4>Customer Service</h4>
-        <ul>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2025 GoGrocery. All rights reserved.</p>
-    </div>
-  </footer>
-</body>
-
+    </footer>
+  </body>
 </html>
