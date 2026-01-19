@@ -163,90 +163,80 @@
   </script>
   <script>
     const api = async (body) => {
-      const response = await fetch('../../backend/api.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      const text = await response.text();
-      console.log('API Response for', body.data_type, ':', text);
-      if (!text) return null;
-      return JSON.parse(text);
+      try {
+        const response = await fetch('../../backend/api.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const text = await response.text();
+        if (!text) return null;
+        return JSON.parse(text);
+      } catch (error) {
+        console.error('API Error:', error);
+        return null;
+      }
     };
 
-    (async function initShop() {
+    (async function initDashboard() {
       try {
-        console.log('Fetching user info...');
-        const ui = await api({ data_type: 'user_info' });
-        console.log('User info:', ui);
-
-        if (!ui || !ui.logged_in || ui.user?.role !== 'shop') {
+        // Get user info
+        const userInfo = await api({ data_type: 'user_info' });
+        if (!userInfo || !userInfo.logged_in || userInfo.user?.role !== 'shop') {
           window.location.href = '../common/login.html';
           return;
         }
 
-        console.log('Fetching shop data...');
-        const resp = await api({ data_type: 'get_my_shop' });
-        console.log('Shop response:', resp);
-        let shopId = 0;
+        // Get shop data
+        const shopData = await api({ data_type: 'get_my_shop' });
+        if (!shopData || !shopData.shop) {
+          alert('No shop found for your account. Please contact administrator.');
+          return;
+        }
 
-        if (resp && resp.shop) {
-          const shop = resp.shop;
-          shopId = shop.id;
-          console.log('Shop ID:', shopId);
+        const shop = shopData.shop;
+        const user = userInfo.user;
 
-          const profileName = document.querySelector('.shop-profile-name');
-          const profileRole = document.querySelector('.shop-profile-role');
-          const avatar = document.querySelector('.shop-avatar');
+        // Update profile header
+        const profileName = document.querySelector('.shop-profile-name');
+        const profileRole = document.querySelector('.shop-profile-role');
+        const avatar = document.querySelector('.shop-avatar');
 
-          console.log('Profile elements:', { profileName, profileRole, avatar });
+        if (profileName) {
+          profileName.textContent = shop.owner_name || user.name || user.email || 'Shop Owner';
+        }
 
-          if (profileName) {
-            profileName.textContent = shop.owner_name || ui.user.name || ui.user.email || 'Shop';
-            console.log('Set profile name to:', profileName.textContent);
-          }
-          if (profileRole) profileRole.textContent = 'Shop';
-          if (avatar) {
-            if (ui.user && ui.user.image) {
-              avatar.src = ui.user.image;
-              console.log('Set avatar to user image:', ui.user.image);
-            } else if (shop && shop.logo) {
-              avatar.src = shop.logo;
-              console.log('Set avatar to shop logo:', shop.logo);
-            }
+        if (profileRole) {
+          profileRole.textContent = 'Shop';
+        }
+
+        if (avatar) {
+          if (user.image) {
+            avatar.src = user.image;
+          } else if (shop.logo) {
+            avatar.src = shop.logo;
           }
         }
 
-        if (shopId) {
-          console.log('Fetching orders and products...');
-          const [oRes, pRes] = await Promise.all([
-            api({ data_type: 'get_orders', shopId: shopId }),
-            api({ data_type: 'get_products', shopId: shopId })
-          ]);
+        // Fetch orders and products
+        const [ordersData, productsData] = await Promise.all([
+          api({ data_type: 'get_orders', shopId: shop.id }),
+          api({ data_type: 'get_products', shopId: shop.id })
+        ]);
 
-          console.log('Orders response:', oRes);
-          console.log('Products response:', pRes);
+        const orders = ordersData?.orders || [];
+        const products = productsData?.products || [];
 
-          const orders = oRes.orders || [];
-          const products = pRes.products || [];
-
-          console.log('Orders count:', orders.length);
-          console.log('Products count:', products.length);
-
-          const stats = document.querySelectorAll('.shop-stat-value');
-          console.log('Stats elements:', stats);
-
-          if (stats.length >= 2) {
-            stats[0].textContent = orders.length;
-            stats[1].textContent = products.length;
-            console.log('Updated stats to:', orders.length, products.length);
-          }
-        } else {
-          console.error('No shopId found!');
+        // Update stats
+        const statValues = document.querySelectorAll('.shop-stat-value');
+        if (statValues.length >= 2) {
+          statValues[0].textContent = orders.length;
+          statValues[1].textContent = products.length;
         }
 
-      } catch (e) {
-        console.error('Error in initShop:', e);
+      } catch (error) {
+        console.error('Dashboard error:', error);
+        alert('Error loading dashboard. Please check console for details.');
       }
     })();
   </script>

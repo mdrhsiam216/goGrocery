@@ -24,7 +24,7 @@ if(!$customerId){
 
 // Fetch orders for this customer
 $orders = $DB->read(
-    "select o.id, o.shopId, o.status, o.amount, o.method, o.voucher, o.created_at, s.name as shop_name from orders o left join shops s on o.shopId = s.id where o.customerId = :cid order by o.id desc",
+    "select o.id, o.shopId, o.status, o.amount, o.method, o.voucher, s.name as shop_name from orders o left join shops s on o.shopId = s.id where o.customerId = :cid order by o.id desc",
     ['cid'=>$customerId]
 );
 
