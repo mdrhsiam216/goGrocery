@@ -1,69 +1,48 @@
+INSERT INTO Users (name, email, password, role, image) VALUES
+('Admin User', 'admin@gogrocery.com', 'hashed_admin_pass', 'admin', NULL),
+('Shop Owner 1', 'shop1@gogrocery.com', 'hashed_shop1_pass', 'shop', NULL),
+('Shop Owner 2', 'shop2@gogrocery.com', 'hashed_shop2_pass', 'shop', NULL),
+('Customer One', 'customer1@gogrocery.com', 'hashed_cust1_pass', 'customer', NULL),
+('Customer Two', 'customer2@gogrocery.com', 'hashed_cust2_pass', 'customer', NULL),
+('Delivery Rider', 'rider@gogrocery.com', 'hashed_rider_pass', 'rider', NULL);
 
--- Users
-INSERT INTO Users (name, email, password, role) VALUES
-('Admin User', 'admin@gmail.com', '123', 'admin'),
-('John Customer', 'john@gmail.com', '123', 'customer'),
-('Jane Manager', 'manager@gmail.com', '123', 'manager'),
-('Fresh Mart Shop', 'owner@gmail.com', '123', 'shop');
-
--- Category
 INSERT INTO category (name) VALUES
 ('Fruits'),
 ('Vegetables'),
 ('Dairy'),
-('Meat'),
 ('Beverages'),
-('Bakery'),
 ('Snacks');
 
--- Shops (linking to shop users)
-INSERT INTO shops (name, userId, location, status) VALUES
-('Fresh Mart', 4, '123 Main St, Cityville', 'active'),
-('Green Grocers', 4, '456 Oak Ave, Townsburg', 'active'),
-('City Supermarket', 4, '789 Pine Rd, Villageton', 'active');
+INSERT INTO shops (userId, location, status) VALUES
+(2, 'Dhanmondi, Dhaka', 'active'),
+(3, 'Banani, Dhaka', 'active');
 
--- Coupon
+INSERT INTO customers (userId, location) VALUES
+(4, 'Mirpur, Dhaka'),
+(5, 'Uttara, Dhaka');
+
 INSERT INTO coupon (name, percentage, quantity, claimedQuantity) VALUES
 ('WELCOME10', 10.00, 100, 5),
-('SUMMER20', 20.00, 50, 0),
-('FREESHIP', 100.00, 200, 10);
+('SAVE20', 20.00, 50, 10);
 
--- Customers
-INSERT INTO customers (userId, location) VALUES
-(2, '101 Home St, Cityville');
+INSERT INTO products (name, categoryId, price, quantity, shopId, image) VALUES
+('Apple', 1, 180.00, 100, 1, 'apple.jpg'),
+('Banana', 1, 60.00, 150, 1, 'banana.jpg'),
+('Tomato', 2, 40.00, 200, 1, 'tomato.jpg'),
+('Milk 1L', 3, 90.00, 80, 2, 'milk.jpg'),
+('Yogurt', 3, 120.00, 60, 2, 'yogurt.jpg'),
+('Orange Juice', 4, 150.00, 50, 2, 'juice.jpg');
 
--- Products
--- Fresh Mart (id 1)
-INSERT INTO products (name, categoryId, price, quantity, shopId) VALUES
-('Apple', 1, 2.50, 100, 1),
-('Banana', 1, 1.20, 150, 1),
-('Milk', 3, 3.99, 50, 1),
-('Bread', 6, 2.99, 30, 1);
-
--- Green Grocers (id 2)
-INSERT INTO products (name, categoryId, price, quantity, shopId) VALUES
-('Carrot', 2, 0.99, 200, 2),
-('Broccoli', 2, 1.99, 80, 2),
-('Chicken Breast', 4, 8.99, 40, 2);
-
--- City Supermarket (id 3)
-INSERT INTO products (name, categoryId, price, quantity, shopId) VALUES
-('Orange Juice', 5, 4.50, 60, 3),
-('Cola', 5, 1.50, 120, 3),
-('Potato Chips', 7, 2.50, 100, 3);
-
--- Cart
 INSERT INTO cart (productId, userId, quantity) VALUES
-(1, 2, 5),
-(3, 2, 2);
+(1, 4, 2),
+(4, 4, 1),
+(2, 5, 5);
 
--- Orders
 INSERT INTO orders (shopId, customerId, status, amount, method, voucher) VALUES
-(1, 1, 'pending', 20.48, 'cash', NULL),
-(1, 1, 'delivered', 15.00, 'online', 'WELCOME10');
+(1, 1, 'pending', 420.00, 'cash', 'WELCOME10'),
+(2, 2, 'delivering', 240.00, 'online', NULL);
 
--- OrderItems
 INSERT INTO orderItems (ordersId, productId, quantity) VALUES
-(1, 1, 4),
-(1, 4, 1),
-(2, 3, 2);
+(1, 1, 2),
+(1, 2, 1),
+(2, 4, 2);
