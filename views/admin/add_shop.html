@@ -143,7 +143,7 @@
               </svg>
               My Profile
             </a>
-            <a href="../common/login.html" class="admin-nav-link">
+            <a href="#" class="admin-nav-link" id="logoutLink">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -278,6 +278,24 @@
         sidebar.classList.remove("active");
         sidebarOverlay.classList.remove("active");
       });
+
+      // Logout handler
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", async (e) => {
+          e.preventDefault();
+          try {
+            await fetch("../../backend/api.php", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ data_type: "logout" }),
+            });
+            window.location.href = "../common/login.html";
+          } catch (e) {
+            console.warn(e);
+          }
+        });
+      }
     </script>
 
     <script>

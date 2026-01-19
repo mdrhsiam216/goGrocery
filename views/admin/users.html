@@ -90,7 +90,7 @@
               </svg>
               My Profile
             </a>
-            <a href="../common/login.html" class="admin-nav-link">
+            <a href="#" class="admin-nav-link" id="logoutLink">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -157,23 +157,19 @@
                 class="admin-avatar"
               />
               <div class="admin-profile-info">
-                <p class="admin-profile-name">John Admin</p>
-                <p class="admin-profile-role">Super Admin</p>
+                <p class="admin-profile-name"></p>
               </div>
             </div>
           </div>
         </header>
 
-        <!-- Content Area -->
         <div class="admin-content">
-          <!-- Breadcrumb -->
           <nav class="admin-breadcrumb">
             <a href="dashboard.html">Dashboard</a>
             <span>/</span>
             <span class="current">Users</span>
           </nav>
 
-          <!-- Page Header -->
           <div class="admin-page-header">
             <div class="admin-page-header-info">
               <h1>User Management</h1>
@@ -200,31 +196,25 @@
             </div>
           </div>
 
-          <!-- Users Table -->
           <div class="admin-table-wrapper">
             <table class="admin-table">
               <thead>
                 <tr>
                   <th>User</th>
                   <th>Role</th>
-                  <th>change role</th>
-                  <th>action</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                <!-- PHP: Loop through users -->
-              </tbody>
+              <tbody></tbody>
             </table>
           </div>
         </div>
       </main>
 
-      <!-- Sidebar Overlay for Mobile -->
       <div class="admin-sidebar-overlay" id="sidebarOverlay"></div>
     </div>
 
     <script>
-      // Sidebar Toggle
       const sidebar = document.querySelector(".admin-sidebar");
       const sidebarToggle = document.getElementById("sidebarToggle");
       const sidebarOverlay = document.getElementById("sidebarOverlay");
@@ -238,9 +228,26 @@
         sidebar.classList.remove("active");
         sidebarOverlay.classList.remove("active");
       });
+
+      // Logout handler
+      const logoutLink = document.getElementById("logoutLink");
+      if (logoutLink) {
+        logoutLink.addEventListener("click", async (e) => {
+          e.preventDefault();
+          try {
+            await fetch("../../backend/api.php", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ data_type: "logout" }),
+            });
+            window.location.href = "../common/login.html";
+          } catch (e) {
+            console.warn(e);
+          }
+        });
+      }
     </script>
     <script>
-      // Admin page: load users dynamically and protect access
       (async function () {
         try {
           const r = await fetch("../../backend/api.php", {
@@ -253,7 +260,6 @@
             window.location.href = "../../views/common/login.html";
             return;
           }
-          // set admin profile info
           if (j.user) {
             const adminAvatar = document.querySelector(".admin-avatar");
             if (adminAvatar && j.user.image) adminAvatar.src = j.user.image;
@@ -274,18 +280,29 @@
               const tr = document.createElement("tr");
               const avatarSrc = u.image
                 ? u.image
-                : "/placeholder.svg?height=42&width=42";
+                : "/goGrocery/assets/images/placeholder.svg";
+
               tr.innerHTML = `
-              <td><div class="user-cell"><img src="${avatarSrc}" class="user-cell-avatar"><div class="user-cell-info"><h4>${u.name}</h4><p>${u.email}</p></div></div></td>
+              <td>
+                <div class="user-cell">
+                  <img src="${avatarSrc}" class="user-cell-avatar" alt="${u.name}">
+                  <div class="user-cell-info">
+                    <h4>${u.name}</h4>
+                    <p>${u.email}</p>
+                  </div>
+                </div>
+              </td>
               <td><span class="role-badge ${u.role}">${u.role}</span></td>
-              <td></td>
-              <td></td>
-              <td><div class="table-actions"><button class="table-action-btn role-change" data-id="${u.id}">Change Role</button><button class="table-action-btn delete-user" data-id="${u.id}">Delete</button></div></td>
+              <td>
+                <div class="table-actions">
+                  <button class="btn btn-sm btn-secondary role-change" data-id="${u.id}">Change Role</button>
+                  <button class="btn btn-sm btn-danger delete-user" data-id="${u.id}">Delete</button>
+                </div>
+              </td>
             `;
               tbody.appendChild(tr);
             });
 
-            // attach handlers
             tbody.querySelectorAll(".role-change").forEach((btn) => {
               btn.addEventListener("click", async () => {
                 const id = btn.dataset.id;
