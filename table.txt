@@ -42,7 +42,7 @@
 
 ---shops
 -id[pk]
--name
+-userId[fk]
 -location
 -status(active or inactive{default- active})
 

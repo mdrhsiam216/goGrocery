@@ -16,11 +16,11 @@ INSERT INTO category (name) VALUES
 ('Bakery'),
 ('Snacks');
 
--- Shops
-INSERT INTO shops (name, location, status) VALUES
-('Fresh Mart', '123 Main St, Cityville', 'active'),
-('Green Grocers', '456 Oak Ave, Townsburg', 'active'),
-('City Supermarket', '789 Pine Rd, Villageton', 'active');
+-- Shops (linking to shop users)
+INSERT INTO shops (name, userId, location, status) VALUES
+('Fresh Mart', 4, '123 Main St, Cityville', 'active'),
+('Green Grocers', 4, '456 Oak Ave, Townsburg', 'active'),
+('City Supermarket', 4, '789 Pine Rd, Villageton', 'active');
 
 -- Coupon
 INSERT INTO coupon (name, percentage, quantity, claimedQuantity) VALUES
