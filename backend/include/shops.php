@@ -56,7 +56,7 @@ if($DATA_OBJ->data_type == 'update_shop'){
 }
 
 if($DATA_OBJ->data_type == 'delete_shop'){
-    if(!isset($_SESSION['role']) || $_SESSION['role'] != 'admin'){ $info->message = 'Unauthorized'; echo json_encode($info); die; }
+    if(!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'manager'])){ $info->message = 'Unauthorized'; echo json_encode($info); die; }
     $id = isset($DATA_OBJ->id) ? intval($DATA_OBJ->id) : 0; if(!$id){ $info->message = 'Invalid id'; echo json_encode($info); die; }
     $ok = $DB->write("delete from shops where id = :id", ['id'=>$id]); $info->message = $ok ? 'Deleted' : 'Could not delete'; echo json_encode($info); die;
 }

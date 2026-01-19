@@ -51,7 +51,6 @@
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
               </svg>
               Shop Oversight
-              <span class="manager-nav-badge warning">5</span>
             </a>
             <a href="orders.html" class="manager-nav-link">
               <svg
@@ -91,7 +90,7 @@
               </svg>
               My Profile
             </a>
-            <a href="../common/login.html" class="manager-nav-link">
+            <a href="#" class="manager-nav-link" id="logout-btn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -201,179 +200,169 @@
                 </svg>
               </div>
             </div>
-
-            <div class="manager-stat-card">
-              <div class="manager-stat-content">
-                <h3>Today's Revenue</h3>
-                <div class="manager-stat-value">$4,250</div>
-              </div>
-              <div class="manager-stat-icon revenue">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <line x1="12" y1="1" x2="12" y2="23"></line>
-                  <path
-                    d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-
-            <div class="manager-stat-card">
-              <div class="manager-stat-content">
-                <h3>Pending Requests</h3>
-                <div class="manager-stat-value">5</div>
-              </div>
-              <div class="manager-stat-icon pending">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dashboard Grid -->
-          <div class="manager-dashboard-grid">
-            <!-- Recent Shops -->
-            <div class="manager-card">
-              <div class="manager-card-header">
-                <h2 class="manager-card-title">Shop Performance</h2>
-                <a href="shops.html" class="manager-card-action">View All</a>
-              </div>
-              <div class="manager-card-body">
-                <div class="manager-table-container">
-                  <table class="manager-table">
-                    <thead>
-                      <tr>
-                        <th>Shop</th>
-                        <th>Orders Today</th>
-                        <th>Revenue</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- PHP loop for shops -->
-                      <tr>
-                        <td>
-                          <div class="manager-shop-info">
-                            <img
-                              src="/placeholder.svg?height=40&width=40"
-                              alt="Fresh Mart"
-                              class="manager-shop-logo"
-                            />
-                            <div>
-                              <div class="manager-shop-name">Fresh Mart</div>
-                              <div class="manager-shop-owner">John Smith</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>28</td>
-                        <td>$892</td>
-                        <td>
-                          <span class="status-badge success">Active</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="manager-shop-info">
-                            <img
-                              src="/placeholder.svg?height=40&width=40"
-                              alt="Organic Haven"
-                              class="manager-shop-logo"
-                            />
-                            <div>
-                              <div class="manager-shop-name">Organic Haven</div>
-                              <div class="manager-shop-owner">Jane Doe</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>22</td>
-                        <td>$756</td>
-                        <td>
-                          <span class="status-badge success">Active</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="manager-shop-info">
-                            <img
-                              src="/placeholder.svg?height=40&width=40"
-                              alt="Daily Needs"
-                              class="manager-shop-logo"
-                            />
-                            <div>
-                              <div class="manager-shop-name">Daily Needs</div>
-                              <div class="manager-shop-owner">Mike Johnson</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>19</td>
-                        <td>$543</td>
-                        <td>
-                          <span class="status-badge warning">inactive</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="manager-shop-info">
-                            <img
-                              src="/placeholder.svg?height=40&width=40"
-                              alt="Green Basket"
-                              class="manager-shop-logo"
-                            />
-                            <div>
-                              <div class="manager-shop-name">Green Basket</div>
-                              <div class="manager-shop-owner">Emily Brown</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>15</td>
-                        <td>$421</td>
-                        <td>
-                          <span class="status-badge success">Active</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </main>
     </div>
 
     <script>
-      // Mobile sidebar toggle
+      // Sidebar toggle
       const sidebarToggle = document.querySelector(".manager-sidebar-toggle");
       const sidebar = document.querySelector(".manager-sidebar");
       const overlay = document.querySelector(".manager-sidebar-overlay");
 
-      sidebarToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("active");
-        overlay.classList.toggle("active");
-      });
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener("click", () => {
+          sidebar.classList.toggle("active");
+          overlay.classList.toggle("active");
+        });
+      }
 
-      overlay.addEventListener("click", () => {
-        sidebar.classList.remove("active");
-        overlay.classList.remove("active");
-      });
+      if (overlay) {
+        overlay.addEventListener("click", () => {
+          sidebar.classList.remove("active");
+          overlay.classList.remove("active");
+        });
+      }
+
+      // Logout Logic
+      const logoutBtn = document.getElementById("logout-btn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          await api({ data_type: "logout" });
+          window.location.href = "../common/login.html";
+        });
+      }
+
+      // API Helper
+      const api = async (data) => {
+        try {
+          const response = await fetch("../../backend/api.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          return await response.json();
+        } catch (error) {
+          console.error("API Error:", error);
+          return { error: true, message: "Network error" };
+        }
+      };
+
+      // Check auth & load data
+      const init = async () => {
+        const userInfo = await api({ data_type: "user_info" });
+        if (!userInfo.logged_in || userInfo.user.role !== "manager") {
+          window.location.href = "../common/login.html";
+          return;
+        }
+
+        // Update profile info
+        document.querySelector(".manager-profile-name").textContent =
+          userInfo.user.name;
+        document.querySelector(".manager-profile-role").textContent =
+          userInfo.user.role;
+        if (userInfo.user.image) {
+          document.querySelector(".manager-avatar").src = userInfo.user.image;
+        }
+
+        // Fetch Shops
+        const shopsResponse = await api({ data_type: "get_shops" });
+        const shops = shopsResponse.shops || [];
+
+        // Fetch Orders
+        const ordersResponse = await api({ data_type: "get_orders" });
+        const orders = ordersResponse.orders || [];
+
+        updateStats(shops, orders);
+        renderRecentShops(shops, orders);
+      };
+
+      // Update Stats Cards
+      const updateStats = (shops, orders) => {
+        // Active Shops
+        const activeShops = shops.length; // Managers see all
+        document.querySelector(
+          ".manager-stat-card:nth-child(1) .manager-stat-value",
+        ).textContent = activeShops;
+
+        // Today's Orders
+        const today = new Date().toISOString().split("T")[0];
+        const todayOrders = orders.filter(
+          (o) => o.created_at && o.created_at.startsWith(today),
+        );
+        document.querySelector(
+          ".manager-stat-card:nth-child(2) .manager-stat-value",
+        ).textContent = todayOrders.length;
+
+        // Revenue (Today) - simplistic calculation
+        // Filter orders that are "delivered" or "completed" logic could be complex, assuming simplistic sum for now or based on status
+        const revenue = todayOrders.reduce(
+          (sum, o) => sum + (parseFloat(o.amount) || 0),
+          0,
+        );
+        document.querySelector(
+          ".manager-stat-card:nth-child(3) .manager-stat-value",
+        ).textContent = "$" + revenue.toFixed(2);
+
+        // Pending Requests (simplistic placeholder or could be pending shop applications if any)
+        // For now, let's show Pending Orders
+        const pendingOrders = orders.filter((o) => o.status === "pending");
+        document.querySelector(
+          ".manager-stat-card:nth-child(4) .manager-stat-value",
+        ).textContent = pendingOrders.length;
+        document.querySelector(
+          ".manager-stat-card:nth-child(4) h3",
+        ).textContent = "Pending Orders";
+      };
+
+      // Render Recent Shops (Top 5)
+      const renderRecentShops = (shops, orders) => {
+        const tbody = document.getElementById("manager-shops-table-body");
+        tbody.innerHTML = "";
+
+        // Just show first 5 shops for dashboard
+        const recentShops = shops.slice(0, 5);
+
+        if (recentShops.length === 0) {
+          tbody.innerHTML = "<tr><td colspan='4'>No shops found.</td></tr>";
+          return;
+        }
+
+        recentShops.forEach((shop) => {
+          // Calculated simple stats for display
+          const shopOrders = orders.filter((o) => o.shopId == shop.id);
+          const todayOrders = shopOrders.filter(
+            (o) =>
+              o.created_at &&
+              o.created_at.startsWith(new Date().toISOString().split("T")[0]),
+          ).length;
+          const shopRev = shopOrders.reduce(
+            (sum, o) => sum + (parseFloat(o.amount) || 0),
+            0,
+          );
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+                <td>
+                    <div class="manager-shop-info">
+                        <img src="/placeholder.svg?height=40&width=40" alt="${shop.name}" class="manager-shop-logo" />
+                        <div>
+                            <div class="manager-shop-name">${shop.name}</div>
+                            <div class="manager-shop-owner">${shop.location}</div>
+                        </div>
+                    </div>
+                </td>
+                <td>${todayOrders}</td>
+                <td>$${shopRev.toFixed(0)}</td>
+                <td><span class="status-badge success">Active</span></td>
+            `;
+          tbody.appendChild(tr);
+        });
+      };
+
+      init();
     </script>
   </body>
 </html>

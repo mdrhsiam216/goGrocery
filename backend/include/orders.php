@@ -106,7 +106,7 @@ if($DATA_OBJ->data_type == 'create_order'){
 if($DATA_OBJ->data_type == 'get_orders'){
     if(!isset($_SESSION['role'])){ $info->message='Not authorized'; echo json_encode($info); die; }
     $role = $_SESSION['role'];
-    if($role == 'admin'){
+    if($role == 'admin' || $role == 'manager'){
         $q = "select o.*, u.name as customer_name, s.name as shop_name from orders o left join users u on o.customerId = u.id left join shops s on o.shopId = s.id order by o.id desc";
         $res = $DB->read($q);
     } elseif($role == 'shop'){
@@ -127,9 +127,18 @@ if($DATA_OBJ->data_type == 'get_orders'){
 
 // update order status (admin/shop)
 if($DATA_OBJ->data_type == 'update_order'){
-    if(!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin','shop'])){ $info->message='Unauthorized'; echo json_encode($info); die; }
+    if(!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin','shop','manager'])){ $info->message='Unauthorized'; echo json_encode($info); die; }
     $id = isset($DATA_OBJ->id) ? intval($DATA_OBJ->id) : 0; $status = isset($DATA_OBJ->status) ? $DATA_OBJ->status : null;
     if(!$id || !$status){ $info->message='Invalid data'; echo json_encode($info); die; }
     $ok = $DB->write("update orders set status = :s where id = :id", ['s'=>$status, 'id'=>$id]);
     $info->message = $ok ? 'Updated' : 'Could not update'; echo json_encode($info); die;
+}
+
+// delete order (admin/manager)
+if($DATA_OBJ->data_type == 'delete_order'){
+    if(!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'manager'])){ $info->message='Unauthorized'; echo json_encode($info); die; }
+    $id = isset($DATA_OBJ->id) ? intval($DATA_OBJ->id) : 0;
+    if(!$id){ $info->message='Invalid id'; echo json_encode($info); die; }
+    $ok = $DB->write("delete from orders where id = :id", ['id'=>$id]);
+    $info->message = $ok ? 'Deleted' : 'Could not delete'; echo json_encode($info); die;
 }
