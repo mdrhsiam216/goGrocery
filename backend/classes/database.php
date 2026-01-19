@@ -14,21 +14,34 @@ class Database
             $con = new PDO($string, $this->username, $this->password);
             return $con;
         } catch (PDOException $e) {
-            die($e->getMessage());
+            // Return JSON error instead of plain text die
+            $info = (object)[];
+            $info->message = "Database connection error: " . $e->getMessage();
+            $info->error = true;
+            echo json_encode($info);
+            die;
         }
     }
 
     public function read($query, $data = [])
     {
         $con = $this->connect();
-        $stm = $con->prepare($query);
-        $check = $stm->execute($data);
+        try{
+            $stm = $con->prepare($query);
+            $check = $stm->execute($data);
 
-        if ($check) {
-            $result = $stm->fetchAll(PDO::FETCH_OBJ);
-            if (is_array($result) && count($result) > 0) {
-                return $result;
+            if ($check) {
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                if (is_array($result) && count($result) > 0) {
+                    return $result;
+                }
             }
+        }catch(PDOException $e){
+             $info = (object)[];
+             $info->message = "Database query error: " . $e->getMessage();
+             $info->error = true;
+             echo json_encode($info);
+             die;
         }
         return false;
     }
@@ -36,11 +49,20 @@ class Database
     public function write($query, $data = [])
     {
         $con = $this->connect();
-        $stm = $con->prepare($query);
-        $check = $stm->execute($data);
+        try{
+            $stm = $con->prepare($query);
+            $check = $stm->execute($data);
 
-        if ($check) {
-            return $con->lastInsertId();
+            if ($check) {
+                $id = $con->lastInsertId();
+                return $id ? $id : true;
+            }
+        }catch(PDOException $e){
+             $info = (object)[];
+             $info->message = "Database write error: " . $e->getMessage();
+             $info->error = true;
+             echo json_encode($info);
+             die;
         }
         return false;
     }

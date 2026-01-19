@@ -54,7 +54,7 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "signup")
 	include("include/user_info.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_orders_view"){
 	include("include/orders_view.php");
-}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_categories"){
+}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ["get_categories", "add_category", "update_category", "delete_category"])){
 	include("include/categories.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_products"){
 	include("include/products.php");
@@ -72,7 +72,7 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "signup")
 	include("include/shops.php");
 }elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['create_order','get_orders','update_order'])){
 	include("include/orders.php");
-}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['get_users','update_user','delete_user'])){
+}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['get_users','update_user','delete_user','create_user'])){
 	include("include/admin.php");
 }elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['save_profile','change_password'])){
 	include("include/profile.php");
