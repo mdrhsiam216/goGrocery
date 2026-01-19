@@ -38,11 +38,51 @@ if ($DATA_OBJ->data_type == 'add_shop') {
         $ok = $DB->write("insert into shops (location, userId) values (:location, :userId)", $params);
     } else {
         // admin/manager can optionally assign owner by providing userId
-        if (isset($DATA_OBJ->userId)) {
-            $params['userId'] = intval($DATA_OBJ->userId);
-            $ok = $DB->write("insert into shops (location, userId) values (:location, :userId)", $params);
+        if (isset($DATA_OBJ->userId) && intval($DATA_OBJ->userId) > 0) {
+            $providedUserId = intval($DATA_OBJ->userId);
+            // verify the user exists to avoid foreign key constraint failures
+            $userExists = $DB->read("select id from users where id = :id limit 1", ['id' => $providedUserId]);
+            if ($userExists) {
+                $params['userId'] = $providedUserId;
+                $ok = $DB->write("insert into shops (location, userId) values (:location, :userId)", $params);
+            } else {
+                $info->message = 'Invalid owner userId';
+                echo json_encode($info);
+                die;
+            }
         } else {
-            $ok = $DB->write("insert into shops (location) values (:location)", $params);
+            // No owner provided: create a shop user and associate it
+            $shopName = $name ? $name : 'Shop ' . time();
+
+            // generate a unique placeholder email and a random password
+            $unique = time() . rand(100, 999);
+            $generatedEmail = 'shop_' . $unique . '@local.shop';
+            $generatedPassword = substr(md5(uniqid('', true)), 0, 10);
+
+            $userData = [
+                'name' => $shopName,
+                'email' => $generatedEmail,
+                'password' => $generatedPassword,
+                'role' => 'shop',
+                'image' => null
+            ];
+
+            // insert user
+            $newUserId = $DB->write("insert into users (name, email, password, role, image) values (:name, :email, :password, :role, :image)", $userData);
+            if ($newUserId) {
+                $params['userId'] = $newUserId;
+                $ok = $DB->write("insert into shops (location, userId) values (:location, :userId)", $params);
+                if ($ok) {
+                    // expose created credentials so admin can note them
+                    $info->created_user = (object) [
+                        'id' => $newUserId,
+                        'email' => $generatedEmail,
+                        'password' => $generatedPassword
+                    ];
+                }
+            } else {
+                $ok = false;
+            }
         }
     }
     $info->message = $ok ? 'Shop created' : 'Could not create';
