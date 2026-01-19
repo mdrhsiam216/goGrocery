@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop & Products - GoGrocery</title>
+    <link rel="stylesheet" href="../../assets/css/common/base.css">
+    <link rel="stylesheet" href="../../assets/css/common/components.css">
+    <link rel="stylesheet" href="../../assets/css/customer/layout.css">
+    <link rel="stylesheet" href="../../assets/css/customer/shops-and-products.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../../index.html" class="header-logo">
+                <img src="../../assets/images/logo.png" alt="GoGrocery" />
+            </a>
+
+            <div class="header-search">
+                <form class="search-form" action="search.html" method="GET">
+                    <input
+                        type="text"
+                        class="search-input"
+                        name="q"
+                        placeholder="Search for products"
+                    />
+                    <button type="submit" class="search-btn">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <div class="header-actions">
+                <a href="cart.html" class="header-link cart-link">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="8" cy="21" r="1"></circle>
+                        <circle cx="19" cy="21" r="1"></circle>
+                        <path
+                            d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                        ></path>
+                    </svg>
+                    <span class="cart-badge">0</span>
+                </a>
+
+                <div class="user-menu">
+                    <button class="user-menu-btn">
+                        <img
+                            src="/placeholder.svg?height=32&width=32"
+                            alt="User"
+                            class="user-avatar"
+                        />
+                        <span>User</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div class="user-menu-dropdown">
+                        <a href="../common/profile.html">My Profile</a>
+                        <a href="orders.html">My Orders</a>
+                        <a href="../common/change-password.html">Change Password</a>
+                        <a href="#" class="logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="shops-products-container">
+        <!-- Left Sidebar - Shops -->
+        <aside class="shops-sidebar">
+            <div class="sidebar-header">
+                <h3>Shops</h3>
+            </div>
+            <div class="shops-list">
+                <!-- Shops will be loaded dynamically -->
+            </div>
+        </aside>
+
+        <!-- Right Content - Products -->
+        <main class="products-main">
+            <div class="products-header">
+                <h2 id="selected-shop-name">All Products</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section footer-about">
+                <div class="footer-logo">
+                    <img src="../../assets/images/logo.png" alt="GoGrocery" />
+                </div>
+                <p class="footer-description">
+                    Your favorite local grocery stores, delivered fresh to your doorstep.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="shops-and-products.html">Products</a></li>
+                    <li><a href="orders.html">My Orders</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 GoGrocery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        async function apiPost(body){
+            try{
+                const res = await fetch('../../backend/api.php', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify(body)
+                });
+                return await res.json();
+            }catch(e){
+                console.error(e);
+                return null;
+            }
+        }
+
+        let allShops = [];
+        let selectedShopId = 0;
+
+        function createProductCard(p){
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            let imgSrc = '/placeholder.svg?height=160&width=200';
+            if(p.image && p.image.trim()){
+                imgSrc = p.image;
+            }
+            
+            const imgWrap = document.createElement('div');
+            imgWrap.className = 'product-image';
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = p.name;
+            imgWrap.appendChild(img);
+            
+            const info = document.createElement('div');
+            info.className = 'product-info';
+            
+            const catSpan = document.createElement('span');
+            catSpan.className = 'product-category';
+            catSpan.textContent = p.category_name || '';
+            
+            const h3 = document.createElement('h3');
+            h3.textContent = p.name;
+            
+            const price = document.createElement('div');
+            price.className = 'product-price';
+            const curr = document.createElement('span');
+            curr.className = 'current';
+            curr.textContent = '$' + (parseFloat(p.price).toFixed(2) || '0.00');
+            price.appendChild(curr);
+            
+            const cartSection = document.createElement('div');
+            cartSection.className = 'product-cart-section';
+            
+            const quantityLabel = document.createElement('label');
+            quantityLabel.textContent = 'Qty: ';
+            const quantityInput = document.createElement('input');
+            quantityInput.type = 'number';
+            quantityInput.min = '1';
+            quantityInput.value = '1';
+            quantityInput.className = 'quantity-input';
+            quantityLabel.appendChild(quantityInput);
+            
+            const btn = document.createElement('button');
+            btn.className = 'product-add-btn';
+            btn.textContent = 'Add to Cart';
+            btn.dataset.id = p.id;
+            btn.addEventListener('click', async (e)=>{
+                const quantity = parseInt(quantityInput.value) || 1;
+                const res = await apiPost({data_type:'add_to_cart', productId: p.id, quantity: quantity});
+                if(res && res.data_type === 'add_to_cart'){
+                    const cnt = await apiPost({data_type:'cart_count'});
+                    const badge = document.querySelector('.cart-badge');
+                    if(badge && cnt && cnt.count !== undefined){
+                        badge.textContent = cnt.count;
+                    }
+                    alert('Added ' + quantity + ' item(s) to cart');
+                    quantityInput.value = '1';
+                } else if(res && res.logged_in === false){
+                    window.location.href = '../common/login.html';
+                } else {
+                    alert(res && res.message ? res.message : 'Could not add to cart');
+                }
+            });
+            
+            cartSection.appendChild(quantityLabel);
+            cartSection.appendChild(btn);
+            
+            info.appendChild(catSpan);
+            info.appendChild(h3);
+            info.appendChild(price);
+            info.appendChild(cartSection);
+            
+            card.appendChild(imgWrap);
+            card.appendChild(info);
+            
+            return card;
+        }
+
+        async function loadShops(){
+            const res = await apiPost({data_type:'get_shops'});
+            if(res && res.shops && res.shops.length){
+                allShops = res.shops;
+                const shopsList = document.querySelector('.shops-list');
+                shopsList.innerHTML = '';
+                
+                // Add "All Shops" option
+                const allOption = document.createElement('div');
+                allOption.className = 'shop-item active';
+                allOption.textContent = 'All Shops';
+                allOption.addEventListener('click', async ()=>{
+                    selectedShopId = 0;
+                    document.querySelectorAll('.shop-item').forEach(el => el.classList.remove('active'));
+                    allOption.classList.add('active');
+                    document.getElementById('selected-shop-name').textContent = 'All Products';
+                    await loadProducts(0);
+                });
+                shopsList.appendChild(allOption);
+                
+                res.shops.forEach(shop => {
+                    const shopEl = document.createElement('div');
+                    shopEl.className = 'shop-item';
+                    shopEl.textContent = shop.name;
+                    shopEl.addEventListener('click', async ()=>{
+                        selectedShopId = shop.id;
+                        document.querySelectorAll('.shop-item').forEach(el => el.classList.remove('active'));
+                        shopEl.classList.add('active');
+                        document.getElementById('selected-shop-name').textContent = shop.name + ' Products';
+                        await loadProducts(shop.id);
+                    });
+                    shopsList.appendChild(shopEl);
+                });
+            }
+        }
+
+        async function loadProducts(shopId = 0){
+            let query = {data_type:'get_products'};
+            const res = await apiPost(query);
+            const grid = document.querySelector('.products-grid');
+            
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            if(res && res.products && res.products.length){
+                let products = res.products;
+                
+                // Filter by shop if shopId is specified
+                if(shopId > 0){
+                    products = products.filter(p => parseInt(p.shopId) === shopId);
+                }
+                
+                if(products.length > 0){
+                    products.forEach(p => grid.appendChild(createProductCard(p)));
+                } else {
+                    grid.innerHTML = '<p class="no-products">No products available in this shop</p>';
+                }
+            } else {
+                grid.innerHTML = '<p class="no-products">No products found</p>';
+            }
+        }
+
+        async function updateHeaderAndCart(){
+            const j = await apiPost({data_type:'user_info'});
+            const headerActions = document.querySelector('.header-actions');
+            const cartLink = headerActions ? headerActions.querySelector('.cart-link') : null;
+            const cartBadge = cartLink ? cartLink.querySelector('.cart-badge') : null;
+
+            if(j && j.logged_in){
+                if(cartLink) cartLink.style.display = 'flex';
+                const cartRes = await apiPost({data_type:'cart_count'});
+                if(cartBadge && cartRes && cartRes.count !== undefined){
+                    cartBadge.textContent = cartRes.count;
+                }
+                
+                const user = j.user || {};
+                const btn = document.querySelector('.user-menu-btn');
+                const userSpan = btn ? btn.querySelector('span') : null;
+                const userImg = btn ? btn.querySelector('img') : null;
+                
+                if(userSpan) userSpan.textContent = user.name || 'User';
+                if(userImg && user.image) userImg.src = user.image;
+            } else {
+                if(cartLink) cartLink.style.display = 'none';
+            }
+
+            const logoutBtn = document.querySelector('.logout');
+            if(logoutBtn){
+                logoutBtn.addEventListener('click', async (e)=>{
+                    e.preventDefault();
+                    await apiPost({data_type:'logout'});
+                    window.location.href = '../common/login.html';
+                });
+            }
+        }
+
+        // Initialize page
+        (async function(){
+            await updateHeaderAndCart();
+            await loadShops();
+            await loadProducts();
+        })();
+    </script>
+</body>
+</html>

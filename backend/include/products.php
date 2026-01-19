@@ -1,23 +1,7 @@
 <?php
 $info = (object)[];
 
-// optional category filter
-$category = isset($DATA_OBJ->category) ? intval($DATA_OBJ->category) : 0;
-
-if($category > 0){
-    $query = "select p.*, c.name as category_name from products p left join category c on p.categoryId = c.id where p.categoryId = :category";
-    $result = $DB->read($query, ['category' => $category]);
-}else{
-    $query = "select p.*, c.name as category_name from products p left join category c on p.categoryId = c.id order by p.id desc limit 20";
-    $result = $DB->read($query);
-}
-
-$info->data_type = 'get_products';
-$info->products = $result ? $result : [];
-
-echo json_encode($info);
-
-// handle product create/update/delete via multipart/form-data or JSON
+// Handle data_type first if it's set
 if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == 'add_product'){
     // only shop or admin can add
     if(!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['shop','admin'])){ $info->message='Unauthorized'; echo json_encode($info); die; }
@@ -44,12 +28,12 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == 'add_product'){
     if(isset($_FILES['image']) && $_FILES['image']['tmp_name']){
         $up = $_FILES['image'];
         $ext = pathinfo($up['name'], PATHINFO_EXTENSION);
-        $dir = __DIR__ . '/../../assets/uploads/products';
+        $dir = __DIR__ . '/../../assets/images/products';
         if(!is_dir($dir)) @mkdir($dir, 0755, true);
         $filename = uniqid('prod_') . '.' . ($ext ? $ext : 'jpg');
         $dest = $dir . '/' . $filename;
         if(move_uploaded_file($up['tmp_name'], $dest)){
-            $imagePath = '/assets/uploads/products/' . $filename;
+            $imagePath = $filename;
         }
     } elseif(isset($DATA_OBJ->image_base64) && $DATA_OBJ->image_base64){
         // data URL or base64 string
@@ -57,14 +41,14 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == 'add_product'){
         if(preg_match('/^data:(image\/[^;]+);base64,(.+)$/', $b, $m)){
             $mime = $m[1]; $data = $m[2];
             $ext = explode('/', $mime)[1];
-            $dir = __DIR__ . '/../../assets/uploads/products'; if(!is_dir($dir)) @mkdir($dir,0755,true);
+            $dir = __DIR__ . '/../../assets/images/products'; if(!is_dir($dir)) @mkdir($dir,0755,true);
             $filename = uniqid('prod_') . '.' . $ext;
             $dest = $dir . '/' . $filename;
-            if(file_put_contents($dest, base64_decode($data)) !== false){ $imagePath = '/assets/uploads/products/' . $filename; }
+            if(file_put_contents($dest, base64_decode($data)) !== false){ $imagePath = $filename; }
         } else {
             // raw base64
-            $data = $b; $dir = __DIR__ . '/../../assets/uploads/products'; if(!is_dir($dir)) @mkdir($dir,0755,true);
-            $filename = uniqid('prod_') . '.jpg'; $dest = $dir . '/' . $filename; if(file_put_contents($dest, base64_decode($data)) !== false){ $imagePath = '/assets/uploads/products/' . $filename; }
+            $data = $b; $dir = __DIR__ . '/../../assets/images/products'; if(!is_dir($dir)) @mkdir($dir,0755,true);
+            $filename = uniqid('prod_') . '.jpg'; $dest = $dir . '/' . $filename; if(file_put_contents($dest, base64_decode($data)) !== false){ $imagePath = $filename; }
         }
     }
 
@@ -80,5 +64,33 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == 'add_product'){
 
     $info->data_type = 'add_product';
     $info->message = $ok ? 'Product added' : 'Could not add product';
-    echo json_encode($info); die;
+    echo json_encode($info); 
+    die;
 }
+
+// Get products (default behavior when no data_type or data_type is get_products)
+// optional category filter and limit
+$category = isset($DATA_OBJ->category) ? intval($DATA_OBJ->category) : 0;
+$limit = isset($DATA_OBJ->limit) ? intval($DATA_OBJ->limit) : 20;
+
+if($category > 0){
+    $query = "select p.*, c.name as category_name from products p left join category c on p.categoryId = c.id where p.categoryId = :category limit $limit";
+    $result = $DB->read($query, ['category' => $category]);
+}else{
+    $query = "select p.*, c.name as category_name from products p left join category c on p.categoryId = c.id order by p.id desc limit $limit";
+    $result = $DB->read($query);
+}
+
+// Construct image paths for products
+if($result){
+    foreach($result as &$product){
+        if(isset($product->image) && !empty($product->image)){
+            $product->image = '/goGrocery/assets/images/products/' . $product->image;
+        }
+    }
+}
+
+$info->data_type = 'get_products';
+$info->products = $result ? $result : [];
+
+echo json_encode($info);

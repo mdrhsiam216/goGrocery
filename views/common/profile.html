@@ -92,10 +92,7 @@
                                 <span class="info-label">Location</span>
                                 <span class="info-value">123 Main Street, City</span>
                             </div>
-                            <div class="info-row">
-                                <span class="info-label">Member Since</span>
-                                <span class="info-value">January 15, 2025</span>
-                            </div>
+                            
                         </section>
                     </div>
                 </div>
@@ -103,10 +100,14 @@
         </main>
     </div>
         <script>
+            async function apiPost(data){
+                const res = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+                return await res.json();
+            }
+
             (async function(){
                 try{
-                    const res = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'user_info'})});
-                    const j = await res.json();
+                    const j = await apiPost({data_type:'user_info'});
                     if(!j.logged_in){ window.location.href = 'login.html'; return; }
                     const u = j.user || {};
                     const img = document.querySelector('.profile-avatar-img');
@@ -128,6 +129,16 @@
                         const label = row.querySelector('.info-label')?.textContent?.trim();
                         if(label && map[label] !== undefined){ row.querySelector('.info-value').textContent = map[label]; }
                     });
+
+                    // Logout handler
+                    const logoutLink = document.querySelector('.profile-header-nav a');
+                    if(logoutLink){
+                        logoutLink.addEventListener('click', async (e)=>{
+                            e.preventDefault();
+                            await apiPost({data_type:'logout'});
+                            window.location.href = 'login.html';
+                        });
+                    }
                 }catch(e){ console.warn(e); }
             })();
         </script>

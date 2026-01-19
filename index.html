@@ -24,7 +24,7 @@
               type="text"
               class="search-input"
               name="q"
-              placeholder="Search for products, shops..."
+              placeholder="Search for products"
             />
             <button type="submit" class="search-btn">
               <svg
@@ -148,17 +148,23 @@
       async function updateHeaderAndCart(){
         const j = await apiPost({data_type:'user_info'});
         const headerActions = document.querySelector('.header-actions');
-        const cartBadge = headerActions ? headerActions.querySelector('.cart-badge') : null;
+        const cartLink = headerActions ? headerActions.querySelector('.cart-link') : null;
+        const cartBadge = cartLink ? cartLink.querySelector('.cart-badge') : null;
 
-        // ensure cart count is fetched
-        const cartRes = await apiPost({data_type:'cart_count'});
-        if(cartBadge && cartRes && cartRes.count !== undefined){
-          cartBadge.textContent = cartRes.count;
+        // Show cart only if logged in
+        if(j && j.logged_in){
+          if(cartLink) cartLink.style.display = 'flex';
+          // ensure cart count is fetched
+          const cartRes = await apiPost({data_type:'cart_count'});
+          if(cartBadge && cartRes && cartRes.count !== undefined){
+            cartBadge.textContent = cartRes.count;
+          }
+        } else {
+          if(cartLink) cartLink.style.display = 'none';
         }
 
         if(!headerActions) return;
 
-        const cartLink = headerActions.querySelector('.cart-link');
         const mobile = headerActions.querySelector('.mobile-menu-toggle');
         headerActions.innerHTML = '';
         if(cartLink) headerActions.appendChild(cartLink);
@@ -213,24 +219,28 @@
         }
       }
 
-      function createCategoryCard(cat){
-        const a = document.createElement('a');
-        a.href = '#';
-        a.className = 'category-card';
-        a.dataset.id = cat.id;
-        const icon = document.createElement('div'); icon.className='category-icon';
-        const img = document.createElement('img'); img.src = cat.image ? cat.image : './assets/images/category-placeholder.png'; img.alt = cat.name;
-        icon.appendChild(img);
-        const h3 = document.createElement('h3'); h3.textContent = cat.name;
-        a.appendChild(icon); a.appendChild(h3);
-        a.addEventListener('click', (e)=>{ e.preventDefault(); loadProducts(cat.id); });
-        return a;
-      }
+      // function createCategoryCard(cat){
+      //   const a = document.createElement('a');
+      //   a.href = '#';
+      //   a.className = 'category-card';
+      //   a.dataset.id = cat.id;
+      //   const icon = document.createElement('div'); icon.className='category-icon';
+      //   const img = document.createElement('img'); img.src = cat.image ? cat.image : './assets/images/category-placeholder.png'; img.alt = cat.name;
+      //   icon.appendChild(img);
+      //   const h3 = document.createElement('h3'); h3.textContent = cat.name;
+      //   a.appendChild(icon); a.appendChild(h3);
+      //   a.addEventListener('click', (e)=>{ e.preventDefault(); loadProducts(cat.id); });
+      //   return a;
+      // }
 
       function createProductCard(p){
         const card = document.createElement('div'); card.className='product-card';
         const imgWrap = document.createElement('div'); imgWrap.className='product-image';
-        const img = document.createElement('img'); img.src = p.image ? p.image : '/placeholder.svg?height=160&width=200'; img.alt = p.name; imgWrap.appendChild(img);
+        let imgSrc = '/placeholder.svg?height=160&width=200';
+        if(p.image && p.image.trim()){
+          imgSrc = p.image;
+        }
+        const img = document.createElement('img'); img.src = imgSrc; img.alt = p.name; imgWrap.appendChild(img);
         const info = document.createElement('div'); info.className='product-info';
         const catSpan = document.createElement('span'); catSpan.className='product-category'; catSpan.textContent = p.category_name || '';
         const h3 = document.createElement('h3'); h3.textContent = p.name;
@@ -256,20 +266,32 @@
         return card;
       }
 
-      async function loadCategories(){
-        const res = await apiPost({data_type:'get_categories'});
-        const grid = document.querySelector('.categories-grid');
-        if(!grid) return;
-        grid.innerHTML = '';
-        if(res && res.categories && res.categories.length){
-          res.categories.forEach(c => grid.appendChild(createCategoryCard(c)));
-        } else {
-          grid.innerHTML = '<p>No categories found</p>';
-        }
-      }
+      // async function loadCategories(){
+      //   const res = await apiPost({data_type:'get_categories'});
+      //   const grid = document.querySelector('.categories-grid');
+      //   if(!grid) return;
+      //   grid.innerHTML = '';
+      //   if(res && res.categories && res.categories.length){
+      //     res.categories.forEach(c => grid.appendChild(createCategoryCard(c)));
+      //   } else {
+      //     grid.innerHTML = '<p>No categories found</p>';
+      //   }
+      // }
 
       async function loadProducts(category = 0){
         const res = await apiPost({data_type:'get_products', category: category});
+        const grid = document.querySelector('.products-grid');
+        if(!grid) return;
+        grid.innerHTML = '';
+        if(res && res.products && res.products.length){
+          res.products.forEach(p => grid.appendChild(createProductCard(p)));
+        } else {
+          grid.innerHTML = '<p>No products found</p>';
+        }
+      }
+
+      async function loadPopularProducts(){
+        const res = await apiPost({data_type:'get_products', limit: 5});
         const grid = document.querySelector('.products-grid');
         if(!grid) return;
         grid.innerHTML = '';
@@ -284,7 +306,7 @@
       (function(){
         updateHeaderAndCart();
         loadCategories();
-        loadProducts();
+        loadPopularProducts();
       })();
     </script>
 
@@ -300,7 +322,7 @@
           <div class="hero-search">
             <input
               type="text"
-              placeholder="Search for products or shops..."
+              placeholder="Search for shops..."
             />
             <button type="button">Search</button>
           </div>
@@ -322,7 +344,6 @@
         </div>
 
         <div class="categories-grid">
-          <!-- PHP: Loop through categories -->
           <a href="products.html?category=1" class="category-card">
             <div class="category-icon">
               <img
@@ -365,7 +386,7 @@
           <a href="products.html?category=4" class="category-card">
             <div class="category-icon">
               <img
-                src="/placeholder.svg?height=32&width=32"
+                src="./assets/images/bakery.png"
                 alt="Bakery"
               />
             </div>
@@ -375,7 +396,7 @@
           <a href="products.html?category=5" class="category-card">
             <div class="category-icon">
               <img
-                src="/placeholder.svg?height=32&width=32"
+                src="./assets/images/beverage.png"
                 alt="Beverages"
               />
             </div>
@@ -403,7 +424,7 @@
       <div class="container">
         <div class="section-header">
           <h2>Popular Products</h2>
-          <a href="products.html" class="section-link">
+          <a href="./views/customer/shops-and-products.html" class="section-link">
             View All
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -422,97 +443,7 @@
         </div>
 
         <div class="products-grid">
-          <!-- PHP: Loop through featured products -->
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="/placeholder.svg?height=160&width=200"
-                alt="Fresh Apples"
-              />
-              
-            </div>
-            <div class="product-info">
-              <span class="product-category">Fruits</span>
-              <h3>Fresh Red Apples</h3>
-              <div class="product-price">
-                <span class="current">$3.49</span>
-                <span class="original">$4.10</span>
-              </div>
-              <button class="product-add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="/placeholder.svg?height=160&width=200"
-                alt="Organic Milk"
-              />
-              
-            </div>
-            <div class="product-info">
-              <span class="product-category">Dairy</span>
-              <h3>Organic Whole Milk</h3>
-              <div class="product-price">
-                <span class="current">$4.99</span>
-              </div>
-              <button class="product-add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="/placeholder.svg?height=160&width=200"
-                alt="Fresh Baguette"
-              />
-            
-            </div>
-            <div class="product-info">
-              <span class="product-category">Bakery</span>
-              <h3>French Baguette</h3>
-              <div class="product-price">
-                <span class="current">$2.69</span>
-                <span class="original">$2.99</span>
-              </div>
-              <button class="product-add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="/placeholder.svg?height=160&width=200"
-                alt="Chicken Breast"
-              />
-            </div>
-            <div class="product-info">
-              <span class="product-category">Meat</span>
-              <h3>Chicken Breast (1kg)</h3>
-              <div class="product-price">
-                <span class="current">$8.99</span>
-              </div>
-              <button class="product-add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-image">
-              <img
-                src="/placeholder.svg?height=160&width=200"
-                alt="Orange Juice"
-              />
-            </div>
-            <div class="product-info">
-              <span class="product-category">Beverages</span>
-              <h3>Fresh Orange Juice</h3>
-              <div class="product-price">
-                <span class="current">$3.99</span>
-                <span class="original">$4.99</span>
-              </div>
-              <button class="product-add-btn">Add to Cart</button>
-            </div>
-          </div>
+          <!-- Dynamically loaded popular products (first 5) -->
         </div>
       </div>
     </section>

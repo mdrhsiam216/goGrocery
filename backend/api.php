@@ -16,8 +16,8 @@ $info = (object)[];
 //check if logged in
 if(!isset($_SESSION['userid']))
 {
-	// Allow unauthenticated requests for login, signup, user_info and logout
-	if(isset($DATA_OBJ->data_type) && !in_array($DATA_OBJ->data_type, ["login","signup","user_info","logout"]))
+	// Allow unauthenticated requests for login, signup, user_info, logout, and product/category browsing
+	if(isset($DATA_OBJ->data_type) && !in_array($DATA_OBJ->data_type, ["login","signup","user_info","logout","get_products","get_categories","get_shops"]))
 	{
 		$info->logged_in = false;
 		echo json_encode($info);

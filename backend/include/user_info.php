@@ -26,6 +26,20 @@ if($result){
     if(isset($user->image)){
         $info->user->image = $user->image;
     }
+    
+    // Get location from customers table if user is a customer
+    if($user->role == 'customer'){
+        $custRes = $DB->read("select location from customers where userId = :userId limit 1", ['userId' => $userId]);
+        if($custRes){
+            $info->user->location = $custRes[0]->location;
+        }
+    }
+    
+    // Construct image path if image filename exists
+    if(isset($user->image) && !empty($user->image)){
+        $info->user->image = '/goGrocery/assets/images/users/' . $user->image;
+    }
+    
     echo json_encode($info);
     die;
 }
