@@ -1,92 +1,152 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - GoGrocery</title>
-    <link rel="stylesheet" href="../../assets/css/common/base.css">
-    <link rel="stylesheet" href="../../assets/css/common/components.css">
-    <link rel="stylesheet" href="../../assets/css/common/auth.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../assets/css/common/base.css" />
+    <link rel="stylesheet" href="../../assets/css/common/components.css" />
+    <link rel="stylesheet" href="../../assets/css/common/auth.css" />
+  </head>
+  <body>
     <div class="auth-wrapper">
-        <div class="auth-container">
-            <div class="auth-card">
-                <!-- Logo -->
-                <div class="auth-logo">
-                    <a href="/">
-                        <img src="../../assets/images/logo.png" alt="GoGrocery Logo">
-                    </a>
-                </div>
-                
-                <!-- Title -->
-                <h1 class="auth-title">Welcome Back</h1>
-                <p class="auth-subtitle">Sign in to continue to GoGrocery</p>
-                
-                <!-- Alert placeholder for PHP messages -->
-                <!-- <?php if(isset($error)): ?>
+      <div class="auth-container">
+        <div class="auth-card">
+          <!-- Logo -->
+          <div class="auth-logo">
+            <a href="/">
+              <img src="../../assets/images/logo.png" alt="GoGrocery Logo" />
+            </a>
+          </div>
+
+          <!-- Title -->
+          <h1 class="auth-title">Welcome Back</h1>
+          <p class="auth-subtitle">Sign in to continue to GoGrocery</p>
+
+          <!-- Alert placeholder for PHP messages -->
+          <!-- <?php if(isset($error)): ?>
                 <div class="alert alert-error"><?php echo $error; ?></div>
                 <?php endif; ?> -->
-                
-                <!-- Login Form -->
-                <form class="auth-form" action="" method="POST">
-                    <div class="form-group">
-                        <label class="form-label" for="email">Email Address</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            class="form-control" 
-                            placeholder="Enter your email"
-                            required
-                        >
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="password">Password</label>
-                        <div class="password-wrapper">
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                class="form-control" 
-                                placeholder="Enter your password"
-                                required
-                            >
-                            <button type="button" class="password-toggle" onclick="togglePassword()">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="auth-options">
-                        <label class="form-check">
-                            <input type="checkbox" name="remember">
-                            <span>Remember me</span>
-                        </label>
-                        <a href="forgot-password.html">Forgot password?</a>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                </form>
-                
-                <!-- Footer -->
-                <div class="auth-footer">
-                    Don't have an account? <a href="register.html">Create one</a>
-                </div>
+
+          <!-- Login Form -->
+          <form class="auth-form" action="" method="POST">
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="Enter your email"
+                required
+              />
             </div>
+
+            <div class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Enter your password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  onclick="togglePassword()"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                    ></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-options">
+              <a href="forgot-password.html">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Sign In
+            </button>
+          </form>
+
+          <!-- Footer -->
+          <div class="auth-footer">
+            Don't have an account? <a href="register.html">Create one</a>
+          </div>
         </div>
+      </div>
     </div>
-    
+
     <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
+      function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+      }
+
+      const form = document.querySelector(".auth-form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = "Signing In...";
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        data.data_type = "login";
+
+        try {
+          const response = await fetch("../../backend/api.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+          console.log(result);
+
+          if (
+            result.data_type === "login" &&
+            result.message === "Login successful"
+          ) {
+            if (result.redirect) {
+              window.location.href = result.redirect;
+            } else {
+              window.location.href = "../../index.html";
+            }
+          } else {
+            alert(result.message);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again.");
+        } finally {
+          submitBtn.textContent = originalBtnText;
+          submitBtn.disabled = false;
         }
+      });
     </script>
-</body>
+  </body>
 </html>

@@ -21,57 +21,58 @@ if(!isset($_SESSION['userid']))
 	
 }
 
+
 require_once("classes/autoload.php");
 $DB = new Database();
+
 
 $Error = "";
 
 //proccess the data
 if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "signup")
 {
-
 	//signup
-	include("includes/signup.php");
+	include("include/signup.php");
 
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "login")
 {
 	//login
-	include("includes/login.php");
+	include("include/login.php");
 
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "logout")
 {
-	include("includes/logout.php");
+	include("include/logout.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "user_info")
 {
 
 	//user info
-	include("includes/user_info.php");
+	include("include/user_info.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "contacts")
 {
 	//user info
-	include("includes/contacts.php");
+	include("include/contacts.php");
 }elseif(isset($DATA_OBJ->data_type) && ($DATA_OBJ->data_type == "chats" || $DATA_OBJ->data_type == "chats_refresh"))
 {
 	//user info
-	include("includes/chats.php");
+	include("include/chats.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "settings")
 {
 	//user info
-	include("includes/settings.php");
+	include("include/settings.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "save_settings")
 {
 	//user info
-	include("includes/save_settings.php");
+	include("include/save_settings.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "send_message")
 {
 	 //send message
-	include("includes/send_message.php");
+	include("include/send_message.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "delete_message")
 {
 	 //send message
-	include("includes/delete_message.php");
+	include("include/delete_message.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "delete_thread")
 {
 	 //send message
-	include("includes/delete_thread.php");
+	include("include/delete_thread.php");
 }

@@ -1,0 +1,78 @@
+CREATE DATABASE IF NOT EXISTS goGrocery;
+USE goGrocery;
+
+CREATE TABLE Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'customer', 'manager', 'rider', 'shop') DEFAULT 'customer'
+);
+
+CREATE TABLE category (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE shops (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    status ENUM('active', 'inactive') DEFAULT 'active'
+);
+
+CREATE TABLE coupon (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    percentage DECIMAL(5,2) NOT NULL,
+    quantity INT NOT NULL,
+    claimedQuantity INT DEFAULT 0
+);
+
+CREATE TABLE customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT NOT NULL,
+    location VARCHAR(255),
+    FOREIGN KEY (userId) REFERENCES Users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    categoryId INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    quantity INT NOT NULL,
+    shopId INT NOT NULL,
+    FOREIGN KEY (categoryId) REFERENCES category(id) ON DELETE CASCADE,
+    FOREIGN KEY (shopId) REFERENCES shops(id) ON DELETE CASCADE
+);
+
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    productId INT NOT NULL,
+    userId INT NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (productId) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (userId) REFERENCES Users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    shopId INT NOT NULL,
+    customerId INT NOT NULL,
+    status ENUM('pending', 'delivered', 'delivering', 'rejected') DEFAULT 'pending',
+    amount DECIMAL(10,2) NOT NULL,
+    method ENUM('cash', 'online') NOT NULL,
+    voucher VARCHAR(50),
+    FOREIGN KEY (shopId) REFERENCES shops(id) ON DELETE CASCADE,
+    FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE
+);
+
+CREATE TABLE orderItems (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ordersId INT NOT NULL,
+    productId INT NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (ordersId) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (productId) REFERENCES products(id) ON DELETE CASCADE
+);

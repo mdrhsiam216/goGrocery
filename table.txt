@@ -1,0 +1,64 @@
+----Database:
+-name: goGrocery
+
+----Users:
+-id [pk]
+-name
+-email
+-password
+-role [admin,customer(default), manager, rider, shop]
+
+----coupon:
+-id [pk]
+-name
+-percentage
+-quantity
+-claimedQuantity
+
+----cart:
+-id[pk]
+-productId[fk]
+-userId[fk]
+-quantity
+
+
+----products
+-id [pk]
+-name
+-categoryId[fk]
+-price
+-quantity
+-shopId[fk]
+
+
+
+---customers
+-id[pk]
+-userId[fk]
+-location 
+
+
+---shops
+-id[pk]
+-name
+-location
+-status(active or inactive{default- active})
+
+---category
+-id[pk]
+-name
+
+---orders
+-id[pk]
+-shopId[fk]
+-customerId[fk]
+-status(pending, delivered, delivering, rejected)
+-amount
+-method(cash,online)
+-voucher
+
+----orderItems
+-id[pk]
+-ordersId[fk]
+-productId[fk]
+-quantity

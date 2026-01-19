@@ -1,146 +1,202 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - GoGrocery</title>
-    <link rel="stylesheet" href="../../assets/css/common/base.css">
-    <link rel="stylesheet" href="../../assets/css/common/components.css">
-    <link rel="stylesheet" href="../../assets/css/common/auth.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../assets/css/common/base.css" />
+    <link rel="stylesheet" href="../../assets/css/common/components.css" />
+    <link rel="stylesheet" href="../../assets/css/common/auth.css" />
+  </head>
+  <body>
     <div class="auth-wrapper">
-        <div class="auth-container">
-            <div class="auth-card">
-                <!-- Logo -->
-                <div class="auth-logo">
-                    <a href="/">
-                        <img src="../../assets/images/logo.png" alt="GoGrocery Logo">
-                    </a>
-                </div>
-                
-                <!-- Title -->
-                <h1 class="auth-title">Create Account</h1>
-                <p class="auth-subtitle">Join GoGrocery today</p>
-                
-                <!-- Alert placeholder for PHP messages -->
-                <!-- <?php if(isset($error)): ?>
+      <div class="auth-container">
+        <div class="auth-card">
+          <!-- Logo -->
+          <div class="auth-logo">
+            <a href="/">
+              <img src="../../assets/images/logo.png" alt="GoGrocery Logo" />
+            </a>
+          </div>
+
+          <!-- Title -->
+          <h1 class="auth-title">Create Account</h1>
+          <p class="auth-subtitle">Join GoGrocery today</p>
+
+          <!-- Alert placeholder for PHP messages -->
+          <!-- <?php if(isset($error)): ?>
                 <div class="alert alert-error"><?php echo $error; ?></div>
                 <?php endif; ?> -->
-                
-                <!-- Register Form -->
-                <form class="auth-form" action="" method="POST">
-                    <div class="form-group">
-                        <label class="form-label" for="name">Full Name</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            class="form-control" 
-                            placeholder="Enter your full name"
-                            required
-                        >
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="email">Email Address</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            class="form-control" 
-                            placeholder="Enter your email"
-                            required
-                        >
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="password">Password</label>
-                        <div class="password-wrapper">
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                class="form-control" 
-                                placeholder="Create a password"
-                                required
-                                minlength="8"
-                            >
-                            <button type="button" class="password-toggle" onclick="togglePassword('password')">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                        <span class="form-hint">Must be at least 8 characters</span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="confirm_password">Confirm Password</label>
-                        <div class="password-wrapper">
-                            <input 
-                                type="password" 
-                                id="confirm_password" 
-                                name="confirm_password" 
-                                class="form-control" 
-                                placeholder="Confirm your password"
-                                required
-                            >
-                            <button type="button" class="password-toggle" onclick="togglePassword('confirm_password')">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Role Selection -->
-                    <div class="form-group">
-                        <label class="form-label">Register as</label>
-                        <div class="role-selection">
-                            <div class="role-option">
-                                <input type="radio" id="role_customer" name="role" value="customer" checked>
-                                <label for="role_customer">
-                                    <span class="role-icon">🛒</span>
-                                    <span>Customer</span>
-                                </label>
-                            </div>
-                            <div class="role-option">
-                                <input type="radio" id="role_shop" name="role" value="shop">
-                                <label for="role_shop">
-                                    <span class="role-icon">🏪</span>
-                                    <span>Shop Owner</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-check">
-                            <input type="checkbox" name="terms" required>
-                            <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
-                </form>
-                
-                <!-- Footer -->
-                <div class="auth-footer">
-                    Already have an account? <a href="login.html">Sign in</a>
-                </div>
+
+          <!-- Register Form -->
+          <form class="auth-form" action="" method="POST">
+            <div class="form-group">
+              <label class="form-label" for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                placeholder="Enter your full name"
+                required
+              />
             </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Create a password"
+                  required
+                  minlength="8"
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  onclick="togglePassword('password')"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                    ></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+              <span class="form-hint">Must be at least 8 characters</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="confirm_password"
+                >Confirm Password</label
+              >
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  id="confirm_password"
+                  name="confirm_password"
+                  class="form-control"
+                  placeholder="Confirm your password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  onclick="togglePassword('confirm_password')"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                    ></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Create Account
+            </button>
+          </form>
+
+          <!-- Footer -->
+          <div class="auth-footer">
+            Already have an account? <a href="login.html">Sign in</a>
+          </div>
         </div>
+      </div>
     </div>
-    
+
     <script>
-        function togglePassword(inputId) {
-            const passwordInput = document.getElementById(inputId);
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
+      function togglePassword(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+      }
+
+      const form = document.querySelector(".auth-form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = "Creating Account...";
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        data.data_type = "signup";
+
+        // Basic client-side validation for password match
+        if (data.password !== data.confirm_password) {
+          alert("Passwords do not match!");
+          submitBtn.textContent = originalBtnText;
+          submitBtn.disabled = false;
+          return;
         }
+
+        try {
+          const response = await fetch("../../backend/api.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+          console.log(result);
+
+          if (
+            result.data_type === "signup" &&
+            result.message === "Your profile was created successfully"
+          ) {
+            alert("Registration successful! Redirecting to login...");
+            window.location.href = "login.html";
+          } else {
+            alert(result.message);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again.");
+        } finally {
+          submitBtn.textContent = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
