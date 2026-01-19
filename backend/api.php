@@ -73,7 +73,7 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "signup")
 	include("include/cart.php");
 }elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['add_shop','update_shop','delete_shop'])){
 	include("include/shops.php");
-}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['create_order','get_orders','update_order'])){
+}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['create_order','get_orders','update_order','delete_order'])){
 	include("include/orders.php");
 }elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['get_users','update_user','delete_user','create_user'])){
 	include("include/admin.php");
