@@ -32,7 +32,6 @@
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
             Orders
-            <span class="shop-nav-badge">5</span>
           </a>
         </div>
 
@@ -66,15 +65,7 @@
             </svg>
             Shop Settings
           </a>
-          <a href="../common/profile.html" class="shop-nav-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-              stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            My Profile
-          </a>
-          <a href="../common/login.html" class="shop-nav-link">
+          <a href="#" class="shop-nav-link logout">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
               stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -101,9 +92,9 @@
         </div>
         <div class="shop-header-right">
           <div class="shop-header-profile">
-            <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar">
+            <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar" id="shopAvatar">
             <div class="shop-profile-info">
-              <p class="shop-profile-name">John Doe</p>
+              <p class="shop-profile-name" id="shopName"></p>
               <p class="shop-profile-role">Shop</p>
             </div>
           </div>
@@ -123,7 +114,7 @@
                 </svg>
               </div>
             </div>
-            <p class="shop-stat-value">156</p>
+            <p class="shop-stat-value" id="totalOrders">0</p>
             <p class="shop-stat-label">Total Orders</p>
           </div>
 
@@ -137,7 +128,7 @@
                 </svg>
               </div>
             </div>
-            <p class="shop-stat-value">48</p>
+            <p class="shop-stat-value" id="totalProducts">0</p>
             <p class="shop-stat-label">Products</p>
           </div>
         </div>
@@ -147,6 +138,60 @@
   </div>
 
   <script>
+    // Load shop dashboard data
+    async function loadShopData() {
+      try {
+        // Fetch user info (logged-in user)
+        const userResponse = await fetch('../../backend/api.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data_type: 'user_info'
+          })
+        });
+        const userData = await userResponse.json();
+        
+        if (userData.user) {
+          // Update profile info
+          document.getElementById('shopName').textContent = userData.user.name;
+          
+          // Update avatar
+          if (userData.user.image) {
+            document.getElementById('shopAvatar').src = userData.user.image;
+          }
+          
+          // Now load shop data using userId
+          const shopResponse = await fetch('../../backend/api.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              data_type: 'shop_dashboard',
+              userId: userData.user.id
+            })
+          });
+          const shopData = await shopResponse.json();
+          
+          if (shopData.success && shopData.data) {
+            const data = shopData.data;
+            
+            // Update stats
+            document.getElementById('totalOrders').textContent = data.total_orders || 0;
+            document.getElementById('totalProducts').textContent = data.total_products || 0;
+          }
+        }
+      } catch (error) {
+        console.error('Error loading shop data:', error);
+      }
+    }
+
+    // Load data on page load
+    window.addEventListener('DOMContentLoaded', loadShopData);
+
+    // Sidebar toggle
     const sidebar = document.querySelector('.shop-sidebar');
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -160,85 +205,28 @@
       sidebar.classList.remove('active');
       sidebarOverlay.classList.remove('active');
     });
-  </script>
-  <script>
-    const api = async (body) => {
-      try {
-        const response = await fetch('../../backend/api.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body)
-        });
-        const text = await response.text();
-        if (!text) return null;
-        return JSON.parse(text);
-      } catch (error) {
-        console.error('API Error:', error);
-        return null;
-      }
-    };
 
-    (async function initDashboard() {
-      try {
-        // Get user info
-        const userInfo = await api({ data_type: 'user_info' });
-        if (!userInfo || !userInfo.logged_in || userInfo.user?.role !== 'shop') {
+    // Handle logout
+    const logoutBtn = document.querySelector('.logout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+          const response = await fetch('../../backend/api.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data_type: 'logout' })
+          });
+          const result = await response.json();
           window.location.href = '../common/login.html';
-          return;
+        } catch (error) {
+          console.error('Logout error:', error);
+          window.location.href = '../common/login.html';
         }
-
-        // Get shop data
-        const shopData = await api({ data_type: 'get_my_shop' });
-        if (!shopData || !shopData.shop) {
-          alert('No shop found for your account. Please contact administrator.');
-          return;
-        }
-
-        const shop = shopData.shop;
-        const user = userInfo.user;
-
-        // Update profile header
-        const profileName = document.querySelector('.shop-profile-name');
-        const profileRole = document.querySelector('.shop-profile-role');
-        const avatar = document.querySelector('.shop-avatar');
-
-        if (profileName) {
-          profileName.textContent = shop.owner_name || user.name || user.email || 'Shop Owner';
-        }
-
-        if (profileRole) {
-          profileRole.textContent = 'Shop';
-        }
-
-        if (avatar) {
-          if (user.image) {
-            avatar.src = user.image;
-          } else if (shop.logo) {
-            avatar.src = shop.logo;
-          }
-        }
-
-        // Fetch orders and products
-        const [ordersData, productsData] = await Promise.all([
-          api({ data_type: 'get_orders', shopId: shop.id }),
-          api({ data_type: 'get_products', shopId: shop.id })
-        ]);
-
-        const orders = ordersData?.orders || [];
-        const products = productsData?.products || [];
-
-        // Update stats
-        const statValues = document.querySelectorAll('.shop-stat-value');
-        if (statValues.length >= 2) {
-          statValues[0].textContent = orders.length;
-          statValues[1].textContent = products.length;
-        }
-
-      } catch (error) {
-        console.error('Dashboard error:', error);
-        alert('Error loading dashboard. Please check console for details.');
-      }
-    })();
+      });
+    }
   </script>
 </body>
 

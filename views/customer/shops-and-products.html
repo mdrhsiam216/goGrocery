@@ -69,7 +69,7 @@
                 <div class="user-menu">
                     <button class="user-menu-btn">
                         <img
-                            src="/placeholder.svg?height=32&width=32"
+                            src="/goGrocery/assets/images/placeholder.svg"
                             alt="User"
                             class="user-avatar"
                         />
@@ -331,7 +331,7 @@
                 const userImg = btn ? btn.querySelector('img') : null;
                 
                 if(userSpan) userSpan.textContent = user.name || 'User';
-                if(userImg && user.image) userImg.src = user.image;
+                if(userImg) userImg.src = user.image || '/goGrocery/assets/images/placeholder.svg';
             } else {
                 if(cartLink) cartLink.style.display = 'none';
             }
@@ -349,7 +349,7 @@
         // Initialize page
         (async function(){
             await updateHeaderAndCart();
-            await loadShops();
+            await loadShops();  
             await loadProducts();
         })();
     </script>

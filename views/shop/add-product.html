@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,22 @@
   <link rel="stylesheet" href="../../assets/css/common/base.css">
   <link rel="stylesheet" href="../../assets/css/common/components.css">
   <link rel="stylesheet" href="../../assets/css/shop/layout.css">
+  <style>
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+    .shop-sidebar-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+    .shop-image-upload svg {
+      width: 48px;
+      height: 48px;
+    }
+  </style>
 </head>
+
 <body>
   <div class="shop-dashboard">
     <!-- Sidebar -->
@@ -16,31 +32,37 @@
         <div class="shop-nav-section">
           <p class="shop-nav-title">Main</p>
           <a href="dashboard.html" class="shop-nav-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
             Dashboard
           </a>
           <a href="orders.html" class="shop-nav-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
             Orders
-            <span class="shop-nav-badge">5</span>
           </a>
         </div>
 
         <div class="shop-nav-section">
           <p class="shop-nav-title">Catalog</p>
           <a href="products.html" class="shop-nav-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
             </svg>
             Products
           </a>
           <a href="add-product.html" class="shop-nav-link active">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
             Add Product
           </a>
@@ -49,16 +71,20 @@
         <div class="shop-nav-section">
           <p class="shop-nav-title">Settings</p>
           <a href="settings.html" class="shop-nav-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             Shop Settings
           </a>
-          
-          <a href="../common/login.html" class="shop-nav-link">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+
+          <a href="#" class="shop-nav-link logout">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             Logout
           </a>
@@ -72,39 +98,33 @@
       <header class="shop-top-header">
         <div class="shop-header-left">
           <button class="shop-sidebar-toggle" id="sidebarToggle">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
           <h1 class="shop-page-title">Add Product</h1>
         </div>
         <div class="shop-header-right">
           <div class="shop-header-profile">
-            <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar">
+            <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar" id="shopAvatar">
             <div class="shop-profile-info">
-              <p class="shop-profile-name">John Doe</p>
+              <p class="shop-profile-name" id="shopName"></p>
               <p class="shop-profile-role">Shop</p>
             </div>
           </div>
         </div>
       </header>
 
-      <!-- Content Area -->
       <div class="shop-content">
-        <!-- Page Header -->
         <div class="shop-page-header">
           <div>
             <h2>Add New Product</h2>
-            <p>Create a new product listing for your shop</p>
           </div>
-          <a href="products.html" class="btn btn-secondary">Back to Products</a>
         </div>
 
-        <!-- Product Form -->
         <form action="#" method="POST" enctype="multipart/form-data">
-          <!-- PHP: Handle form submission -->
 
-          <!-- Basic Information -->
           <div class="shop-card">
             <div class="shop-card-header">
               <h3 class="shop-card-title">Basic Information</h3>
@@ -120,24 +140,9 @@
                   <label class="form-label">Category *</label>
                   <select class="form-select" name="category_id" required>
                     <option value="">Select Category</option>
-                    <!-- PHP: Loop through categories -->
-                    <option value="1">Fruits</option>
-                    <option value="2">Vegetables</option>
-                    <option value="3">Dairy</option>
-                    <option value="4">Bakery</option>
-                    <option value="5">Beverages</option>
-                    <option value="6">Snacks</option>
+                    <!-- Categories loaded via JS -->
                   </select>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">SKU (Optional)</label>
-                  <input type="text" class="form-input" name="sku" placeholder="e.g., PRD-001">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Description</label>
-                <textarea class="form-textarea" name="description" rows="4" placeholder="Describe your product..."></textarea>
               </div>
             </div>
           </div>
@@ -149,14 +154,17 @@
             </div>
             <div class="shop-card-body">
               <div class="shop-image-upload" id="imagePreview">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <p>Click to upload or drag and drop</p>
                 <p class="text-muted">PNG, JPG up to 5MB</p>
               </div>
               <input type="file" name="image" id="productImage" accept="image/*" style="display: none;">
-              <button type="button" class="btn btn-secondary" onclick="document.getElementById('productImage').click()">Upload Image</button>
+              <button type="button" class="btn btn-secondary"
+                onclick="document.getElementById('productImage').click()">Upload Image</button>
             </div>
           </div>
 
@@ -171,16 +179,6 @@
                   <label class="form-label">Price *</label>
                   <input type="number" class="form-input" name="price" placeholder="0.00" step="0.01" min="0" required>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Unit</label>
-                  <select class="form-select" name="unit">
-                    <option value="piece">Per Piece</option>
-                    <option value="kg">Per KG</option>
-                    <option value="liter">Per Liter</option>
-                    <option value="pack">Per Pack</option>
-                    <option value="dozen">Per Dozen</option>
-                  </select>
-                </div>
               </div>
 
               <div class="form-row">
@@ -188,22 +186,11 @@
                   <label class="form-label">Stock Quantity *</label>
                   <input type="number" class="form-input" name="stock_quantity" placeholder="0" min="0" required>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Low Stock Alert</label>
-                  <input type="number" class="form-input" name="low_stock_alert" placeholder="10" min="0">
-                  <p class="text-muted">Get notified when stock falls below this level</p>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-checkbox">
-                  <input type="checkbox" name="is_active" checked>
-                  <span>Product is active and visible to customers</span>
-                </label>
               </div>
             </div>
             <div class="shop-card-footer">
-              <button type="button" class="btn btn-secondary" onclick="window.location.href='products.html'">Cancel</button>
+              <button type="button" class="btn btn-secondary"
+                onclick="window.location.href='products.html'">Cancel</button>
               <button type="submit" class="btn btn-primary">Add Product</button>
             </div>
           </div>
@@ -216,83 +203,184 @@
   </div>
 
   <script>
-    const sidebar = document.querySelector('.shop-sidebar');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    let categories = [];
 
-    sidebarToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-      sidebarOverlay.classList.toggle('active');
-    });
+    // Load categories
+    async function loadCategories() {
+      try {
+        const response = await fetch('../../backend/api.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data_type: 'get_categories'
+          })
+        });
+        const data = await response.json();
+        
+        if (data.categories) {
+          categories = data.categories;
+          const catSelect = document.querySelector('select[name="category_id"]');
+          if (catSelect) {
+            categories.forEach(cat => {
+              const option = document.createElement('option');
+              option.value = cat.id;
+              option.textContent = cat.name;
+              catSelect.appendChild(option);
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error loading categories:', error);
+      }
+    }
 
-    sidebarOverlay.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      sidebarOverlay.classList.remove('active');
-    });
+    // Load user info
+    async function loadUserInfo() {
+      try {
+        const response = await fetch('../../backend/api.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data_type: 'user_info'
+          })
+        });
+        const data = await response.json();
+        
+        if (data.user) {
+          document.getElementById('shopName').textContent = data.user.name;
+          
+          // Update avatar
+          if (data.user.image) {
+            document.getElementById('shopAvatar').src = data.user.image;
+          }
+        }
+      } catch (error) {
+        console.error('Error loading user info:', error);
+      }
+    }
 
     // Image Preview
     const productImage = document.getElementById('productImage');
     const imagePreview = document.getElementById('imagePreview');
 
-    productImage.addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          imagePreview.innerHTML = '<img src="' + e.target.result + '" alt="Product Preview" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">';
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+    if (productImage) {
+      productImage.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imagePreview.innerHTML = '<img src="' + e.target.result + '" alt="Product Preview" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">';
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
 
     // Make image preview clickable
-    imagePreview.addEventListener('click', () => {
-      productImage.click();
-    });
+    if (imagePreview) {
+      imagePreview.addEventListener('click', () => {
+        if (productImage) productImage.click();
+      });
+    }
 
-    // Submit form with file upload via fetch as multipart/form-data
+    // Submit form
     const form = document.querySelector('form');
-    form.addEventListener('submit', async function(e){
-      e.preventDefault();
-      const formData = new FormData(form);
-      // include data_type for dispatcher
-      formData.append('data_type', 'add_product');
-      // map field names to expected backend names
-      // form has inputs with name attributes matching most fields
-
-      try{
-        const res = await fetch('../../backend/api.php', { method: 'POST', body: formData });
-        const j = await res.json();
-        if(j && j.data_type == 'add_product' && j.message){
-          alert(j.message);
-          if(j.message.toLowerCase().includes('added')) window.location.href = 'products.html';
-        } else {
-          alert(j && j.message ? j.message : 'Could not add product');
-        }
-      }catch(err){ console.error(err); alert('Upload failed'); }
-    });
-  </script>
-  <script>
-    const api = (body) => fetch('../../backend/api.php', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(body) }).then(r=>r.json());
-    (async function initShop(){
-      try{
-        const ui = await api({ data_type: 'user_info' });
-        if(!ui || !ui.logged_in || ui.user?.role !== 'shop'){ window.location.href = '../common/login.html'; return; }
-        const resp = await api({ data_type: 'get_my_shop' });
-        if(resp && resp.shop){
-          const shop = resp.shop;
-          const profileName = document.querySelector('.shop-profile-name');
-          const profileRole = document.querySelector('.shop-profile-role');
-          const avatar = document.querySelector('.shop-avatar');
-          if(profileName) profileName.textContent = shop.owner_name || ui.user.name || ui.user.email || 'Shop';
-          if(profileRole) profileRole.textContent = 'Shop';
-          if(avatar){
-            if(ui.user && ui.user.image) avatar.src = ui.user.image;
-            else if(shop && shop.logo) avatar.src = shop.logo;
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        formData.append('data_type', 'add_product');
+        
+        try {
+          const response = await fetch('../../backend/api.php', {
+            method: 'POST',
+            body: formData
+          });
+          
+          // Check if response is OK
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
+          
+          const text = await response.text();
+          
+          // Check if response is empty
+          if (!text) {
+            throw new Error('Empty response from server');
+          }
+          
+          const result = JSON.parse(text);
+          
+          if (result.message) {
+            if (result.message.toLowerCase().includes('added')) {
+              alert('Product added successfully!');
+              window.location.href = 'products.html';
+            } else {
+              alert('Error: ' + result.message);
+            }
+          } else {
+            alert('No response message from server');
+            console.log('Full response:', result);
+          }
+        } catch (error) {
+          console.error('Error adding product:', error);
+          alert('Error adding product: ' + error.message);
         }
-      }catch(e){console.error(e)}
-    })();
+      });
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadUserInfo();
+      loadCategories();
+    });
+
+    // Sidebar toggle
+    const sidebar = document.querySelector('.shop-sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        sidebarOverlay.classList.toggle('active');
+      });
+    }
+
+    if (sidebarOverlay) {
+      sidebarOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+      });
+    }
+
+    // Handle logout
+    const logoutBtn = document.querySelector('.logout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+          const response = await fetch('../../backend/api.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data_type: 'logout' })
+          });
+          const result = await response.json();
+          window.location.href = '../common/login.html';
+        } catch (error) {
+          console.error('Logout error:', error);
+          window.location.href = '../common/login.html';
+        }
+      });
+    }
   </script>
 </body>
+
 </html>

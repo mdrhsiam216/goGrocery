@@ -1,10 +1,10 @@
 INSERT INTO Users (name, email, password, role, image) VALUES
-('Admin User', 'admin@gogrocery.com', 'hashed_admin_pass', 'admin', NULL),
-('Shop Owner 1', 'shop1@gogrocery.com', 'hashed_shop1_pass', 'shop', NULL),
-('Shop Owner 2', 'shop2@gogrocery.com', 'hashed_shop2_pass', 'shop', NULL),
-('Customer One', 'customer1@gogrocery.com', 'hashed_cust1_pass', 'customer', NULL),
-('Customer Two', 'customer2@gogrocery.com', 'hashed_cust2_pass', 'customer', NULL),
-('Delivery Rider', 'rider@gogrocery.com', 'hashed_rider_pass', 'rider', NULL);
+('Admin User', 'admin@gmail.com', '123', 'admin', NULL),
+('Shop Owner 1', 'shop1@gmail.com', '123', 'shop', NULL),
+('Shop Owner 2', 'shop2@gmail.com', '123', 'shop', NULL),
+('Customer One', 'customer1@gmail.com', '123', 'customer', NULL),
+('Customer Two', 'customer2@gmail.com', '123', 'customer', NULL),
+('Delivery Rider', 'rider@gmail.com', '123', 'rider', NULL);
 
 INSERT INTO category (name) VALUES
 ('Fruits'),

@@ -22,10 +22,6 @@ if($result){
     $info->user->name = isset($user->name) ? $user->name : '';
     $info->user->email = isset($user->email) ? $user->email : '';
     $info->user->role = isset($user->role) ? $user->role : 'customer';
-    // include image if available
-    if(isset($user->image)){
-        $info->user->image = $user->image;
-    }
     
     // Get location from customers table if user is a customer
     if($user->role == 'customer'){
@@ -38,6 +34,9 @@ if($result){
     // Construct image path if image filename exists
     if(isset($user->image) && !empty($user->image)){
         $info->user->image = '/goGrocery/assets/images/users/' . $user->image;
+    } else {
+        // Provide a placeholder avatar with local file
+        $info->user->image = '/goGrocery/assets/images/placeholder.svg';
     }
     
     echo json_encode($info);

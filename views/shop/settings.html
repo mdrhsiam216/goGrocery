@@ -8,6 +8,16 @@
   <link rel="stylesheet" href="../../assets/css/common/base.css">
   <link rel="stylesheet" href="../../assets/css/common/components.css">
   <link rel="stylesheet" href="../../assets/css/shop/layout.css">
+  <style>
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+    .shop-sidebar-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
 </head>
 
 <body>
@@ -32,7 +42,6 @@
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
             Orders
-            <span class="shop-nav-badge">5</span>
           </a>
         </div>
 
@@ -67,7 +76,7 @@
             Shop Settings
           </a>
 
-          <a href="../common/login.html" class="shop-nav-link">
+          <a href="#" class="shop-nav-link logout">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
               stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -94,9 +103,9 @@
         </div>
         <div class="shop-header-right">
           <div class="shop-header-profile">
-            <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar">
+            <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar" id="shopAvatar">
             <div class="shop-profile-info">
-              <p class="shop-profile-name">John Doe</p>
+              <p class="shop-profile-name" id="shopName">John Doe</p>
               <p class="shop-profile-role">Shop</p>
             </div>
           </div>
@@ -105,43 +114,48 @@
 
       <!-- Content Area -->
       <div class="shop-content">
-        <form action="#" method="POST" enctype="multipart/form-data">
-          <!-- PHP: Handle form submission -->
+        <!-- Profile Section -->
+        <form id="profileForm" enctype="multipart/form-data">
+          <div class="shop-card">
+            <div class="shop-card-header">
+              <h3 class="shop-card-title">Profile Picture & Name</h3>
+            </div>
+            <div class="shop-card-body">
+              <!-- Profile Picture -->
+              <div style="display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px;">
+                <div>
+                  <img src="/placeholder.svg?height=100&width=100" alt="Profile" id="profilePicturePreview" style="width: 100px; height: 100px; border-radius: 8px; object-fit: cover; border: 2px solid #ddd;">
+                </div>
+                <div style="flex: 1;">
+                  <input type="file" name="profilePicture" id="profilePictureInput" accept="image/*" style="display: none;">
+                  <button type="button" class="btn btn-secondary" onclick="document.getElementById('profilePictureInput').click()">Change Picture</button>
+                  <p class="text-muted" style="margin-top: 8px;">JPG, PNG. Max 5MB</p>
+                </div>
+              </div>
 
+              <!-- Name -->
+              <div class="form-group">
+                <label class="form-label">Your Name *</label>
+                <input type="text" class="form-input" id="nameInput" name="name" placeholder="Enter your name" required>
+              </div>
+            </div>
+            <div class="shop-card-footer">
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Shop Settings Section -->
+        <form id="settingsForm">
           <!-- Shop Profile -->
           <div class="shop-card">
             <div class="shop-card-header">
-              <h3 class="shop-card-title">Shop Profile</h3>
-              <p class="text-muted">Update your shop's basic information</p>
+              <h3 class="shop-card-title">Shop Information</h3>
             </div>
             <div class="shop-card-body">
-              <!-- Logo Upload -->
-              <div class="shop-logo-upload">
-                <img src="/placeholder.svg?height=80&width=80" alt="Shop Logo" class="shop-logo-preview"
-                  id="logoPreview">
-                <div>
-                  <input type="file" name="logo" id="shopLogo" accept="image/*" style="display: none;">
-                  <button type="button" class="btn btn-sm btn-secondary"
-                    onclick="document.getElementById('shopLogo').click()">Change Logo</button>
-                  <p class="text-muted">JPG, PNG. Max 2MB</p>
-                </div>
-              </div>
-
               <div class="form-group">
-                <label class="form-label">Shop Name *</label>
-                <input type="text" class="form-input" name="name" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Shop Description</label>
-                <textarea class="form-textarea" name="description" rows="4"></textarea>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label">Location *</label>
-                  <input type="text" class="form-input" name="location" required>
-                </div>
+                <label class="form-label">Location *</label>
+                <input type="text" class="form-input" id="locationInput" name="location" placeholder="Enter shop location" required>
               </div>
 
               <div class="form-group">
@@ -155,7 +169,6 @@
                   </label>
                 </div>
               </div>
-
             </div>
             <div class="shop-card-footer">
               <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -170,6 +183,171 @@
   </div>
 
   <script>
+    let currentUserId = null;
+
+    // Load shop settings
+    async function loadSettings() {
+      try {
+        // Get user info
+        const userResponse = await fetch('../../backend/api.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data_type: 'user_info'
+          })
+        });
+        const userData = await userResponse.json();
+        
+        if (userData.user) {
+          currentUserId = userData.user.id;
+          document.getElementById('shopName').textContent = userData.user.name;
+          document.getElementById('nameInput').value = userData.user.name;
+          
+          // Set profile picture
+          if (userData.user.image) {
+            document.getElementById('profilePicturePreview').src = userData.user.image;
+            document.getElementById('shopAvatar').src = userData.user.image;
+          }
+          
+          // Get shop settings
+          const settingsResponse = await fetch('../../backend/api.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              data_type: 'shop_settings',
+              userId: userData.user.id
+            })
+          });
+          const settingsData = await settingsResponse.json();
+          
+          if (settingsData.success && settingsData.shop) {
+            const shop = settingsData.shop;
+            document.getElementById('locationInput').value = shop.location || '';
+            
+            // Set status radio button
+            if (shop.status === 'active') {
+              document.getElementById('statusActive').checked = true;
+            } else {
+              document.getElementById('statusInactive').checked = true;
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error loading settings:', error);
+        alert('Error loading settings');
+      }
+    }
+
+    // Handle profile picture preview
+    document.getElementById('profilePictureInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profilePicturePreview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Save profile (name and picture)
+    document.getElementById('profileForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('nameInput').value;
+      
+      if (!name) {
+        alert('Please enter your name');
+        return;
+      }
+      
+      try {
+        const formData = new FormData();
+        formData.append('data_type', 'update_user_profile');
+        formData.append('name', name);
+        
+        // Add profile picture if selected
+        const pictureInput = document.getElementById('profilePictureInput');
+        if (pictureInput.files && pictureInput.files[0]) {
+          formData.append('profilePicture', pictureInput.files[0]);
+        }
+        
+        const response = await fetch('../../backend/api.php', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const text = await response.text();
+        if (!text) {
+          throw new Error('Empty response from server');
+        }
+        
+        const result = JSON.parse(text);
+        
+        if (result.success) {
+          alert('Profile updated successfully!');
+          loadSettings();
+        } else {
+          alert('Error: ' + (result.message || 'Failed to update profile'));
+        }
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('Error updating profile: ' + error.message);
+      }
+    });
+
+    // Save settings (location and status)
+    document.getElementById('settingsForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const location = document.getElementById('locationInput').value;
+      const status = document.querySelector('input[name="status"]:checked').value;
+      
+      if (!location) {
+        alert('Please enter a location');
+        return;
+      }
+      
+      try {
+        const response = await fetch('../../backend/api.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data_type: 'save_shop_settings',
+            location: location,
+            status: status
+          })
+        });
+        
+        const text = await response.text();
+        if (!text) {
+          throw new Error('Empty response from server');
+        }
+        
+        const result = JSON.parse(text);
+        
+        if (result.success) {
+          alert('Settings saved successfully!');
+          loadSettings();
+        } else {
+          alert('Error: ' + (result.message || 'Failed to save settings'));
+        }
+      } catch (error) {
+        console.error('Error saving settings:', error);
+        alert('Error saving settings: ' + error.message);
+      }
+    });
+
+    // Load settings on page load
+    window.addEventListener('DOMContentLoaded', loadSettings);
+
+    // Sidebar toggle
     const sidebar = document.querySelector('.shop-sidebar');
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -184,76 +362,27 @@
       sidebarOverlay.classList.remove('active');
     });
 
-    // Logo Preview
-    const shopLogo = document.getElementById('shopLogo');
-    const logoPreview = document.getElementById('logoPreview');
-
-    shopLogo.addEventListener('change', function (e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          logoPreview.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Form Submission
-    const form = document.querySelector('form');
-    let shopId = 0;
-
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      if (!shopId) return;
-
-      const formData = new FormData(form);
-      formData.append('data_type', 'update_shop');
-      formData.append('id', shopId);
-
-      try {
-        const res = await fetch('../../backend/api.php', { method: 'POST', body: formData });
-        const j = await res.json();
-        alert(j.message);
-        if (j.message.toLowerCase().includes('updated')) location.reload();
-      } catch (e) { console.error(e); alert('Failed to update settings'); }
-    });
-
-    const api = (body) => fetch('../../backend/api.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json());
-    (async function initShop() {
-      try {
-        const ui = await api({ data_type: 'user_info' });
-        if (!ui || !ui.logged_in || ui.user?.role !== 'shop') { window.location.href = '../common/login.html'; return; }
-
-        const resp = await api({ data_type: 'get_my_shop' });
-        if (resp && resp.shop) {
-          const shop = resp.shop;
-          shopId = shop.id;
-
-          // Populate profile header
-          const profileName = document.querySelector('.shop-profile-name');
-          const profileRole = document.querySelector('.shop-profile-role');
-          const avatar = document.querySelector('.shop-avatar');
-          if (profileName) profileName.textContent = shop.owner_name || ui.user.name || 'Shop';
-          if (profileRole) profileRole.textContent = 'Shop';
-          if (avatar) {
-            if (ui.user && ui.user.image) avatar.src = ui.user.image;
-            else if (shop && shop.logo) avatar.src = shop.logo;
-          }
-
-          // Populate form
-          document.querySelector('[name=name]').value = shop.name;
-          document.querySelector('[name=location]').value = shop.location;
-          // description if exist
-
-          if (shop.image) logoPreview.src = shop.image;
-
-          // Status
-          if (shop.status === 'active') document.getElementById('statusActive').checked = true;
-          else document.getElementById('statusInactive').checked = true;
+    // Handle logout
+    const logoutBtn = document.querySelector('.logout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+          const response = await fetch('../../backend/api.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data_type: 'logout' })
+          });
+          const result = await response.json();
+          window.location.href = '../common/login.html';
+        } catch (error) {
+          console.error('Logout error:', error);
+          window.location.href = '../common/login.html';
         }
-      } catch (e) { console.error(e) }
-    })();
+      });
+    }
   </script>
 </body>
 

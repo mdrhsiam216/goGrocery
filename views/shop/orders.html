@@ -32,7 +32,6 @@
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
             Orders
-            <span class="shop-nav-badge">5</span>
           </a>
         </div>
 
@@ -67,7 +66,7 @@
             Shop Settings
           </a>
 
-          <a href="../common/login.html" class="shop-nav-link">
+          <a href="#" class="shop-nav-link logout">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
               stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -94,9 +93,9 @@
         </div>
         <div class="shop-header-right">
           <div class="shop-header-profile">
-            <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar">
+            <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar" id="shopAvatar">
             <div class="shop-profile-info">
-              <p class="shop-profile-name">sanim agro</p>
+              <p class="shop-profile-name" id="shopName">sanim agro</p>
             </div>
           </div>
         </div>
@@ -104,19 +103,8 @@
 
       <!-- Content Area -->
       <div class="shop-content">
-        <!-- Order Tabs -->
-        <div class="shop-tabs">
-          <button class="shop-tab active">All Orders <span class="shop-tab-count">24</span></button>
-          <button class="shop-tab">Pending <span class="shop-tab-count">5</span></button>
-          <button class="shop-tab">Processing <span class="shop-tab-count">3</span></button>
-          <button class="shop-tab">Ready <span class="shop-tab-count">2</span></button>
-          <button class="shop-tab">Delivered <span class="shop-tab-count">12</span></button>
-          <button class="shop-tab">Cancelled <span class="shop-tab-count">2</span></button>
-        </div>
-
-        <!-- Orders List -->
-        <div class="shop-orders-list">
-          <!-- JS will populate this -->
+        <div class="shop-orders-list" id="ordersContainer">
+          <!-- Orders will be loaded here -->
         </div>
 
         <!-- Pagination -->
@@ -133,6 +121,150 @@
   </div>
 
   <script>
+    // Load shop orders
+    async function loadOrders() {
+      try {
+        // Get user info
+        const userResponse = await fetch('../../backend/api.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data_type: 'user_info'
+          })
+        });
+        const userData = await userResponse.json();
+        
+        if (userData.user) {
+          document.getElementById('shopName').textContent = userData.user.name;
+          
+          // Update avatar
+          if (userData.user.image) {
+            document.getElementById('shopAvatar').src = userData.user.image;
+          }
+          
+          // Get shop orders
+          const ordersResponse = await fetch('../../backend/api.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              data_type: 'shop_orders',
+              userId: userData.user.id
+            })
+          });
+          const ordersData = await ordersResponse.json();
+          
+          if (ordersData.success && ordersData.orders) {
+            displayOrders(ordersData.orders);
+            // Update badge count
+            const badge = document.querySelector('.shop-nav-badge');
+            if (badge) {
+              badge.textContent = ordersData.orders.length;
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error loading orders:', error);
+      }
+    }
+
+    function displayOrders(orders) {
+      const container = document.getElementById('ordersContainer');
+      
+      if (!orders || orders.length === 0) {
+        container.innerHTML = '<p style="text-align: center; padding: 20px;">No orders found</p>';
+        return;
+      }
+      
+      let html = '<div style="display: flex; flex-direction: column; gap: 15px;">';
+      
+      orders.forEach(order => {
+        const statusColors = {
+          'pending': '#ff9800',
+          'delivering': '#2196f3',
+          'delivered': '#4caf50',
+          'rejected': '#f44336'
+        };
+        
+        html += `
+          <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #f9f9f9;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div>
+                <h3 style="margin: 0; font-size: 16px;">Order #${order.id}</h3>
+                <p style="margin: 5px 0; color: #666; font-size: 14px;">Customer: ${order.customer_name}</p>
+                <p style="margin: 5px 0; color: #666; font-size: 14px;">Location: ${order.customer_location}</p>
+              </div>
+              <div style="text-align: right;">
+                <p style="margin: 0; font-size: 18px; font-weight: bold; color: #2196f3;">৳${parseFloat(order.amount).toFixed(2)}</p>
+                <p style="margin: 5px 0; color: #666; font-size: 14px;">${order.method}</p>
+              </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="display: inline-block; padding: 5px 12px; background: ${statusColors[order.status]}; color: white; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                  ${order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                </span>
+              </div>
+              
+              <select class="status-select" data-order-id="${order.id}" style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
+                <option value="delivering" ${order.status === 'delivering' ? 'selected' : ''}>Delivering</option>
+                <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+                <option value="rejected" ${order.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+              </select>
+            </div>
+          </div>
+        `;
+      });
+      
+      html += '</div>';
+      container.innerHTML = html;
+      
+      // Add event listeners for status change
+      document.querySelectorAll('.status-select').forEach(select => {
+        select.addEventListener('change', updateOrderStatus);
+      });
+    }
+
+    async function updateOrderStatus(e) {
+      const orderId = e.target.getAttribute('data-order-id');
+      const newStatus = e.target.value;
+      
+      try {
+        const response = await fetch('../../backend/api.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data_type: 'update_order_status',
+            orderId: orderId,
+            status: newStatus
+          })
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+          alert('Order status updated successfully!');
+          loadOrders();
+        } else {
+          alert('Error updating order status: ' + (result.message || 'Unknown error'));
+          loadOrders();
+        }
+      } catch (error) {
+        console.error('Error updating order status:', error);
+        alert('Error updating order status');
+      }
+    }
+
+    // Load orders on page load
+    window.addEventListener('DOMContentLoaded', loadOrders);
+
+    // Sidebar toggle
     const sidebar = document.querySelector('.shop-sidebar');
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -146,164 +278,25 @@
       sidebar.classList.remove('active');
       sidebarOverlay.classList.remove('active');
     });
-  </script>
-  <script>
-    const api = (body) => fetch('../../backend/api.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json());
-    const validStatuses = ['pending', 'processing', 'ready', 'delivering', 'delivered', 'rejected', 'cancelled']; // map UI tabs to internal status
-    // Internal statuses: pending, delivered, delivering, rejected
-    // UI tabs: Pending, Processing, Ready, Delivered, Cancelled
 
-    // Helper to map DB status to UI Badge
-    function getStatusBadge(status) {
-      let cls = 'info';
-      if (status == 'pending') cls = 'warning';
-      else if (status == 'delivered') cls = 'success';
-      else if (status == 'rejected' || status == 'cancelled') cls = 'danger';
-      else if (status == 'delivering') cls = 'info';
-      return `<span class="status-badge ${cls}">${status}</span>`;
-    }
-
-    let allOrders = [];
-
-    (async function initShop() {
-      try {
-        const ui = await api({ data_type: 'user_info' });
-        if (!ui || !ui.logged_in || ui.user?.role !== 'shop') { window.location.href = '../common/login.html'; return; }
-        const resp = await api({ data_type: 'get_my_shop' });
-
-        let shopId = 0;
-        if (resp && resp.shop) {
-          const shop = resp.shop;
-          shopId = shop.id;
-          const profileName = document.querySelector('.shop-profile-name');
-          const avatar = document.querySelector('.shop-avatar');
-
-          if (profileName) profileName.textContent = shop.owner_name || ui.user.name || 'Shop';
-          if (avatar) {
-            if (ui.user && ui.user.image) avatar.src = ui.user.image;
-            else if (shop && shop.logo) avatar.src = shop.logo;
-          }
-        }
-
-        if (shopId) {
-          const oRes = await api({ data_type: 'get_orders', shopId: shopId });
-          allOrders = oRes.orders || [];
-          renderOrders(allOrders);
-          updateTabCounts();
-        }
-
-      } catch (e) { console.error(e) }
-    })();
-
-    function renderOrders(orders) {
-      const list = document.querySelector('.shop-orders-list');
-      list.innerHTML = '';
-      if (orders.length === 0) {
-        list.innerHTML = '<p style="text-align:center; padding:20px;">No orders found.</p>';
-        return;
-      }
-
-      orders.forEach(o => {
-        const date = new Date(o.date || Date.now()).toLocaleString();
-        // Note: DB table doesn't show 'date' column in schema provided, assuming it might be created_at or not present.
-        // If not present, we can omit or format if available. user schema didn't show it but usually it exists.
-
-        const card = document.createElement('div');
-        card.className = 'shop-order-card';
-        card.innerHTML = `
-                <div class="shop-order-header">
-                  <div>
-                    <p class="shop-order-id">Order #${o.id}</p>
-                    <p class="shop-order-date">${o.date || ''}</p>
-                  </div>
-                  ${getStatusBadge(o.status)}
-                </div>
-                <div class="shop-order-body">
-                  <div class="shop-order-customer">
-                    <img src="/placeholder.svg?height=40&width=40" alt="Customer" class="shop-avatar">
-                    <div>
-                      <p class="shop-customer-name">${o.customer_name || 'Customer'}</p>
-                    </div>
-                  </div>
-                  <div class="shop-order-items">
-                    <!-- Items fetching typically requires another call or join, assuming basic info here. 
-                         The provided get_orders query joins users/shops but not items. 
-                         For MVP we verify crud/status. -->
-                    <p>Total Amount: $${parseFloat(o.amount).toFixed(2)}</p>
-                    <p class="text-muted">Payment: ${o.method}</p>
-                  </div>
-                </div>
-                <div class="shop-order-footer">
-                  <div class="action-btns">
-                    <select class="form-select btn-sm" onchange="updateStatus(${o.id}, this.value)" style="width:auto; display:inline-block;">
-                        <option value="" disabled selected>Change Status</option>
-                        <option value="pending">Pending</option>
-                        <option value="delivering">Delivering</option>
-                        <option value="delivered">Delivered</option>
-                        <option value="rejected">Rejected</option>
-                    </select>
-                  </div>
-                </div>
-            `;
-        list.appendChild(card);
-      });
-    }
-
-    async function updateStatus(id, status) {
-      if (!confirm('Update order status to ' + status + '?')) return;
-      try {
-        const res = await api({ data_type: 'update_order', id: id, status: status });
-        if (res.message && res.message.toLowerCase().includes('updated')) {
-          // reload or re-fetch
-          location.reload();
-        } else {
-          alert(res.message);
-        }
-      } catch (e) { console.error(e); alert('Error updating status'); }
-    }
-
-    // Tabs logic
-    const tabs = document.querySelectorAll('.shop-tab');
-    tabs.forEach(t => {
-      t.addEventListener('click', () => {
-        tabs.forEach(x => x.classList.remove('active'));
-        t.classList.add('active');
-
-        const label = t.innerText.split(' ')[0].toLowerCase(); // "All", "Pending", ...
-        if (label === 'all') {
-          renderOrders(allOrders);
-        } else {
-          // simple mapping: ui tab -> db status
-          // Pending -> pending
-          // Processing -> delivering? (Let's assume processing isn't distinct in DB ENUM)
-          // Delivered -> delivered
-          // Cancelled -> rejected
-          let filterStatus = label;
-          if (label === 'cancelled') filterStatus = 'rejected';
-          if (label === 'processing') filterStatus = 'delivering';
-
-          const filtered = allOrders.filter(o => o.status === filterStatus);
-          renderOrders(filtered);
-        }
-      });
-    });
-
-    function updateTabCounts() {
-      // simplified count update
-      const counts = {};
-      allOrders.forEach(o => {
-        counts[o.status] = (counts[o.status] || 0) + 1;
-      });
-
-      tabs.forEach(t => {
-        const label = t.innerText.split(' ')[0].toLowerCase();
-        const span = t.querySelector('span');
-        if (label === 'all') span.innerText = allOrders.length;
-        else {
-          let s = label;
-          if (label === 'cancelled') s = 'rejected';
-          if (label === 'processing') s = 'delivering';
-          span.innerText = counts[s] || 0;
+    // Handle logout
+    const logoutBtn = document.querySelector('.logout');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+          const response = await fetch('../../backend/api.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data_type: 'logout' })
+          });
+          const result = await response.json();
+          window.location.href = '../common/login.html';
+        } catch (error) {
+          console.error('Logout error:', error);
+          window.location.href = '../common/login.html';
         }
       });
     }

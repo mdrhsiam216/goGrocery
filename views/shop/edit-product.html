@@ -135,12 +135,6 @@
                                     <label class="form-label">Category *</label>
                                     <select class="form-select" name="category_id" required>
                                         <option value="">Select Category</option>
-                                        <option value="1">Fruits</option>
-                                        <option value="2">Vegetables</option>
-                                        <option value="3">Dairy</option>
-                                        <option value="4">Bakery</option>
-                                        <option value="5">Beverages</option>
-                                        <option value="6">Snacks</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -301,8 +295,28 @@
     </script>
     <script>
         const api = (body) => fetch('../../backend/api.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json());
+
+        async function loadCategories() {
+            const catSelect = document.querySelector('select[name="category_id"]');
+            if (!catSelect) return;
+            try {
+                const res = await api({ data_type: 'get_categories' });
+                if (res && res.categories) {
+                    catSelect.innerHTML = '<option value="">Select Category</option>';
+                    res.categories.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c.id;
+                        opt.textContent = c.name;
+                        catSelect.appendChild(opt);
+                    });
+                }
+            } catch (e) { console.error('Error loading categories', e); }
+        }
+
         (async function initShop() {
             try {
+                await loadCategories(); // Load categories first
+
                 const ui = await api({ data_type: 'user_info' });
                 if (!ui || !ui.logged_in || ui.user?.role !== 'shop') { window.location.href = '../common/login.html'; return; }
 

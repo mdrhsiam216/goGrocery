@@ -133,26 +133,9 @@
             <h1 class="admin-page-title">User Management</h1>
           </div>
           <div class="admin-header-right">
-            <div class="admin-search">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <input type="text" placeholder="Search anything..." />
-            </div>
-
             <div class="admin-header-profile">
               <img
-                src="/placeholder.svg?height=40&width=40"
+                src="/goGrocery/assets/images/placeholder.svg"
                 alt="Admin"
                 class="admin-avatar"
               />
@@ -262,7 +245,7 @@
           }
           if (j.user) {
             const adminAvatar = document.querySelector(".admin-avatar");
-            if (adminAvatar && j.user.image) adminAvatar.src = j.user.image;
+            if (adminAvatar) adminAvatar.src = j.user.image || "/goGrocery/assets/images/placeholder.svg";
             if (j.user.name)
               document.querySelector(".admin-profile-name").textContent =
                 j.user.name;
