@@ -65,7 +65,7 @@ if($DATA_OBJ->data_type == 'get_cart'){
         echo json_encode($info);
         die;
     }
-    $query = "select c.id as cartId, c.quantity, p.* from cart c left join products p on c.productId = p.id where c.userId = :uid";
+    $query = "select c.id as cartId, c.quantity, c.productId, p.id, p.name, p.categoryId, p.price, p.shopId, p.image, s.name as shop_name from cart c left join products p on c.productId = p.id left join shops s on p.shopId = s.id where c.userId = :uid";
     $res = $DB->read($query, ['uid'=>$userId]);
     $info->data_type = 'get_cart';
     $info->items = $res ? $res : [];

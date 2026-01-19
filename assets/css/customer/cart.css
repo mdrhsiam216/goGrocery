@@ -100,6 +100,49 @@
   align-items: center;
   gap: 12px;
   margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity-section label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.quantity-section input {
+  width: 60px;
+  padding: 6px 8px;
+  border: 1px solid var(--border-gray);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  text-align: center;
+}
+
+.quantity-section input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.change-qty-btn {
+  padding: 6px 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.change-qty-btn:hover {
+  background: var(--primary-dark);
 }
 
 .cart-item-price {
@@ -210,13 +253,27 @@
 }
 
 /* Coupon Input */
+.coupon-section {
+  margin: 20px 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.coupon-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 10px;
+}
+
 .coupon-form {
   display: flex;
   gap: 10px;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
-.coupon-form input {
+.coupon-input {
   flex: 1;
   padding: 10px 14px;
   border: 1px solid var(--border-gray);
@@ -224,14 +281,15 @@
   font-size: 14px;
 }
 
-.coupon-form input:focus {
+.coupon-input:focus {
   outline: none;
   border-color: var(--primary);
 }
 
-.coupon-form button {
+.apply-coupon-btn {
   padding: 10px 16px;
-  background-color: var(--light-gray);
+  background-color: var(--primary);
+  color: white;
   border: none;
   border-radius: var(--radius-md);
   font-size: 14px;
@@ -240,8 +298,18 @@
   transition: background-color var(--transition-fast);
 }
 
-.coupon-form button:hover {
-  background-color: var(--border-gray);
+.apply-coupon-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.coupon-info {
+  padding: 10px;
+  border-radius: var(--radius-sm);
+}
+
+.coupon-message {
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .checkout-btn {

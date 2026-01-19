@@ -40,7 +40,7 @@ class Database
         $check = $stm->execute($data);
 
         if ($check) {
-            return true;
+            return $con->lastInsertId();
         }
         return false;
     }

@@ -3,8 +3,8 @@ $info = (object)[];
 
 // get shops
 if($DATA_OBJ->data_type == 'get_shops'){
-    // include owner info if available
-    $query = "select s.*, u.id as owner_id, u.name as owner_name, u.email as owner_email from shops s left join users u on u.id = s.user_id order by s.name";
+    // Get all shops
+    $query = "select * from shops order by name";
     $res = $DB->read($query);
     $info->data_type = 'get_shops';
     $info->shops = $res ? $res : [];
