@@ -348,6 +348,106 @@
         sidebar.classList.remove("active");
         overlay.classList.remove("active");
       });
+
+      // Simple API helper
+      const api = (body) =>
+        fetch("../../backend/api.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }).then((r) => r.json());
+
+      const statusClass = (s) => {
+        if (!s) return "";
+        s = s.toLowerCase();
+        if (s.includes("process") || s.includes("pending")) return "warning";
+        if (s.includes("out") || s.includes("deliver")) return "info";
+        if (s.includes("deliv") || s.includes("complete") || s.includes("paid")) return "success";
+        if (s.includes("cancel")) return "error";
+        return "";
+      };
+
+      const renderOrders = (orders) => {
+        const tbody = document.querySelector(".manager-table tbody");
+        tbody.innerHTML = "";
+        if (!orders || !orders.length) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = '<td colspan="8" style="text-align:center;">No orders found.</td>';
+          tbody.appendChild(tr);
+          return;
+        }
+
+        orders.forEach((o) => {
+          const tr = document.createElement("tr");
+          const orderId = o.id || o.order_id || o.orderId || "-";
+          const custName = (o.customer_name || o.customer || (o.customer && o.customer.name)) || "-";
+          const custEmail = (o.customer_email || (o.customer && o.customer.email)) || "-";
+          const shopName = o.shop_name || (o.shop && o.shop.name) || "-";
+          const itemsCount = o.items_count || (o.items && o.items.length) || (o.order_items && o.order_items.length) || 0;
+          const total = (o.total || o.amount || o.total_amount || 0).toString();
+          const date = o.created_at || o.created || o.date || "";
+          const st = o.status || "";
+
+          tr.innerHTML = `
+            <td><strong>#ORD-${orderId}</strong></td>
+            <td>
+              <div class="manager-shop-info">
+                <img src="/placeholder.svg?height=36&width=36" alt="Customer" class="manager-shop-logo" style="width:36px;height:36px" />
+                <div>
+                  <div class="manager-shop-name">${custName}</div>
+                  <div class="manager-shop-owner">${custEmail}</div>
+                </div>
+              </div>
+            </td>
+            <td>${shopName}</td>
+            <td>${itemsCount} items</td>
+            <td><strong>$${total}</strong></td>
+            <td><span class="status-badge ${statusClass(st)}">${st}</span></td>
+            <td>${date}</td>
+            <td><button class="btn btn-outline btn-sm view-order" data-id="${orderId}">View</button></td>
+          `;
+
+          tbody.appendChild(tr);
+        });
+
+        // attach view handlers
+        document.querySelectorAll(".view-order").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            const id = e.currentTarget.getAttribute("data-id");
+            window.location.href = `order-detail.html?order_id=${encodeURIComponent(id)}`;
+          });
+        });
+      };
+
+      // Protect page and load orders
+      (async function init() {
+        try {
+          const ui = await api({ data_type: "user_info" });
+          if (!ui || !ui.logged_in || ui.user?.role !== "manager") {
+            window.location.href = "../common/login.html";
+            return;
+          }
+
+          // set profile info in header (if present)
+          const nameEl = document.querySelector(".manager-profile-name");
+          const roleEl = document.querySelector(".manager-profile-role");
+          const avatarEl = document.querySelector(".manager-avatar");
+          if (nameEl) nameEl.textContent = ui.user.name || ui.user.email || "Manager";
+          if (roleEl) roleEl.textContent = (ui.user.role || "Manager").charAt(0).toUpperCase() + (ui.user.role || "Manager").slice(1);
+          if (avatarEl && ui.user.image) avatarEl.src = ui.user.image;
+
+          const resp = await api({ data_type: "get_orders" });
+          if (resp && resp.orders) {
+            renderOrders(resp.orders);
+          } else if (resp && resp.message) {
+            renderOrders([]);
+          } else {
+            renderOrders([]);
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      })();
     </script>
   </body>
 </html>

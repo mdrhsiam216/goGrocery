@@ -8,212 +8,95 @@
     <link rel="stylesheet" href="../../assets/css/common/components.css" />
     <link rel="stylesheet" href="../../assets/css/customer/layout.css" />
     <link rel="stylesheet" href="../../assets/css/customer/cart.css" />
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="header">
-      <div class="header-container">
-        <a href="../../index.html" class="header-logo">
-          <img src="../../assets/images/logo.png" alt="GoGrocery" />
-        </a>
-        
-        <div class="header-actions">
-          <a href="cart.html" class="header-link cart-link">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path
-                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-              ></path>
-            </svg>
-            <span class="cart-badge">3</span>
-          </a>
-          <div class="user-menu">
-            <button class="user-menu-btn">
-              <img
-                src="/placeholder.svg?height=32&width=32"
-                alt="User"
-                class="user-avatar"
-              />
-              <span>John</span>
-            </button>
-            <div class="user-menu-dropdown">
-              <a href="../common/profile.html">My Profile</a>
-              <a href="orders.html">My Orders</a>
-              <a href="#" class="logout">Logout</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+    <script>
+      async function api(body){
+        try{
+          const res = await fetch('../../backend/api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+          return await res.json();
+        }catch(e){ return null; }
+      }
 
-    <!-- Page Header -->
-    <div class="page-header" style="background-color: var(--white)">
-      <div class="container">
-        <div class="breadcrumb">
-          <a href="../../index.html">Home</a>
-          <span>/</span>
-          <span>Shopping Cart</span>
-        </div>
-        <h1>Shopping Cart</h1>
-      </div>
-    </div>
+      function formatMoney(v){ return '$' + parseFloat(v).toFixed(2); }
 
-    <!-- Cart Content -->
-    <main class="container">
-      <div class="cart-container">
-        <!-- Cart Items -->
-        <div class="cart-items">
-          <div class="cart-header">
-            <h2>Cart Items (3)</h2>
-            <button class="clear-cart">Clear Cart</button>
-          </div>
+      async function loadCart(){
+        const res = await api({data_type: 'get_cart'});
+        const list = document.querySelector('.cart-list');
+        const countEl = document.querySelector('.cart-count');
+        const subtotalEl = document.querySelector('.summary-subtotal');
+        const itemsEl = document.querySelector('.summary-items');
+        const totalEl = document.querySelector('.summary-total-amount');
 
-          <!-- PHP: Loop through cart items -->
-          <div class="cart-item">
-            <div class="cart-item-image">
-              <img
-                src="/placeholder.svg?height=100&width=100"
-                alt="Fresh Red Apples"
-              />
-            </div>
+        list.innerHTML = '';
+        if(!res || !res.items || res.items.length === 0){
+          list.innerHTML = '<p>Your cart is empty.</p>';
+          countEl.textContent = '0'; itemsEl.textContent = '0'; subtotalEl.textContent = '$0.00'; totalEl.textContent = '$0.00';
+          return;
+        }
+
+        let subtotal = 0; let items = 0;
+        res.items.forEach(item => {
+          items += item.quantity;
+          subtotal += (parseFloat(item.price) * item.quantity);
+
+          const node = document.createElement('div'); node.className='cart-item';
+          node.innerHTML = `
+            <div class="cart-item-image"><img src="${item.image?item.image:'/placeholder.svg?height=100&width=100'}" alt="${item.name}"/></div>
             <div class="cart-item-details">
-              <span class="cart-item-shop">Fresh Mart</span>
-              <h3 class="cart-item-name">Fresh Red Apples</h3>
-              <span class="cart-item-variant">Size: 1kg</span>
+              <span class="cart-item-shop">${item.shopId || ''}</span>
+              <h3 class="cart-item-name">${item.name}</h3>
+              <span class="cart-item-variant"></span>
               <div class="cart-item-quantity">
                 <div class="quantity-control">
-                  <button class="qty-btn">-</button>
-                  <input type="number" class="qty-input" value="2" min="1" />
-                  <button class="qty-btn">+</button>
+                  <button class="qty-decrease">-</button>
+                  <input type="number" class="qty-input" value="${item.quantity}" min="1" />
+                  <button class="qty-increase">+</button>
                 </div>
-                <button class="remove-item">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path d="M3 6h18"></path>
-                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                  </svg>
-                </button>
+                <button class="remove-item" data-id="${item.cartId}">Remove</button>
               </div>
             </div>
             <div class="cart-item-price">
-              <span class="price">$6.98</span>
-              <span class="unit-price">$3.49 each</span>
+              <span class="price">${formatMoney(item.price * item.quantity)}</span>
+              <span class="unit-price">${formatMoney(item.price)} each</span>
             </div>
-          </div>
+          `;
 
-          <div class="cart-item">
-            <div class="cart-item-image">
-              <img
-                src="/placeholder.svg?height=100&width=100"
-                alt="Organic Milk"
-              />
-            </div>
-            <div class="cart-item-details">
-              <span class="cart-item-shop">Fresh Mart</span>
-              <h3 class="cart-item-name">Organic Whole Milk</h3>
-              <span class="cart-item-variant">1L</span>
-              <div class="cart-item-quantity">
-                <div class="quantity-control">
-                  <button class="qty-btn">-</button>
-                  <input type="number" class="qty-input" value="1" min="1" />
-                  <button class="qty-btn">+</button>
-                </div>
-                <button class="remove-item">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path d="M3 6h18"></path>
-                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="cart-item-price">
-              <span class="price">$4.99</span>
-              <span class="unit-price">$4.99 each</span>
-            </div>
-          </div>
+          // attach handlers
+          node.querySelector('.qty-decrease').addEventListener('click', async ()=>{
+            const input = node.querySelector('.qty-input'); let v = parseInt(input.value); if(v>1){ v--; input.value = v; await api({data_type:'update_cart', cartId: item.cartId, quantity: v}); loadCart(); }
+          });
+          node.querySelector('.qty-increase').addEventListener('click', async ()=>{
+            const input = node.querySelector('.qty-input'); let v = parseInt(input.value); v++; input.value = v; await api({data_type:'update_cart', cartId: item.cartId, quantity: v}); loadCart();
+          });
+          node.querySelector('.remove-item').addEventListener('click', async ()=>{
+            await api({data_type:'remove_from_cart', cartId: item.cartId}); loadCart();
+          });
 
-          <div class="cart-item">
-            <div class="cart-item-image">
-              <img
-                src="/placeholder.svg?height=100&width=100"
-                alt="French Baguette"
-              />
-            </div>
-            <div class="cart-item-details">
-              <span class="cart-item-shop">Golden Bakery</span>
-              <h3 class="cart-item-name">French Baguette</h3>
-              <span class="cart-item-variant">Fresh Baked</span>
-              <div class="cart-item-quantity">
-                <div class="quantity-control">
-                  <button class="qty-btn">-</button>
-                  <input type="number" class="qty-input" value="2" min="1" />
-                  <button class="qty-btn">+</button>
-                </div>
-                <button class="remove-item">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path d="M3 6h18"></path>
-                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div class="cart-item-price">
-              <span class="price">$5.38</span>
-              <span class="unit-price">$2.69 each</span>
-            </div>
-          </div>
-        </div>
+          list.appendChild(node);
+        });
 
-        <!-- Cart Summary -->
-        <div class="cart-summary">
-          <h3>Order Summary</h3>
+        countEl.textContent = items;
+        itemsEl.textContent = items;
+        subtotalEl.textContent = formatMoney(subtotal);
+        // delivery fixed simple
+        const delivery = subtotal > 0 ? 4.98 : 0;
+        document.querySelector('.summary-delivery').textContent = formatMoney(delivery);
+        const total = subtotal - 0 + delivery;
+        totalEl.textContent = formatMoney(total);
+      }
 
-          <div class="summary-row">
-            <span>Subtotal (5 items)</span>
-            <span>$17.35</span>
+      document.querySelector('.clear-cart').addEventListener('click', async ()=>{ if(confirm('Clear cart?')){ await api({data_type:'clear_cart'}); loadCart(); } });
+
+      // init
+      loadCart();
+    </script>
           </div>
           <div class="summary-row">
             <span>Delivery Fee</span>
-            <span>$4.98</span>
+            <span class="summary-delivery">$0.00</span>
           </div>
           <div class="summary-row discount">
             <span>Discount</span>
-            <span>-$2.00</span>
+            <span class="summary-discount">$0.00</span>
           </div>
 
           <form class="coupon-form">
@@ -223,7 +106,7 @@
 
           <div class="summary-total">
             <span>Total</span>
-            <span>$20.33</span>
+            <span class="summary-total-amount">$0.00</span>
           </div>
 
           <a href="checkout.html" class="btn btn-primary checkout-btn">

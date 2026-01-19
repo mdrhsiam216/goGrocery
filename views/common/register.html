@@ -138,6 +138,21 @@
     </div>
 
     <script>
+      // Redirect to home if already logged in
+      (async function(){
+        try{
+          const res = await fetch("../../backend/api.php", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({data_type: 'user_info'})
+          });
+          const j = await res.json();
+          if(j.logged_in){
+            window.location.href = "../../index.html";
+          }
+        }catch(e){/* ignore */}
+      })();
+
       function togglePassword(inputId) {
         const passwordInput = document.getElementById(inputId);
         const type =

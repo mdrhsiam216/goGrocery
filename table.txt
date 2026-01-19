@@ -6,7 +6,8 @@
 -name
 -email
 -password
--role [admin,customer(default), manager, rider, shop]
+-role [admin,customer(default), manager, shop]
+ -image (profile photo URL/path)
 
 ----coupon:
 -id [pk]
@@ -29,6 +30,7 @@
 -price
 -quantity
 -shopId[fk]
+ -image (product photo URL/path)
 
 
 

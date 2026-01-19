@@ -83,7 +83,7 @@
             <img src="/placeholder.svg?height=36&width=36" alt="User" class="shop-avatar">
             <div class="shop-profile-info">
               <p class="shop-profile-name">John Doe</p>
-              <p class="shop-profile-role">Shop Owner</p>
+              <p class="shop-profile-role">Shop</p>
             </div>
           </div>
         </div>
@@ -195,6 +195,28 @@
         reader.readAsDataURL(file);
       }
     });
+  </script>
+  <script>
+    const api = (body) => fetch('../../backend/api.php', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(body) }).then(r=>r.json());
+    (async function initShop(){
+      try{
+        const ui = await api({ data_type: 'user_info' });
+        if(!ui || !ui.logged_in || ui.user?.role !== 'shop'){ window.location.href = '../common/login.html'; return; }
+        const resp = await api({ data_type: 'get_my_shop' });
+        if(resp && resp.shop){
+          const shop = resp.shop;
+          const profileName = document.querySelector('.shop-profile-name');
+          const profileRole = document.querySelector('.shop-profile-role');
+          const avatar = document.querySelector('.shop-avatar');
+          if(profileName) profileName.textContent = shop.owner_name || ui.user.name || ui.user.email || 'Shop';
+          if(profileRole) profileRole.textContent = 'Shop';
+          if(avatar){
+            if(ui.user && ui.user.image) avatar.src = ui.user.image;
+            else if(shop && shop.logo) avatar.src = shop.logo;
+          }
+        }
+      }catch(e){console.error(e)}
+    })();
   </script>
 </body>
 </html>

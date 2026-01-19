@@ -9,7 +9,22 @@ $result = $DB->read($query, $data);
 
 if($result){
     $row = $result[0];
-    if($password == $row->password){ // Note: You should use password_verify in production, simplistic comparison as requested
+    // Support both hashed and legacy plain-text passwords
+    $validPassword = false;
+    if(password_verify($password, $row->password)){
+        $validPassword = true;
+    } elseif($password == $row->password){
+        // legacy plain-text match
+        $validPassword = true;
+    }
+
+    if($validPassword){
+        // If legacy plain-text matched, re-hash and store the password
+        if(!password_needs_rehash($row->password, PASSWORD_DEFAULT) && password_hash($password, PASSWORD_DEFAULT) !== $row->password){
+            $updateQuery = "update users set password = :password where id = :id";
+            $DB->write($updateQuery, ['password' => password_hash($password, PASSWORD_DEFAULT), 'id' => $row->id]);
+        }
+
         $_SESSION['userid'] = $row->id;
         $_SESSION['role'] = $row->role;
         $role = isset($row->role) ? $row->role : 'customer';

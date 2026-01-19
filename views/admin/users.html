@@ -389,5 +389,47 @@
       sidebarOverlay.classList.remove('active');
     });
   </script>
+  <script>
+    // Admin page: load users dynamically and protect access
+    (async function(){
+      try{
+        const r = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'user_info'})});
+        const j = await r.json();
+        if(!j.logged_in || j.user.role !== 'admin'){ window.location.href='../../views/common/login.html'; return; }
+        // set admin profile info
+        if(j.user){
+          const adminAvatar = document.querySelector('.admin-avatar');
+          if(adminAvatar && j.user.image) adminAvatar.src = j.user.image;
+          if(j.user.name) document.querySelector('.admin-profile-name').textContent = j.user.name;
+        }
+
+        const usersRes = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'get_users'})}).then(r=>r.json());
+        const tbody = document.querySelector('.admin-table tbody'); tbody.innerHTML = '';
+        if(usersRes && usersRes.users){
+          usersRes.users.forEach(u=>{
+            const tr = document.createElement('tr');
+            const avatarSrc = u.image ? u.image : '/placeholder.svg?height=42&width=42';
+            tr.innerHTML = `
+              <td><div class="user-cell"><img src="${avatarSrc}" class="user-cell-avatar"><div class="user-cell-info"><h4>${u.name}</h4><p>${u.email}</p></div></div></td>
+              <td><span class="role-badge ${u.role}">${u.role}</span></td>
+              <td></td>
+              <td></td>
+              <td><div class="table-actions"><button class="table-action-btn role-change" data-id="${u.id}">Change Role</button><button class="table-action-btn delete-user" data-id="${u.id}">Delete</button></div></td>
+            `;
+            tbody.appendChild(tr);
+          });
+
+          // attach handlers
+          tbody.querySelectorAll('.role-change').forEach(btn=>{
+            btn.addEventListener('click', async ()=>{
+              const id = btn.dataset.id; const role = prompt('Enter role (admin,customer,manager,shop):'); if(!role) return;
+              await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'update_user', id: id, role: role})}); location.reload();
+            });
+          });
+          tbody.querySelectorAll('.delete-user').forEach(btn=>{ btn.addEventListener('click', async ()=>{ if(confirm('Delete user?')){ await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'delete_user', id: btn.dataset.id})}); location.reload(); } }); });
+        }
+      }catch(e){ console.warn(e); }
+    })();
+  </script>
 </body>
 </html>

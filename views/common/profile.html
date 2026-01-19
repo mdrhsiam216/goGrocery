@@ -102,5 +102,34 @@
             </div>
         </main>
     </div>
+        <script>
+            (async function(){
+                try{
+                    const res = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'user_info'})});
+                    const j = await res.json();
+                    if(!j.logged_in){ window.location.href = 'login.html'; return; }
+                    const u = j.user || {};
+                    const img = document.querySelector('.profile-avatar-img');
+                    const name = document.querySelector('.profile-avatar-name');
+                    const role = document.querySelector('.profile-avatar-role');
+                    if(img && u.image) img.src = u.image;
+                    if(name) name.textContent = u.name || u.email || 'User';
+                    if(role) role.textContent = (u.role || 'Customer');
+
+                    // map info rows
+                    const map = {
+                        'Full Name': u.name || '',
+                        'Email Address': u.email || '',
+                        'Role': (u.role || ''),
+                        'Location': u.location || '',
+                        'Member Since': u.created_at || ''
+                    };
+                    document.querySelectorAll('.info-row').forEach(row=>{
+                        const label = row.querySelector('.info-label')?.textContent?.trim();
+                        if(label && map[label] !== undefined){ row.querySelector('.info-value').textContent = map[label]; }
+                    });
+                }catch(e){ console.warn(e); }
+            })();
+        </script>
 </body>
 </html>

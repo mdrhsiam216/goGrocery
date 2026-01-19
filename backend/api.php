@@ -5,18 +5,23 @@ session_start();
 $DATA_RAW = file_get_contents("php://input");
 $DATA_OBJ = json_decode($DATA_RAW);
 
+// If request is a multipart/form-data (file upload), php://input won't be JSON.
+// Support form posts by using $_POST when JSON decode fails.
+if(!$DATA_OBJ && isset($_POST['data_type'])){
+	$DATA_OBJ = (object) $_POST;
+}
+
 $info = (object)[];
 
 //check if logged in
 if(!isset($_SESSION['userid']))
 {
-
-	if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type != "login" && $DATA_OBJ->data_type != "signup")
+	// Allow unauthenticated requests for login, signup, user_info and logout
+	if(isset($DATA_OBJ->data_type) && !in_array($DATA_OBJ->data_type, ["login","signup","user_info","logout"]))
 	{
-		
 		$info->logged_in = false;
 		echo json_encode($info);
-		die;	
+		die;
 	}
 	
 }
@@ -47,14 +52,26 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "signup")
 
 	//user info
 	include("include/user_info.php");
-}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "contacts")
-{
-	//user info
-	include("include/contacts.php");
-}elseif(isset($DATA_OBJ->data_type) && ($DATA_OBJ->data_type == "chats" || $DATA_OBJ->data_type == "chats_refresh"))
-{
-	//user info
-	include("include/chats.php");
+}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_categories"){
+	include("include/categories.php");
+}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_products"){
+	include("include/products.php");
+}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "cart_count"){
+	include("include/cart.php");
+}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "add_to_cart"){
+	include("include/cart.php");
+}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_cart"){
+	include("include/cart.php");
+}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_shops"){
+	include("include/shops.php");
+}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['add_shop','update_shop','delete_shop'])){
+	include("include/shops.php");
+}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['create_order','get_orders','update_order'])){
+	include("include/orders.php");
+}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['get_users','update_user','delete_user'])){
+	include("include/admin.php");
+}elseif(isset($DATA_OBJ->data_type) && in_array($DATA_OBJ->data_type, ['save_profile','change_password'])){
+	include("include/profile.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "settings")
 {
 	//user info
@@ -63,16 +80,4 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "signup")
 {
 	//user info
 	include("include/save_settings.php");
-}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "send_message")
-{
-	 //send message
-	include("include/send_message.php");
-}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "delete_message")
-{
-	 //send message
-	include("include/delete_message.php");
-}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "delete_thread")
-{
-	 //send message
-	include("include/delete_thread.php");
 }

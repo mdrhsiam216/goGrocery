@@ -6,7 +6,8 @@ CREATE TABLE Users (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'customer', 'manager', 'rider', 'shop') DEFAULT 'customer'
+    role ENUM('admin', 'customer', 'manager', 'rider', 'shop') DEFAULT 'customer',
+    image VARCHAR(255) DEFAULT NULL
 );
 
 CREATE TABLE category (
@@ -43,6 +44,7 @@ CREATE TABLE products (
     price DECIMAL(10,2) NOT NULL,
     quantity INT NOT NULL,
     shopId INT NOT NULL,
+    image VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (categoryId) REFERENCES category(id) ON DELETE CASCADE,
     FOREIGN KEY (shopId) REFERENCES shops(id) ON DELETE CASCADE
 );

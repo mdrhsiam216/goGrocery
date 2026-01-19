@@ -164,5 +164,34 @@
       sidebarOverlay.classList.remove('active');
     });
   </script>
+  <script>
+    // Ensure only admin can access this page
+    (async function(){
+      try{
+        const res = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'user_info'})});
+        const j = await res.json();
+        if(!j.logged_in || j.user.role !== 'admin'){
+          window.location.href = '../../views/common/login.html';
+          return;
+        }
+
+        // fetch counts
+        const users = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'get_users'})}).then(r=>r.json()).catch(()=>null);
+        const shops = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'get_shops'})}).then(r=>r.json()).catch(()=>null);
+        const orders = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'get_orders'})}).then(r=>r.json()).catch(()=>null);
+
+        if(users && users.users) document.querySelector('.admin-stats-grid .admin-stat-card.primary .admin-stat-value').textContent = users.users.length;
+        if(shops && shops.shops) document.querySelectorAll('.admin-stat-card')[1].querySelector('.admin-stat-value').textContent = shops.shops.length;
+        if(orders && orders.orders) document.querySelectorAll('.admin-stat-card')[2].querySelector('.admin-stat-value').textContent = orders.orders.length;
+
+        // profile name + avatar
+        if(j.user){
+          if(j.user.name) document.querySelector('.admin-profile-name').textContent = j.user.name;
+          const adminAvatar = document.querySelector('.admin-avatar');
+          if(adminAvatar && j.user.image) adminAvatar.src = j.user.image;
+        }
+      }catch(e){ console.warn(e); }
+    })();
+  </script>
 </body>
 </html>

@@ -143,5 +143,27 @@
             </div>
         </main>
     </div>
+        <script>
+            (async function(){
+                try{
+                    const res = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'user_info'})});
+                    const j = await res.json();
+                    if(!j.logged_in){ window.location.href = 'login.html'; return; }
+                    const u = j.user || {};
+                    const img = document.querySelector('.profile-avatar-img');
+                    const nameEl = document.getElementById('name');
+                    const emailEl = document.getElementById('email');
+                    const locEl = document.getElementById('location');
+                    const name = document.querySelector('.profile-avatar-name');
+                    const role = document.querySelector('.profile-avatar-role');
+                    if(img && u.image) img.src = u.image;
+                    if(name) name.textContent = u.name || u.email || 'User';
+                    if(role) role.textContent = (u.role || 'Customer');
+                    if(nameEl) nameEl.value = u.name || '';
+                    if(emailEl) emailEl.value = u.email || '';
+                    if(locEl) locEl.value = u.location || '';
+                }catch(e){ console.warn(e); }
+            })();
+        </script>
 </body>
 </html>

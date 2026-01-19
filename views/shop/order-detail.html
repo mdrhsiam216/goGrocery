@@ -116,7 +116,7 @@
                         <img src="/placeholder.svg?height=36&width=36" alt="User" class="header-user-avatar">
                         <div class="header-user-info">
                             <div class="header-user-name">John Doe</div>
-                            <div class="header-user-role">Shop Owner</div>
+                            <div class="header-user-role">Shop</div>
                         </div>
                     </div>
                 </div>
@@ -336,5 +336,29 @@
             sidebarOverlay.classList.remove('active');
         });
     </script>
+        <script>
+            const api = (body) => fetch('../../backend/api.php', { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(body) }).then(r=>r.json());
+            (async function initShop(){
+                try{
+                    const ui = await api({ data_type: 'user_info' });
+                    if(!ui || !ui.logged_in || ui.user?.role !== 'shop'){ window.location.href = '../common/login.html'; return; }
+                    const resp = await api({ data_type: 'get_my_shop' });
+                    if(resp && resp.shop){
+                        const shop = resp.shop;
+                        const headerName = document.querySelector('.header-user-name');
+                        const headerRole = document.querySelector('.header-user-role');
+                        const avatar = document.querySelector('.header-user-avatar');
+                        const sidebarName = document.querySelector('.sidebar-shop-name');
+                        if(headerName) headerName.textContent = shop.owner_name || ui.user.name || ui.user.email || 'Shop';
+                        if(headerRole) headerRole.textContent = 'Shop';
+                        if(avatar){
+                            if(ui.user && ui.user.image) avatar.src = ui.user.image;
+                            else if(shop && shop.logo) avatar.src = shop.logo;
+                        }
+                        if(sidebarName) sidebarName.textContent = shop.name || sidebarName.textContent;
+                    }
+                }catch(e){console.error(e)}
+            })();
+        </script>
 </body>
 </html>

@@ -1,9 +1,10 @@
 -- Users
-INSERT INTO Users (name, email, password, role) VALUES 
-('Admin User', 'admin@gmail.com', '123', 'admin'),
-('John Customer', 'john@gmail.com', '123', 'customer'),
-('Jane Manager', 'manager@gmail.com', '123', 'manager'),
-('Fresh Mart Owner', 'owner@gmail.com', '123', 'shop');
+-- Note: passwords in seed are plain for fast testing; production should use hashed passwords
+INSERT INTO Users (name, email, password, role, image) VALUES 
+('Admin User', 'admin@gmail.com', '123', 'admin', '/assets/images/users/admin.png'),
+('John Customer', 'john@gmail.com', '123', 'customer', '/assets/images/users/john.png'),
+('Jane Manager', 'manager@gmail.com', '123', 'manager', '/assets/images/users/manager.png'),
+('Fresh Mart Shop', 'owner@gmail.com', '123', 'shop', '/assets/images/users/freshmart.png');
 
 -- Category
 INSERT INTO category (name) VALUES 
@@ -34,23 +35,23 @@ INSERT INTO customers (userId, location) VALUES
 
 -- Products
 -- Fresh Mart (id 1)
-INSERT INTO products (name, categoryId, price, quantity, shopId) VALUES 
-('Apple', 1, 2.50, 100, 1),
-('Banana', 1, 1.20, 150, 1),
-('Milk', 3, 3.99, 50, 1),
-('Bread', 6, 2.99, 30, 1);
+INSERT INTO products (name, categoryId, price, quantity, shopId, image) VALUES 
+('Apple', 1, 2.50, 100, 1, '/assets/images/products/apple.png'),
+('Banana', 1, 1.20, 150, 1, '/assets/images/products/banana.png'),
+('Milk', 3, 3.99, 50, 1, '/assets/images/products/milk.png'),
+('Bread', 6, 2.99, 30, 1, '/assets/images/products/bread.png');
 
 -- Green Grocers (id 2)
-INSERT INTO products (name, categoryId, price, quantity, shopId) VALUES 
-('Carrot', 2, 0.99, 200, 2),
-('Broccoli', 2, 1.99, 80, 2),
-('Chicken Breast', 4, 8.99, 40, 2);
+INSERT INTO products (name, categoryId, price, quantity, shopId, image) VALUES 
+('Carrot', 2, 0.99, 200, 2, '/assets/images/products/carrot.png'),
+('Broccoli', 2, 1.99, 80, 2, '/assets/images/products/broccoli.png'),
+('Chicken Breast', 4, 8.99, 40, 2, '/assets/images/products/chicken.png');
 
 -- City Supermarket (id 3)
-INSERT INTO products (name, categoryId, price, quantity, shopId) VALUES 
-('Orange Juice', 5, 4.50, 60, 3),
-('Cola', 5, 1.50, 120, 3),
-('Potato Chips', 7, 2.50, 100, 3);
+INSERT INTO products (name, categoryId, price, quantity, shopId, image) VALUES 
+('Orange Juice', 5, 4.50, 60, 3, '/assets/images/products/oj.png'),
+('Cola', 5, 1.50, 120, 3, '/assets/images/products/cola.png'),
+('Potato Chips', 7, 2.50, 100, 3, '/assets/images/products/chips.png');
 
 -- Cart
 -- John Customer (id 2) adding Apple (id 1) and Milk (id 3)

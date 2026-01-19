@@ -92,9 +92,9 @@
               </svg>
             </button>
             <div class="user-menu-dropdown">
-              <a href="../common/profile.html">My Profile</a>
-              <a href="orders.html">My Orders</a>
-              <a href="../common/change-password.html">Change Password</a>
+              <a href="./views/common/profile.html">My Profile</a>
+              <a href="./views/customer/orders.html">My Orders</a>
+              <a href="./views/common/change-password.html">Change Password</a>
               <a href="#" class="logout">Logout</a>
             </div>
           </div>
@@ -130,6 +130,163 @@
         </div>
       </div>
     </header>
+
+    <script>
+      async function apiPost(body){
+        try{
+          const res = await fetch('./backend/api.php', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(body)
+          });
+          return await res.json();
+        }catch(e){
+          return null;
+        }
+      }
+
+      async function updateHeaderAndCart(){
+        const j = await apiPost({data_type:'user_info'});
+        const headerActions = document.querySelector('.header-actions');
+        const cartBadge = headerActions ? headerActions.querySelector('.cart-badge') : null;
+
+        // ensure cart count is fetched
+        const cartRes = await apiPost({data_type:'cart_count'});
+        if(cartBadge && cartRes && cartRes.count !== undefined){
+          cartBadge.textContent = cartRes.count;
+        }
+
+        if(!headerActions) return;
+
+        const cartLink = headerActions.querySelector('.cart-link');
+        const mobile = headerActions.querySelector('.mobile-menu-toggle');
+        headerActions.innerHTML = '';
+        if(cartLink) headerActions.appendChild(cartLink);
+
+        if(j && j.logged_in){
+          const user = j.user || {};
+          const userMenu = document.createElement('div');
+          userMenu.className = 'user-menu';
+
+          const btn = document.createElement('button');
+          btn.className = 'user-menu-btn';
+
+          const img = document.createElement('img');
+          img.className = 'user-avatar';
+          if(user.image){ img.src = user.image; img.alt = user.name || 'User'; }
+          else { img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.2"/><path d="M4 20a8 8 0 0 1 16 0"/></svg>'); img.alt='Avatar'; }
+
+          const span = document.createElement('span');
+          span.textContent = user.name || 'User';
+
+          btn.appendChild(img);
+          btn.appendChild(span);
+
+          const caret = document.createElementNS('http://www.w3.org/2000/svg','svg');
+          caret.setAttribute('width','16'); caret.setAttribute('height','16'); caret.setAttribute('viewBox','0 0 24 24');
+          const path = document.createElementNS('http://www.w3.org/2000/svg','path'); path.setAttribute('d','m6 9 6 6 6-6'); caret.appendChild(path);
+          btn.appendChild(caret);
+
+          userMenu.appendChild(btn);
+
+          const dropdown = document.createElement('div');
+          dropdown.className = 'user-menu-dropdown';
+          dropdown.innerHTML = '<a href="views/common/profile.html">My Profile</a><a href="views/customer/orders.html">My Orders</a><a href="views/common/change-password.html">Change Password</a><a href="#" class="logout">Logout</a>';
+          userMenu.appendChild(dropdown);
+
+          headerActions.appendChild(userMenu);
+        } else {
+          const a = document.createElement('a');
+          a.href = 'views/common/login.html';
+          a.className = 'header-link';
+          a.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Login</span>';
+          headerActions.appendChild(a);
+        }
+
+        if(mobile) headerActions.appendChild(mobile);
+
+        const logoutBtn = document.querySelector('.logout');
+        if(logoutBtn){
+          logoutBtn.addEventListener('click', async (e)=>{
+            e.preventDefault(); await apiPost({data_type:'logout'}); window.location.href = './index.html';
+          });
+        }
+      }
+
+      function createCategoryCard(cat){
+        const a = document.createElement('a');
+        a.href = '#';
+        a.className = 'category-card';
+        a.dataset.id = cat.id;
+        const icon = document.createElement('div'); icon.className='category-icon';
+        const img = document.createElement('img'); img.src = cat.image ? cat.image : './assets/images/category-placeholder.png'; img.alt = cat.name;
+        icon.appendChild(img);
+        const h3 = document.createElement('h3'); h3.textContent = cat.name;
+        a.appendChild(icon); a.appendChild(h3);
+        a.addEventListener('click', (e)=>{ e.preventDefault(); loadProducts(cat.id); });
+        return a;
+      }
+
+      function createProductCard(p){
+        const card = document.createElement('div'); card.className='product-card';
+        const imgWrap = document.createElement('div'); imgWrap.className='product-image';
+        const img = document.createElement('img'); img.src = p.image ? p.image : '/placeholder.svg?height=160&width=200'; img.alt = p.name; imgWrap.appendChild(img);
+        const info = document.createElement('div'); info.className='product-info';
+        const catSpan = document.createElement('span'); catSpan.className='product-category'; catSpan.textContent = p.category_name || '';
+        const h3 = document.createElement('h3'); h3.textContent = p.name;
+        const price = document.createElement('div'); price.className='product-price'; const curr = document.createElement('span'); curr.className='current'; curr.textContent = ('$' + (parseFloat(p.price).toFixed(2) || '0.00'));
+        price.appendChild(curr);
+        const btn = document.createElement('button'); btn.className='product-add-btn'; btn.textContent = 'Add to Cart'; btn.dataset.id = p.id;
+        btn.addEventListener('click', async ()=>{
+          const res = await apiPost({data_type:'add_to_cart', productId: p.id, quantity:1});
+          if(res && res.data_type === 'add_to_cart'){
+            // update cart count
+            const cnt = await apiPost({data_type:'cart_count'});
+            const badge = document.querySelector('.cart-badge'); if(badge && cnt && cnt.count !== undefined) badge.textContent = cnt.count;
+            alert('Added to cart');
+          } else if(res && res.logged_in === false){
+            window.location.href = 'views/common/login.html';
+          } else {
+            alert(res && res.message ? res.message : 'Could not add to cart');
+          }
+        });
+
+        info.appendChild(catSpan); info.appendChild(h3); info.appendChild(price); info.appendChild(btn);
+        card.appendChild(imgWrap); card.appendChild(info);
+        return card;
+      }
+
+      async function loadCategories(){
+        const res = await apiPost({data_type:'get_categories'});
+        const grid = document.querySelector('.categories-grid');
+        if(!grid) return;
+        grid.innerHTML = '';
+        if(res && res.categories && res.categories.length){
+          res.categories.forEach(c => grid.appendChild(createCategoryCard(c)));
+        } else {
+          grid.innerHTML = '<p>No categories found</p>';
+        }
+      }
+
+      async function loadProducts(category = 0){
+        const res = await apiPost({data_type:'get_products', category: category});
+        const grid = document.querySelector('.products-grid');
+        if(!grid) return;
+        grid.innerHTML = '';
+        if(res && res.products && res.products.length){
+          res.products.forEach(p => grid.appendChild(createProductCard(p)));
+        } else {
+          grid.innerHTML = '<p>No products found</p>';
+        }
+      }
+
+      // Initialize page
+      (function(){
+        updateHeaderAndCart();
+        loadCategories();
+        loadProducts();
+      })();
+    </script>
 
     <!-- Hero Section -->
     <section class="hero">

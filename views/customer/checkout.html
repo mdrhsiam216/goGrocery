@@ -265,6 +265,10 @@
     </footer>
 
     <script>
+      async function api(body){
+        try{ const r = await fetch('../../backend/api.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)}); return await r.json(); }catch(e){return null}
+      }
+
       // Address selection
       document.querySelectorAll(".address-card").forEach((card) => {
         card.addEventListener("click", function () {
@@ -284,6 +288,36 @@
           this.classList.add("selected");
         });
       });
+
+      // load cart summary
+      async function loadSummary(){
+        const res = await api({data_type:'get_cart'});
+        const container = document.querySelector('.order-items');
+        const subtotalEl = document.querySelector('.summary-total');
+        container.innerHTML = '';
+        if(!res || !res.items || res.items.length==0){ container.innerHTML = '<p>Your cart is empty.</p>'; return; }
+        let subtotal = 0;
+        res.items.forEach(it=>{
+          subtotal += parseFloat(it.price) * it.quantity;
+          const el = document.createElement('div'); el.className='order-item'; el.innerHTML = `<div class="order-item-image"><img src="${it.image?it.image:'/placeholder.svg?height=50&width=50'}"/></div><div class="order-item-info"><h4>${it.name}</h4><p>${it.quantity} x</p></div><span class="order-item-price">$${(parseFloat(it.price)*it.quantity).toFixed(2)}</span>`;
+          container.appendChild(el);
+        });
+        document.querySelector('.summary-total .summary-total')
+        document.querySelector('.summary-total')?.querySelector('span')?.textContent = '$' + (subtotal + 4.98).toFixed(2);
+      }
+
+      document.querySelector('.checkout-container').addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        // create order
+        const res = await api({data_type:'create_order', method:'cash'});
+        if(res && res.data_type=='create_order'){
+          alert('Order placed'); window.location.href = '../common/profile.html';
+        } else {
+          alert(res && res.message ? res.message : 'Could not place order');
+        }
+      });
+
+      loadSummary();
     </script>
   </body>
 </html>

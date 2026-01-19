@@ -4,11 +4,14 @@
 $data = [];
 $data['name'] = isset($DATA_OBJ->name) ? trim($DATA_OBJ->name) : "";
 $data['email'] = isset($DATA_OBJ->email) ? trim($DATA_OBJ->email) : "";
-$data['password'] = isset($DATA_OBJ->password) ? $DATA_OBJ->password : "";
+$raw_password = isset($DATA_OBJ->password) ? $DATA_OBJ->password : "";
 
 // Accept role from client if provided, otherwise default to customer
 $allowed_roles = ['admin','customer','manager','rider','shop'];
 $data['role'] = (isset($DATA_OBJ->role) && in_array($DATA_OBJ->role, $allowed_roles)) ? $DATA_OBJ->role : 'customer';
+
+// Hash password before storing (simple, using PHP's password_hash)
+$data['password'] = password_hash($raw_password, PASSWORD_DEFAULT);
 
 // Simple validation
 if(empty($data['name']) || empty($data['email']) || empty($data['password'])){
@@ -30,7 +33,10 @@ if($result){
 }
 
 // Save to DB
-$query = "insert into users (name, email, password, role) values (:name, :email, :password, :role)";
+$image = isset($DATA_OBJ->image) ? trim($DATA_OBJ->image) : null;
+$data['image'] = $image;
+
+$query = "insert into users (name, email, password, role, image) values (:name, :email, :password, :role, :image)";
 $result = $DB->write($query, $data);
 
 if($result){

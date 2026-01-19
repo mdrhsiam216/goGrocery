@@ -272,5 +272,30 @@
       sidebarOverlay.classList.remove('active');
     });
   </script>
+  <script>
+    (async function(){
+      try{
+        const r = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'user_info'})});
+        const j = await r.json();
+        if(!j.logged_in || j.user.role !== 'admin'){ window.location.href='../../views/common/login.html'; return; }
+
+        const shopsRes = await fetch('../../backend/api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data_type:'get_shops'})}).then(r=>r.json());
+        const grid = document.querySelector('.shops-grid'); grid.innerHTML = '';
+        if(shopsRes && shopsRes.shops){
+          shopsRes.shops.forEach(s=>{
+            const card = document.createElement('div'); card.className='shop-card';
+            card.innerHTML = `
+              <div class="shop-card-banner"><img src="/placeholder.svg?height=120&width=400"></div>
+              <img src="/placeholder.svg?height=72&width=72" class="shop-card-logo">
+              <div class="shop-card-body"><h3 class="shop-card-name">${s.name}</h3><p class="shop-card-category">${s.location||''}</p><div class="shop-card-actions"><button class="btn btn-primary btn-sm manage-shop" data-id="${s.id}">Manage</button></div></div>
+            `;
+            grid.appendChild(card);
+          });
+
+          document.querySelectorAll('.manage-shop').forEach(b=>b.addEventListener('click', ()=>{ const id=b.dataset.id; window.location.href = 'dashboard.html?shopId='+id; }));
+        }
+      }catch(e){console.warn(e);}    
+    })();
+  </script>
 </body>
 </html>
