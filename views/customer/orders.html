@@ -8,6 +8,118 @@
     <link rel="stylesheet" href="../../assets/css/common/components.css" />
     <link rel="stylesheet" href="../../assets/css/customer/layout.css" />
     <link rel="stylesheet" href="../../assets/css/customer/order.css" />
+    <style>
+      .orders-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .order-item {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 1rem;
+      }
+
+      .order-id {
+        font-weight: 600;
+        color: var(--primary, #2e7d32);
+        font-size: 1.1rem;
+      }
+
+      .order-status {
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .order-status.pending {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+
+      .order-status.delivered {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .order-status.delivering {
+        background-color: #d1ecf1;
+        color: #0c5460;
+      }
+
+      .order-status.rejected {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .order-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .order-detail-item {
+        padding: 0.5rem 0;
+      }
+
+      .order-detail-label {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 0.2rem;
+      }
+
+      .order-detail-value {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .no-orders {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: #666;
+      }
+
+      .no-orders p {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .no-orders a {
+        color: var(--primary, #2e7d32);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+      }
+
+      .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 4px;
+        margin: 1rem 0;
+      }
+    </style>
   </head>
   <body>
     <!-- Header -->
@@ -62,7 +174,7 @@
           <div class="user-menu">
             <button class="user-menu-btn">
               <img
-                src="/placeholder.svg?height=32&width=32"
+                src="/goGrocery/assets/images/placeholder.svg?height=32&width=32"
                 alt="User"
                 class="user-avatar"
               />
@@ -82,7 +194,210 @@
     <div class="page-header" style="background-color: var(--white)">
       <div class="container">
         <div class="breadcrumb">
-          <a href="home.html">Home</a>
+          <a href="../../index.html">Home</a>
           <span>/</span>
           <span>My Orders</span>
         </div>
+        <h1>My Orders</h1>
+      </div>
+    </div>
+
+    <!-- Orders List -->
+    <main class="orders-container">
+      <div id="orders-list"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section footer-about">
+          <div class="footer-logo">
+            <img src="../../assets/images/logo.png" alt="GoGrocery" />
+          </div>
+          <p class="footer-description">
+            Your favorite local grocery stores, delivered fresh to your
+            doorstep. Shop smarter, live better.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="shops-and-products.html">Products</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 GoGrocery. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      async function apiPost(body) {
+        try {
+            const res = await fetch('../../backend/api.php', {
+              method: 'POST',
+              credentials: 'same-origin',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body)
+            });
+          return await res.json();
+        } catch (e) {
+            console.error('apiPost error', e);
+          return null;
+        }
+      }
+
+      function createOrderElement(order) {
+        const div = document.createElement('div');
+        div.className = 'order-item';
+
+        const header = document.createElement('div');
+        header.className = 'order-header';
+
+        const orderId = document.createElement('div');
+        orderId.className = 'order-id';
+        orderId.textContent = 'Order #' + order.id;
+
+        const status = document.createElement('span');
+        status.className = 'order-status ' + order.status;
+        status.textContent = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+
+        header.appendChild(orderId);
+        header.appendChild(status);
+
+        const details = document.createElement('div');
+        details.className = 'order-details';
+
+        const shopDetail = document.createElement('div');
+        shopDetail.className = 'order-detail-item';
+        const shopLabel = document.createElement('div');
+        shopLabel.className = 'order-detail-label';
+        shopLabel.textContent = 'Shop';
+        const shopValue = document.createElement('div');
+        shopValue.className = 'order-detail-value';
+        shopValue.textContent = order.shop_name || 'N/A';
+        shopDetail.appendChild(shopLabel);
+        shopDetail.appendChild(shopValue);
+
+        const amountDetail = document.createElement('div');
+        amountDetail.className = 'order-detail-item';
+        const amountLabel = document.createElement('div');
+        amountLabel.className = 'order-detail-label';
+        amountLabel.textContent = 'Total Amount';
+        const amountValue = document.createElement('div');
+        amountValue.className = 'order-detail-value';
+        amountValue.textContent = '$' + parseFloat(order.amount).toFixed(2);
+        amountDetail.appendChild(amountLabel);
+        amountDetail.appendChild(amountValue);
+
+        const methodDetail = document.createElement('div');
+        methodDetail.className = 'order-detail-item';
+        const methodLabel = document.createElement('div');
+        methodLabel.className = 'order-detail-label';
+        methodLabel.textContent = 'Payment Method';
+        const methodValue = document.createElement('div');
+        methodValue.className = 'order-detail-value';
+        methodValue.textContent = order.method === 'cash' ? 'Cash on Delivery' : 'Online Payment';
+        methodDetail.appendChild(methodLabel);
+        methodDetail.appendChild(methodValue);
+
+        details.appendChild(shopDetail);
+        details.appendChild(amountDetail);
+        details.appendChild(methodDetail);
+
+        div.appendChild(header);
+        div.appendChild(details);
+
+        return div;
+      }
+
+      async function loadOrders() {
+        const container = document.getElementById('orders-list');
+        container.innerHTML = '<div class="loading">Loading your orders...</div>';
+
+        const res = await apiPost({ data_type: 'get_orders' });
+
+        if (!res) {
+          container.innerHTML = '<div class="error">Error loading orders. Please try again.</div>';
+          return;
+        }
+
+        if (!res.logged_in) {
+            // Redirect only when server explicitly indicates unauthenticated/unauthorized
+            container.innerHTML = '<div class="error">Please log in to view your orders.</div>';
+            setTimeout(() => {
+              window.location.href = '../common/login.html';
+            }, 1500);
+            return;
+        }
+
+        if (!res.orders || res.orders.length === 0) {
+          container.innerHTML = `
+            <div class="no-orders">
+              <p>You haven't placed any orders yet.</p>
+              <a href="../../index.html">Start Shopping</a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = '';
+        res.orders.forEach(order => {
+          container.appendChild(createOrderElement(order));
+        });
+      }
+
+      async function updateHeader() {
+        const j = await apiPost({ data_type: 'user_info' });
+        const headerActions = document.querySelector('.header-actions');
+
+        if (j && j.logged_in) {
+          const user = j.user || {};
+          const userMenu = headerActions.querySelector('.user-menu');
+          if (userMenu) {
+            const userMenuBtn = userMenu.querySelector('.user-menu-btn');
+            if (userMenuBtn) {
+              const span = userMenuBtn.querySelector('span');
+              if (span) span.textContent = user.name || 'User';
+            }
+          }
+        }
+
+        const logoutBtn = document.querySelector('.logout');
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await apiPost({ data_type: 'logout' });
+            window.location.href = '../../index.html';
+          });
+        }
+      }
+
+      // Initialize
+      (function () {
+        updateHeader();
+        loadOrders();
+      })();
+    </script>
+  </body>
+</html>

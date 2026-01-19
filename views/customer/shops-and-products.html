@@ -179,7 +179,7 @@
             const card = document.createElement('div');
             card.className = 'product-card';
             
-            let imgSrc = '/placeholder.svg?height=160&width=200';
+            let imgSrc = '/goGrocery/assets/images/placeholder.svg?height=160&width=200';
             if(p.image && p.image.trim()){
                 imgSrc = p.image;
             }
@@ -293,23 +293,17 @@
         }
 
         async function loadProducts(shopId = 0){
-            let query = {data_type:'get_products'};
+            const query = {data_type:'get_products'};
+            if(shopId && shopId > 0) query.shopId = shopId;
             const res = await apiPost(query);
             const grid = document.querySelector('.products-grid');
-            
+
             if(!grid) return;
             grid.innerHTML = '';
-            
+
             if(res && res.products && res.products.length){
-                let products = res.products;
-                
-                // Filter by shop if shopId is specified
-                if(shopId > 0){
-                    products = products.filter(p => parseInt(p.shopId) === shopId);
-                }
-                
-                if(products.length > 0){
-                    products.forEach(p => grid.appendChild(createProductCard(p)));
+                if(res.products.length > 0){
+                    res.products.forEach(p => grid.appendChild(createProductCard(p)));
                 } else {
                     grid.innerHTML = '<p class="no-products">No products available in this shop</p>';
                 }

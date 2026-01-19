@@ -236,7 +236,7 @@
       function createProductCard(p){
         const card = document.createElement('div'); card.className='product-card';
         const imgWrap = document.createElement('div'); imgWrap.className='product-image';
-        let imgSrc = '/placeholder.svg?height=160&width=200';
+          let imgSrc = '/goGrocery/assets/images/placeholder.svg?height=160&width=200';
         if(p.image && p.image.trim()){
           imgSrc = p.image;
         }
@@ -291,7 +291,7 @@
       }
 
       async function loadPopularProducts(){
-        const res = await apiPost({data_type:'get_products', limit: 5});
+        const res = await apiPost({data_type:'get_products', limit: 5, random: 1});
         const grid = document.querySelector('.products-grid');
         if(!grid) return;
         grid.innerHTML = '';
@@ -305,7 +305,6 @@
       // Initialize page
       (function(){
         updateHeaderAndCart();
-        loadCategories();
         loadPopularProducts();
       })();
     </script>

@@ -233,7 +233,7 @@
                 </a>
                 <div class="user-menu">
                     <button class="user-menu-btn">
-                        <img src="/placeholder.svg?height=32&width=32" alt="User" class="user-avatar" />
+                            <img src="/goGrocery/assets/images/placeholder.svg?height=32&width=32" alt="User" class="user-avatar" />
                         <span>User</span>
                     </button>
                     <div class="user-menu-dropdown">
@@ -542,11 +542,16 @@
                             quantity: item.quantity
                         }))
                     };
-                    
-                    console.log('Sending order data:', orderData);
+
+                    // Ensure numeric types and stringify for reliable logging
+                    orderData.shopId = parseInt(orderData.shopId);
+                    orderData.amount = parseFloat(orderData.amount);
+                    orderData.items = orderData.items.map(i => ({ productId: parseInt(i.productId), quantity: parseInt(i.quantity) }));
+
+                    console.log('Sending order data JSON:', JSON.stringify(orderData));
 
                     const orderRes = await api(orderData);
-                    
+
                     console.log('Order response:', orderRes);
 
                     if(!orderRes || !orderRes.order_id){

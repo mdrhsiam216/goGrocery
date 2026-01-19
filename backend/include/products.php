@@ -71,14 +71,33 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == 'add_product'){
 // Get products (default behavior when no data_type or data_type is get_products)
 // optional category filter and limit
 $category = isset($DATA_OBJ->category) ? intval($DATA_OBJ->category) : 0;
+$shopFilter = isset($DATA_OBJ->shopId) ? intval($DATA_OBJ->shopId) : 0;
 $limit = isset($DATA_OBJ->limit) ? intval($DATA_OBJ->limit) : 20;
+$random = isset($DATA_OBJ->random) ? intval($DATA_OBJ->random) : 0;
 
+// Build base query and parameters
+$params = [];
+$where = [];
 if($category > 0){
-    $query = "select p.*, c.name as category_name from products p left join category c on p.categoryId = c.id where p.categoryId = :category limit $limit";
-    $result = $DB->read($query, ['category' => $category]);
-}else{
-    $query = "select p.*, c.name as category_name from products p left join category c on p.categoryId = c.id order by p.id desc limit $limit";
-    $result = $DB->read($query);
+    $where[] = 'p.categoryId = :category';
+    $params['category'] = $category;
+}
+if($shopFilter > 0){
+    $where[] = 'p.shopId = :shopId';
+    $params['shopId'] = $shopFilter;
+}
+
+$whereSql = '';
+if(count($where) > 0){
+    $whereSql = ' WHERE ' . implode(' AND ', $where);
+}
+
+if($random){
+    $query = "select p.*, c.name as category_name from products p left join category c on p.categoryId = c.id" . $whereSql . " order by rand() limit $limit";
+    $result = $DB->read($query, $params);
+} else {
+    $query = "select p.*, c.name as category_name from products p left join category c on p.categoryId = c.id" . $whereSql . " order by p.id desc limit $limit";
+    $result = $DB->read($query, $params);
 }
 
 // Construct image paths for products
