@@ -256,7 +256,7 @@
         try {
             const res = await fetch('../../backend/api.php', {
               method: 'POST',
-              credentials: 'same-origin',
+              credentials: 'include',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(body)
             });
@@ -335,7 +335,7 @@
         const container = document.getElementById('orders-list');
         container.innerHTML = '<div class="loading">Loading your orders...</div>';
 
-        const res = await apiPost({ data_type: 'get_orders' });
+        const res = await apiPost({ data_type: 'get_orders_view' });
 
         if (!res) {
           container.innerHTML = '<div class="error">Error loading orders. Please try again.</div>';

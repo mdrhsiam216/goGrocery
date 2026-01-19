@@ -52,6 +52,8 @@ if(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "signup")
 
 	//user info
 	include("include/user_info.php");
+}elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_orders_view"){
+	include("include/orders_view.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_categories"){
 	include("include/categories.php");
 }elseif(isset($DATA_OBJ->data_type) && $DATA_OBJ->data_type == "get_products"){
