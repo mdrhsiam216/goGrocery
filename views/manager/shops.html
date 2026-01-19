@@ -1,352 +1,593 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shop Oversight - GoGrocery Manager</title>
-    <link rel="stylesheet" href="../../assets/css/common/base.css">
-    <link rel="stylesheet" href="../../assets/css/common/components.css">
-    <link rel="stylesheet" href="../../assets/css/manager/layout.css">
-    <link rel="stylesheet" href="../../assets/css/manager/shops.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../assets/css/common/base.css" />
+    <link rel="stylesheet" href="../../assets/css/common/components.css" />
+    <link rel="stylesheet" href="../../assets/css/manager/layout.css" />
+    <link rel="stylesheet" href="../../assets/css/manager/shops.css" />
+  </head>
+  <body>
     <div class="manager-dashboard">
-        <!-- Sidebar -->
-        <aside class="manager-sidebar">
+      <!-- Sidebar -->
+      <aside class="manager-sidebar">
+        <nav class="manager-sidebar-nav">
+          <div class="manager-nav-section">
+            <div class="manager-nav-title">Overview</div>
+            <a href="dashboard.html" class="manager-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              Dashboard
+            </a>
+          </div>
 
-            <nav class="manager-sidebar-nav">
-                <div class="manager-nav-section">
-                    <div class="manager-nav-title">Overview</div>
-                    <a href="dashboard.html" class="manager-nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                        Dashboard
-                    </a>
-                </div>
+          <div class="manager-nav-section">
+            <div class="manager-nav-title">Management</div>
+            <a href="shops.html" class="manager-nav-link active">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              Shop Oversight
+              <span class="manager-nav-badge warning">5</span>
+            </a>
+            <a href="orders.html" class="manager-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              Orders Overview
+            </a>
+          </div>
 
-                <div class="manager-nav-section">
-                    <div class="manager-nav-title">Management</div>
-                    <a href="shops.html" class="manager-nav-link active">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                        Shop Oversight
-                        <span class="manager-nav-badge warning">5</span>
-                    </a>
-                    <a href="orders.html" class="manager-nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                        Orders Overview
-                    </a>
-                </div>
+          <div class="manager-nav-section">
+            <div class="manager-nav-title">Account</div>
+            <a href="../common/profile.html" class="manager-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              My Profile
+            </a>
+            <a href="../common/login.html" class="manager-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              Logout
+            </a>
+          </div>
+        </nav>
+      </aside>
 
-                
+      <!-- Sidebar Overlay -->
+      <div class="manager-sidebar-overlay"></div>
 
-                <div class="manager-nav-section">
-                    <div class="manager-nav-title">Account</div>
-                    <a href="../common/profile.html" class="manager-nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        My Profile
-                    </a>
-                    <a href="../common/login.html" class="manager-nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                        Logout
-                    </a>
-                </div>
-            </nav>
-        </aside>
+      <!-- Main Content -->
+      <main class="manager-main">
+        <!-- Top Header -->
+        <header class="manager-top-header">
+          <div class="manager-header-left">
+            <button class="manager-sidebar-toggle">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            <h1 class="manager-page-title">Shop Oversight</h1>
+          </div>
 
-        <!-- Sidebar Overlay -->
-        <div class="manager-sidebar-overlay"></div>
-
-        <!-- Main Content -->
-        <main class="manager-main">
-            <!-- Top Header -->
-            <header class="manager-top-header">
-                <div class="manager-header-left">
-                    <button class="manager-sidebar-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                    </button>
-                    <h1 class="manager-page-title">Shop Oversight</h1>
-                </div>
-
-                <div class="manager-header-right">
-                    
-                    <div class="manager-header-profile">
-                        <img src="/placeholder.svg?height=40&width=40" alt="Manager" class="manager-avatar">
-                        <div class="manager-profile-info">
-                            <div class="manager-profile-name">Sarah Manager</div>
-                            <div class="manager-profile-role">Manager</div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Content -->
-            <div class="manager-content">
-                <!-- Page Header -->
-                <div class="manager-page-header">
-                    <div class="manager-page-header-info">
-                        <h1>Shop Oversight</h1>
-                        <p>Monitor and review shop performance across the platform</p>
-                    </div>
-                    
-                </div>
-
-                <!-- Shops Grid -->
-                <div class="manager-shops-grid">
-                    <!-- Shop Card 1 -->
-                    <div class="manager-shop-card">
-                        <div class="manager-shop-header">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Fresh Mart">
-                            <span class="manager-shop-status-badge">
-                                <span class="status-badge success">Active</span>
-                            </span>
-                        </div>
-                        <div class="manager-shop-body">
-                            <h3 class="manager-shop-title">Fresh Mart</h3>
-                            <div class="manager-shop-category">Grocery Store</div>
-                            <div class="manager-shop-meta">
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    John Smith
-                                </div>
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    Downtown Area
-                                </div>
-                            </div>
-                            <div class="manager-shop-stats">
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">156</div>
-                                    <div class="manager-shop-stat-label">Products</div>
-                                </div>
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">892</div>
-                                    <div class="manager-shop-stat-label">Orders</div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="manager-shop-actions">
-                            <button class="btn btn-primary btn-sm">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Shop Card 2 -->
-                    <div class="manager-shop-card">
-                        <div class="manager-shop-header">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Organic Haven">
-                            <span class="manager-shop-status-badge">
-                                <span class="status-badge success">Active</span>
-                            </span>
-                        </div>
-                        <div class="manager-shop-body">
-                            <h3 class="manager-shop-title">Organic Haven</h3>
-                            <div class="manager-shop-category">Organic Products</div>
-                            <div class="manager-shop-meta">
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    Jane Doe
-                                </div>
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    Uptown District
-                                </div>
-                            </div>
-                            <div class="manager-shop-stats">
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">98</div>
-                                    <div class="manager-shop-stat-label">Products</div>
-                                </div>
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">1.2k</div>
-                                    <div class="manager-shop-stat-label">Orders</div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="manager-shop-actions">
-                            <button class="btn btn-primary btn-sm">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Shop Card 3 - Pending -->
-                    <div class="manager-shop-card">
-                        <div class="manager-shop-header">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Nature's Best">
-                            <span class="manager-shop-status-badge">
-                                <span class="status-badge warning">Pending</span>
-                            </span>
-                        </div>
-                        <div class="manager-shop-body">
-                            <h3 class="manager-shop-title">Nature's Best</h3>
-                            <div class="manager-shop-category">Grocery Store</div>
-                            <div class="manager-shop-meta">
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    Robert Wilson
-                                </div>
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    Westside
-                                </div>
-                            </div>
-                            <div class="manager-shop-stats">
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">45</div>
-                                    <div class="manager-shop-stat-label">Products</div>
-                                </div>
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">0</div>
-                                    <div class="manager-shop-stat-label">Orders</div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="manager-shop-actions">
-                            <button class="btn btn-outline btn-sm">Review</button>
-                            <button class="btn btn-success btn-sm">Approve</button>
-                        </div>
-                    </div>
-
-                    <!-- Shop Card 4 -->
-                    <div class="manager-shop-card">
-                        <div class="manager-shop-header">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Daily Needs">
-                            <span class="manager-shop-status-badge">
-                                <span class="status-badge info">Low Stock</span>
-                            </span>
-                        </div>
-                        <div class="manager-shop-body">
-                            <h3 class="manager-shop-title">Daily Needs</h3>
-                            <div class="manager-shop-category">Convenience Store</div>
-                            <div class="manager-shop-meta">
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    Mike Johnson
-                                </div>
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    Central Market
-                                </div>
-                            </div>
-                            <div class="manager-shop-stats">
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">78</div>
-                                    <div class="manager-shop-stat-label">Products</div>
-                                </div>
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">543</div>
-                                    <div class="manager-shop-stat-label">Orders</div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="manager-shop-actions">
-                            <button class="btn btn-primary btn-sm">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Shop Card 5 -->
-                    <div class="manager-shop-card">
-                        <div class="manager-shop-header">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Green Basket">
-                            <span class="manager-shop-status-badge">
-                                <span class="status-badge success">Active</span>
-                            </span>
-                        </div>
-                        <div class="manager-shop-body">
-                            <h3 class="manager-shop-title">Green Basket</h3>
-                            <div class="manager-shop-category">Organic Products</div>
-                            <div class="manager-shop-meta">
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    Emily Brown
-                                </div>
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    Eastside Plaza
-                                </div>
-                            </div>
-                            <div class="manager-shop-stats">
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">112</div>
-                                    <div class="manager-shop-stat-label">Products</div>
-                                </div>
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">721</div>
-                                    <div class="manager-shop-stat-label">Orders</div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="manager-shop-actions">
-                            <button class="btn btn-primary btn-sm">View Details</button>
-                        </div>
-                    </div>
-
-                    <!-- Shop Card 6 - Suspended -->
-                    <div class="manager-shop-card">
-                        <div class="manager-shop-header">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Quick Stop">
-                            <span class="manager-shop-status-badge">
-                                <span class="status-badge error">Suspended</span>
-                            </span>
-                        </div>
-                        <div class="manager-shop-body">
-                            <h3 class="manager-shop-title">Quick Stop</h3>
-                            <div class="manager-shop-category">Convenience Store</div>
-                            <div class="manager-shop-meta">
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    David Lee
-                                </div>
-                                <div class="manager-shop-meta-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    Northside
-                                </div>
-                            </div>
-                            <div class="manager-shop-stats">
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">34</div>
-                                    <div class="manager-shop-stat-label">Products</div>
-                                </div>
-                                <div class="manager-shop-stat">
-                                    <div class="manager-shop-stat-value">89</div>
-                                    <div class="manager-shop-stat-label">Orders</div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="manager-shop-actions">
-                            <button class="btn btn-outline btn-sm">View Details</button>
-                            <button class="btn btn-success btn-sm">Reactivate</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pagination -->
-                <div class="pagination" style="margin-top: 32px;">
-                    <button class="pagination-btn" disabled>&laquo; Previous</button>
-                    <span class="pagination-info">Showing 1-6 of 48 shops</span>
-                    <button class="pagination-btn">Next &raquo;</button>
-                </div>
+          <div class="manager-header-right">
+            <div class="manager-header-profile">
+              <img
+                src="/placeholder.svg?height=40&width=40"
+                alt="Manager"
+                class="manager-avatar"
+              />
+              <div class="manager-profile-info">
+                <div class="manager-profile-name">Sarah Manager</div>
+                <div class="manager-profile-role">Manager</div>
+              </div>
             </div>
-        </main>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="manager-content">
+          <!-- Page Header -->
+          <div class="manager-page-header">
+            <div class="manager-page-header-info">
+              <h1>Shop Oversight</h1>
+              <p>Monitor and review shop performance across the platform</p>
+            </div>
+          </div>
+
+          <!-- Shops Grid -->
+          <div class="manager-shops-grid">
+            <!-- Shop Card 1 -->
+            <div class="manager-shop-card">
+              <div class="manager-shop-header">
+                <img
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Fresh Mart"
+                />
+                <span class="manager-shop-status-badge">
+                  <span class="status-badge success">Active</span>
+                </span>
+              </div>
+              <div class="manager-shop-body">
+                <h3 class="manager-shop-title">Fresh Mart</h3>
+                <div class="manager-shop-category">Grocery Store</div>
+                <div class="manager-shop-meta">
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    John Smith
+                  </div>
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                      ></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Downtown Area
+                  </div>
+                </div>
+                <div class="manager-shop-stats">
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">156</div>
+                    <div class="manager-shop-stat-label">Products</div>
+                  </div>
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">892</div>
+                    <div class="manager-shop-stat-label">Orders</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manager-shop-actions">
+                <button class="btn btn-primary btn-sm">View Details</button>
+              </div>
+            </div>
+
+            <!-- Shop Card 2 -->
+            <div class="manager-shop-card">
+              <div class="manager-shop-header">
+                <img
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Organic Haven"
+                />
+                <span class="manager-shop-status-badge">
+                  <span class="status-badge success">Active</span>
+                </span>
+              </div>
+              <div class="manager-shop-body">
+                <h3 class="manager-shop-title">Organic Haven</h3>
+                <div class="manager-shop-category">Organic Products</div>
+                <div class="manager-shop-meta">
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Jane Doe
+                  </div>
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                      ></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Uptown District
+                  </div>
+                </div>
+                <div class="manager-shop-stats">
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">98</div>
+                    <div class="manager-shop-stat-label">Products</div>
+                  </div>
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">1.2k</div>
+                    <div class="manager-shop-stat-label">Orders</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manager-shop-actions">
+                <button class="btn btn-primary btn-sm">View Details</button>
+              </div>
+            </div>
+
+            <!-- Shop Card 3 - Pending -->
+            <div class="manager-shop-card">
+              <div class="manager-shop-header">
+                <img
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Nature's Best"
+                />
+                <span class="manager-shop-status-badge">
+                  <span class="status-badge warning">Pending</span>
+                </span>
+              </div>
+              <div class="manager-shop-body">
+                <h3 class="manager-shop-title">Nature's Best</h3>
+                <div class="manager-shop-category">Grocery Store</div>
+                <div class="manager-shop-meta">
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Robert Wilson
+                  </div>
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                      ></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Westside
+                  </div>
+                </div>
+                <div class="manager-shop-stats">
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">45</div>
+                    <div class="manager-shop-stat-label">Products</div>
+                  </div>
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">0</div>
+                    <div class="manager-shop-stat-label">Orders</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manager-shop-actions">
+                <button class="btn btn-outline btn-sm">Review</button>
+                <button class="btn btn-success btn-sm">Approve</button>
+              </div>
+            </div>
+
+            <!-- Shop Card 4 -->
+            <div class="manager-shop-card">
+              <div class="manager-shop-header">
+                <img
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Daily Needs"
+                />
+                <span class="manager-shop-status-badge">
+                  <span class="status-badge info">Low Stock</span>
+                </span>
+              </div>
+              <div class="manager-shop-body">
+                <h3 class="manager-shop-title">Daily Needs</h3>
+                <div class="manager-shop-category">Convenience Store</div>
+                <div class="manager-shop-meta">
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Mike Johnson
+                  </div>
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                      ></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Central Market
+                  </div>
+                </div>
+                <div class="manager-shop-stats">
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">78</div>
+                    <div class="manager-shop-stat-label">Products</div>
+                  </div>
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">543</div>
+                    <div class="manager-shop-stat-label">Orders</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manager-shop-actions">
+                <button class="btn btn-primary btn-sm">View Details</button>
+              </div>
+            </div>
+
+            <!-- Shop Card 5 -->
+            <div class="manager-shop-card">
+              <div class="manager-shop-header">
+                <img
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Green Basket"
+                />
+                <span class="manager-shop-status-badge">
+                  <span class="status-badge success">Active</span>
+                </span>
+              </div>
+              <div class="manager-shop-body">
+                <h3 class="manager-shop-title">Green Basket</h3>
+                <div class="manager-shop-category">Organic Products</div>
+                <div class="manager-shop-meta">
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Emily Brown
+                  </div>
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                      ></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Eastside Plaza
+                  </div>
+                </div>
+                <div class="manager-shop-stats">
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">112</div>
+                    <div class="manager-shop-stat-label">Products</div>
+                  </div>
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">721</div>
+                    <div class="manager-shop-stat-label">Orders</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manager-shop-actions">
+                <button class="btn btn-primary btn-sm">View Details</button>
+              </div>
+            </div>
+
+            <!-- Shop Card 6 - Suspended -->
+            <div class="manager-shop-card">
+              <div class="manager-shop-header">
+                <img
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Quick Stop"
+                />
+                <span class="manager-shop-status-badge">
+                  <span class="status-badge error">Suspended</span>
+                </span>
+              </div>
+              <div class="manager-shop-body">
+                <h3 class="manager-shop-title">Quick Stop</h3>
+                <div class="manager-shop-category">Convenience Store</div>
+                <div class="manager-shop-meta">
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    David Lee
+                  </div>
+                  <div class="manager-shop-meta-item">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                      ></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Northside
+                  </div>
+                </div>
+                <div class="manager-shop-stats">
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">34</div>
+                    <div class="manager-shop-stat-label">Products</div>
+                  </div>
+                  <div class="manager-shop-stat">
+                    <div class="manager-shop-stat-value">89</div>
+                    <div class="manager-shop-stat-label">Orders</div>
+                  </div>
+                </div>
+              </div>
+              <div class="manager-shop-actions">
+                <button class="btn btn-outline btn-sm">View Details</button>
+                <button class="btn btn-success btn-sm">Reactivate</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination" style="margin-top: 32px">
+            <button class="pagination-btn" disabled>&laquo; Previous</button>
+            <span class="pagination-info">Showing 1-6 of 48 shops</span>
+            <button class="pagination-btn">Next &raquo;</button>
+          </div>
+        </div>
+      </main>
     </div>
 
     <script>
-        // Mobile sidebar toggle
-        const sidebarToggle = document.querySelector('.manager-sidebar-toggle');
-        const sidebar = document.querySelector('.manager-sidebar');
-        const overlay = document.querySelector('.manager-sidebar-overlay');
+      // Mobile sidebar toggle
+      const sidebarToggle = document.querySelector(".manager-sidebar-toggle");
+      const sidebar = document.querySelector(".manager-sidebar");
+      const overlay = document.querySelector(".manager-sidebar-overlay");
 
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
+      sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      });
 
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        });
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      });
     </script>
-</body>
+  </body>
 </html>

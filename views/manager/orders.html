@@ -1,243 +1,353 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orders Overview - GoGrocery Manager</title>
-    <link rel="stylesheet" href="../../assets/css/common/base.css">
-    <link rel="stylesheet" href="../../assets/css/common/components.css">
-    <link rel="stylesheet" href="../../assets/css/manager/layout.css">
-    <link rel="stylesheet" href="../../assets/css/manager/shops.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../assets/css/common/base.css" />
+    <link rel="stylesheet" href="../../assets/css/common/components.css" />
+    <link rel="stylesheet" href="../../assets/css/manager/layout.css" />
+    <link rel="stylesheet" href="../../assets/css/manager/shops.css" />
+  </head>
+  <body>
     <div class="manager-dashboard">
-        <!-- Sidebar -->
-        <aside class="manager-sidebar">
-            
+      <!-- Sidebar -->
+      <aside class="manager-sidebar">
+        <nav class="manager-sidebar-nav">
+          <div class="manager-nav-section">
+            <div class="manager-nav-title">Overview</div>
+            <a href="dashboard.html" class="manager-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              Dashboard
+            </a>
+          </div>
 
-            <nav class="manager-sidebar-nav">
-                <div class="manager-nav-section">
-                    <div class="manager-nav-title">Overview</div>
-                    <a href="dashboard.html" class="manager-nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                        Dashboard
-                    </a>
-                </div>
+          <div class="manager-nav-section">
+            <div class="manager-nav-title">Management</div>
+            <a href="shops.html" class="manager-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              Shop Oversight
+              <span class="manager-nav-badge warning">5</span>
+            </a>
+            <a href="orders.html" class="manager-nav-link active">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              Orders Overview
+            </a>
+          </div>
 
-                <div class="manager-nav-section">
-                    <div class="manager-nav-title">Management</div>
-                    <a href="shops.html" class="manager-nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                        Shop Oversight
-                        <span class="manager-nav-badge warning">5</span>
-                    </a>
-                    <a href="orders.html" class="manager-nav-link active">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                        Orders Overview
-                    </a>
-                </div>
+          <div class="manager-nav-section">
+            <div class="manager-nav-title">Account</div>
+            <a href="../common/profile.html" class="manager-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              My Profile
+            </a>
+            <a href="../common/login.html" class="manager-nav-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              Logout
+            </a>
+          </div>
+        </nav>
+      </aside>
 
-                
+      <!-- Sidebar Overlay -->
+      <div class="manager-sidebar-overlay"></div>
 
-                <div class="manager-nav-section">
-                    <div class="manager-nav-title">Account</div>
-                    <a href="../common/profile.html" class="manager-nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        My Profile
-                    </a>
-                    <a href="../common/login.html" class="manager-nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                        Logout
-                    </a>
-                </div>
-            </nav>
-        </aside>
+      <!-- Main Content -->
+      <main class="manager-main">
+        <!-- Top Header -->
+        <header class="manager-top-header">
+          <div class="manager-header-left">
+            <button class="manager-sidebar-toggle">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            <h1 class="manager-page-title">Orders Overview</h1>
+          </div>
 
-        <!-- Sidebar Overlay -->
-        <div class="manager-sidebar-overlay"></div>
-
-        <!-- Main Content -->
-        <main class="manager-main">
-            <!-- Top Header -->
-            <header class="manager-top-header">
-                <div class="manager-header-left">
-                    <button class="manager-sidebar-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                    </button>
-                    <h1 class="manager-page-title">Orders Overview</h1>
-                </div>
-
-                <div class="manager-header-right">
-
-                    <div class="manager-header-profile">
-                        <img src="/placeholder.svg?height=40&width=40" alt="Manager" class="manager-avatar">
-                        <div class="manager-profile-info">
-                            <div class="manager-profile-name">Sarah Manager</div>
-                            <div class="manager-profile-role">Manager</div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Content -->
-            <div class="manager-content">
-                <!-- Page Header -->
-                <div class="manager-page-header">
-                    <div class="manager-page-header-info">
-                        <h1>Orders Overview</h1>
-                    </div>
-                </div>
-
-                <!-- Orders Table -->
-                <div class="manager-card">
-                    <div class="manager-card-body" style="padding: 0;">
-                        <div class="manager-table-container">
-                            <table class="manager-table">
-                                <thead>
-                                    <tr>
-                                        <th>Order ID</th>
-                                        <th>Customer</th>
-                                        <th>Shop</th>
-                                        <th>Items</th>
-                                        <th>Total</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- PHP loop for orders -->
-                                    <tr>
-                                        <td><strong>#ORD-1089</strong></td>
-                                        <td>
-                                            <div class="manager-shop-info">
-                                                <img src="/placeholder.svg?height=36&width=36" alt="Customer" class="manager-shop-logo" style="width: 36px; height: 36px;">
-                                                <div>
-                                                    <div class="manager-shop-name">Alex Johnson</div>
-                                                    <div class="manager-shop-owner">alex@email.com</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Fresh Mart</td>
-                                        <td>5 items</td>
-                                        <td><strong>$45.99</strong></td>
-                                        <td><span class="status-badge warning">Processing</span></td>
-                                        <td>Jan 18, 2026</td>
-                                        <td>
-                                            <button class="btn btn-outline btn-sm">View</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>#ORD-1088</strong></td>
-                                        <td>
-                                            <div class="manager-shop-info">
-                                                <img src="/placeholder.svg?height=36&width=36" alt="Customer" class="manager-shop-logo" style="width: 36px; height: 36px;">
-                                                <div>
-                                                    <div class="manager-shop-name">Sarah Williams</div>
-                                                    <div class="manager-shop-owner">sarah@email.com</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Organic Haven</td>
-                                        <td>3 items</td>
-                                        <td><strong>$32.50</strong></td>
-                                        <td><span class="status-badge info">Out for Delivery</span></td>
-                                        <td>Jan 18, 2026</td>
-                                        <td>
-                                            <button class="btn btn-outline btn-sm">View</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>#ORD-1087</strong></td>
-                                        <td>
-                                            <div class="manager-shop-info">
-                                                <img src="/placeholder.svg?height=36&width=36" alt="Customer" class="manager-shop-logo" style="width: 36px; height: 36px;">
-                                                <div>
-                                                    <div class="manager-shop-name">Mike Brown</div>
-                                                    <div class="manager-shop-owner">mike@email.com</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Daily Needs</td>
-                                        <td>8 items</td>
-                                        <td><strong>$67.25</strong></td>
-                                        <td><span class="status-badge success">Delivered</span></td>
-                                        <td>Jan 18, 2026</td>
-                                        <td>
-                                            <button class="btn btn-outline btn-sm">View</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>#ORD-1086</strong></td>
-                                        <td>
-                                            <div class="manager-shop-info">
-                                                <img src="/placeholder.svg?height=36&width=36" alt="Customer" class="manager-shop-logo" style="width: 36px; height: 36px;">
-                                                <div>
-                                                    <div class="manager-shop-name">Emily Davis</div>
-                                                    <div class="manager-shop-owner">emily@email.com</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Green Basket</td>
-                                        <td>2 items</td>
-                                        <td><strong>$18.99</strong></td>
-                                        <td><span class="status-badge">Pending</span></td>
-                                        <td>Jan 18, 2026</td>
-                                        <td>
-                                            <button class="btn btn-outline btn-sm">View</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>#ORD-1085</strong></td>
-                                        <td>
-                                            <div class="manager-shop-info">
-                                                <img src="/placeholder.svg?height=36&width=36" alt="Customer" class="manager-shop-logo" style="width: 36px; height: 36px;">
-                                                <div>
-                                                    <div class="manager-shop-name">James Wilson</div>
-                                                    <div class="manager-shop-owner">james@email.com</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Fresh Mart</td>
-                                        <td>6 items</td>
-                                        <td><strong>$54.75</strong></td>
-                                        <td><span class="status-badge error">Cancelled</span></td>
-                                        <td>Jan 17, 2026</td>
-                                        <td>
-                                            <button class="btn btn-outline btn-sm">View</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pagination -->
-                <div class="pagination" style="margin-top: 24px;">
-                    <button class="pagination-btn" disabled>&laquo; Previous</button>
-                    <span class="pagination-info">Showing 1-5 of 127 orders</span>
-                    <button class="pagination-btn">Next &raquo;</button>
-                </div>
+          <div class="manager-header-right">
+            <div class="manager-header-profile">
+              <img
+                src="/placeholder.svg?height=40&width=40"
+                alt="Manager"
+                class="manager-avatar"
+              />
+              <div class="manager-profile-info">
+                <div class="manager-profile-name">Sarah Manager</div>
+                <div class="manager-profile-role">Manager</div>
+              </div>
             </div>
-        </main>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="manager-content">
+          <!-- Page Header -->
+          <div class="manager-page-header">
+            <div class="manager-page-header-info">
+              <h1>Orders Overview</h1>
+            </div>
+          </div>
+
+          <!-- Orders Table -->
+          <div class="manager-card">
+            <div class="manager-card-body" style="padding: 0">
+              <div class="manager-table-container">
+                <table class="manager-table">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Shop</th>
+                      <th>Items</th>
+                      <th>Total</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- PHP loop for orders -->
+                    <tr>
+                      <td><strong>#ORD-1089</strong></td>
+                      <td>
+                        <div class="manager-shop-info">
+                          <img
+                            src="/placeholder.svg?height=36&width=36"
+                            alt="Customer"
+                            class="manager-shop-logo"
+                            style="width: 36px; height: 36px"
+                          />
+                          <div>
+                            <div class="manager-shop-name">Alex Johnson</div>
+                            <div class="manager-shop-owner">alex@email.com</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Fresh Mart</td>
+                      <td>5 items</td>
+                      <td><strong>$45.99</strong></td>
+                      <td>
+                        <span class="status-badge warning">Processing</span>
+                      </td>
+                      <td>Jan 18, 2026</td>
+                      <td>
+                        <button class="btn btn-outline btn-sm">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>#ORD-1088</strong></td>
+                      <td>
+                        <div class="manager-shop-info">
+                          <img
+                            src="/placeholder.svg?height=36&width=36"
+                            alt="Customer"
+                            class="manager-shop-logo"
+                            style="width: 36px; height: 36px"
+                          />
+                          <div>
+                            <div class="manager-shop-name">Sarah Williams</div>
+                            <div class="manager-shop-owner">
+                              sarah@email.com
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Organic Haven</td>
+                      <td>3 items</td>
+                      <td><strong>$32.50</strong></td>
+                      <td>
+                        <span class="status-badge info">Out for Delivery</span>
+                      </td>
+                      <td>Jan 18, 2026</td>
+                      <td>
+                        <button class="btn btn-outline btn-sm">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>#ORD-1087</strong></td>
+                      <td>
+                        <div class="manager-shop-info">
+                          <img
+                            src="/placeholder.svg?height=36&width=36"
+                            alt="Customer"
+                            class="manager-shop-logo"
+                            style="width: 36px; height: 36px"
+                          />
+                          <div>
+                            <div class="manager-shop-name">Mike Brown</div>
+                            <div class="manager-shop-owner">mike@email.com</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Daily Needs</td>
+                      <td>8 items</td>
+                      <td><strong>$67.25</strong></td>
+                      <td>
+                        <span class="status-badge success">Delivered</span>
+                      </td>
+                      <td>Jan 18, 2026</td>
+                      <td>
+                        <button class="btn btn-outline btn-sm">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>#ORD-1086</strong></td>
+                      <td>
+                        <div class="manager-shop-info">
+                          <img
+                            src="/placeholder.svg?height=36&width=36"
+                            alt="Customer"
+                            class="manager-shop-logo"
+                            style="width: 36px; height: 36px"
+                          />
+                          <div>
+                            <div class="manager-shop-name">Emily Davis</div>
+                            <div class="manager-shop-owner">
+                              emily@email.com
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Green Basket</td>
+                      <td>2 items</td>
+                      <td><strong>$18.99</strong></td>
+                      <td><span class="status-badge">Pending</span></td>
+                      <td>Jan 18, 2026</td>
+                      <td>
+                        <button class="btn btn-outline btn-sm">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>#ORD-1085</strong></td>
+                      <td>
+                        <div class="manager-shop-info">
+                          <img
+                            src="/placeholder.svg?height=36&width=36"
+                            alt="Customer"
+                            class="manager-shop-logo"
+                            style="width: 36px; height: 36px"
+                          />
+                          <div>
+                            <div class="manager-shop-name">James Wilson</div>
+                            <div class="manager-shop-owner">
+                              james@email.com
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>Fresh Mart</td>
+                      <td>6 items</td>
+                      <td><strong>$54.75</strong></td>
+                      <td><span class="status-badge error">Cancelled</span></td>
+                      <td>Jan 17, 2026</td>
+                      <td>
+                        <button class="btn btn-outline btn-sm">View</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination" style="margin-top: 24px">
+            <button class="pagination-btn" disabled>&laquo; Previous</button>
+            <span class="pagination-info">Showing 1-5 of 127 orders</span>
+            <button class="pagination-btn">Next &raquo;</button>
+          </div>
+        </div>
+      </main>
     </div>
 
     <script>
-        // Mobile sidebar toggle
-        const sidebarToggle = document.querySelector('.manager-sidebar-toggle');
-        const sidebar = document.querySelector('.manager-sidebar');
-        const overlay = document.querySelector('.manager-sidebar-overlay');
+      // Mobile sidebar toggle
+      const sidebarToggle = document.querySelector(".manager-sidebar-toggle");
+      const sidebar = document.querySelector(".manager-sidebar");
+      const overlay = document.querySelector(".manager-sidebar-overlay");
 
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
+      sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      });
 
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        });
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      });
     </script>
-</body>
+  </body>
 </html>
