@@ -317,7 +317,7 @@
           },
           body: JSON.stringify({
               data_type: 'delete_product',
-              id: productId
+              productId: productId
             })
         });
         const result = await response.json();
