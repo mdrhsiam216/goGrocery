@@ -13,7 +13,6 @@
 
 <body>
   <div class="manager-dashboard">
-    <!-- Sidebar -->
     <aside class="manager-sidebar">
       <nav class="manager-sidebar-nav">
         <div class="manager-nav-section">
@@ -75,12 +74,9 @@
       </nav>
     </aside>
 
-    <!-- Sidebar Overlay -->
     <div class="manager-sidebar-overlay"></div>
 
-    <!-- Main Content -->
     <main class="manager-main">
-      <!-- Top Header -->
       <header class="manager-top-header">
         <div class="manager-header-left">
           <button class="manager-sidebar-toggle">
@@ -105,16 +101,13 @@
         </div>
       </header>
 
-      <!-- Content -->
       <div class="manager-content">
-        <!-- Page Header -->
         <div class="manager-page-header">
           <div class="manager-page-header-info">
             <h1>Orders Overview</h1>
           </div>
         </div>
 
-        <!-- Orders Table -->
         <div class="manager-card">
           <div class="manager-card-body" style="padding: 0">
             <div class="manager-table-container">
@@ -142,7 +135,6 @@
           </div>
         </div>
       </div>
-      <!-- Custom Styles for Orders Table -->
       <style>
         .manager-table {
           width: 100%;
@@ -226,10 +218,7 @@
     </main>
   </div>
 
-
-
   <script>
-    // Sidebar
     const sidebarToggle = document.querySelector(".manager-sidebar-toggle");
     const sidebar = document.querySelector(".manager-sidebar");
     const overlay = document.querySelector(".manager-sidebar-overlay");
@@ -244,7 +233,6 @@
         overlay.classList.remove("active");
       });
 
-    // Logout Logic
     const logoutBtn = document.getElementById("logout-btn");
     if (logoutBtn) {
       logoutBtn.addEventListener("click", async (e) => {
@@ -254,7 +242,6 @@
       });
     }
 
-    // API
     const api = async (data) => {
       try {
         const r = await fetch("../../backend/api.php", {
