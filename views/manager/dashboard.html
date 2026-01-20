@@ -1,350 +1,270 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manager Dashboard - GoGrocery</title>
-    <link rel="stylesheet" href="../../assets/css/common/base.css" />
-    <link rel="stylesheet" href="../../assets/css/common/components.css" />
-    <link rel="stylesheet" href="../../assets/css/manager/layout.css" />
-    <link rel="stylesheet" href="../../assets/css/manager/dashboard.css" />
-  </head>
-  <body>
-    <div class="manager-dashboard">
-      <!-- Sidebar -->
-      <aside class="manager-sidebar">
-        <nav class="manager-sidebar-nav">
-          <div class="manager-nav-section">
-            <div class="manager-nav-title">Overview</div>
-            <a href="dashboard.html" class="manager-nav-link active">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-              </svg>
-              Dashboard
-            </a>
-          </div>
 
-          <div class="manager-nav-section">
-            <div class="manager-nav-title">Management</div>
-            <a href="shops.html" class="manager-nav-link">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-              Shop Oversight
-            </a>
-            <a href="orders.html" class="manager-nav-link">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                ></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-              </svg>
-              Orders Overview
-            </a>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager Dashboard - GoGrocery</title>
+  <link rel="stylesheet" href="../../assets/css/common/base.css" />
+  <link rel="stylesheet" href="../../assets/css/common/components.css" />
+  <link rel="stylesheet" href="../../assets/css/manager/layout.css" />
+  <link rel="stylesheet" href="../../assets/css/manager/dashboard.css" />
+</head>
 
-          <div class="manager-nav-section">
-            <div class="manager-nav-title">Account</div>
-            <a href="../common/profile.html" class="manager-nav-link">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              My Profile
-            </a>
-            <a href="#" class="manager-nav-link" id="logout-btn">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                <polyline points="16 17 21 12 16 7"></polyline>
-                <line x1="21" y1="12" x2="9" y2="12"></line>
-              </svg>
-              Logout
-            </a>
-          </div>
-        </nav>
-      </aside>
+<body>
+  <div class="manager-dashboard">
+    <aside class="manager-sidebar">
+      <nav class="manager-sidebar-nav">
+        <div class="manager-nav-section">
+          <div class="manager-nav-title">Overview</div>
+          <a href="dashboard.html" class="manager-nav-link active">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            Dashboard
+          </a>
+        </div>
 
-      <!-- Sidebar Overlay -->
-      <div class="manager-sidebar-overlay"></div>
+        <div class="manager-nav-section">
+          <div class="manager-nav-title">Management</div>
+          <a href="shops.html" class="manager-nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            Shop Oversight
+          </a>
+          <a href="orders.html" class="manager-nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            Orders Overview
+          </a>
+        </div>
 
-      <!-- Main Content -->
-      <main class="manager-main">
-        <!-- Top Header -->
-        <header class="manager-top-header">
-          <div class="manager-header-left">
-            <button class="manager-sidebar-toggle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
-            <h1 class="manager-page-title">Dashboard</h1>
-          </div>
+        <div class="manager-nav-section">
+          <div class="manager-nav-title">Account</div>
+          <a href="../common/profile.html" class="manager-nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            My Profile
+          </a>
+          <a href="#" class="manager-nav-link" id="logout-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            Logout
+          </a>
+        </div>
+      </nav>
+    </aside>
 
-          <div class="manager-header-right">
-            <div class="manager-header-profile">
-              <img
-                src="/placeholder.svg?height=40&width=40"
-                alt="Manager"
-                class="manager-avatar"
-              />
-              <div class="manager-profile-info">
-                <div class="manager-profile-name">Sarah Manager</div>
-                <div class="manager-profile-role">Manager</div>
-              </div>
-            </div>
-          </div>
-        </header>
+    <div class="manager-sidebar-overlay"></div>
 
-        <!-- Content -->
-        <div class="manager-content">
-          <!-- Stats Overview -->
-          <div class="manager-stats">
-            <div class="manager-stat-card">
-              <div class="manager-stat-content">
-                <h3>Active Shops</h3>
-                <div class="manager-stat-value">48</div>
-              </div>
-              <div class="manager-stat-icon shops">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-                  ></path>
-                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
-              </div>
-            </div>
+    <main class="manager-main">
+      <header class="manager-top-header">
+        <div class="manager-header-left">
+          <button class="manager-sidebar-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <h1 class="manager-page-title">Dashboard</h1>
+        </div>
 
-            <div class="manager-stat-card">
-              <div class="manager-stat-content">
-                <h3>Today's Orders</h3>
-                <div class="manager-stat-value">127</div>
-              </div>
-              <div class="manager-stat-icon orders">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                  ></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                </svg>
-              </div>
+        <div class="manager-header-right">
+          <div class="manager-header-profile">
+            <img src="/placeholder.svg?height=40&width=40" alt="Manager" class="manager-avatar" />
+            <div class="manager-profile-info">
+              <div class="manager-profile-name">Sarah Manager</div>
+              <div class="manager-profile-role">Manager</div>
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </header>
 
-    <script>
-      // Sidebar toggle
-      const sidebarToggle = document.querySelector(".manager-sidebar-toggle");
-      const sidebar = document.querySelector(".manager-sidebar");
-      const overlay = document.querySelector(".manager-sidebar-overlay");
+      <div class="manager-content">
+        <div class="manager-stats">
+          <div class="manager-stat-card">
+            <div class="manager-stat-content">
+              <h3>Active Shops</h3>
+              <div class="manager-stat-value">48</div>
+            </div>
+            <div class="manager-stat-icon shops">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+          </div>
 
-      if (sidebarToggle) {
-        sidebarToggle.addEventListener("click", () => {
-          sidebar.classList.toggle("active");
-          overlay.classList.toggle("active");
+          <div class="manager-stat-card">
+            <div class="manager-stat-content">
+              <h3>Today's Orders</h3>
+              <div class="manager-stat-value">127</div>
+            </div>
+            <div class="manager-stat-icon orders">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const sidebarToggle = document.querySelector(".manager-sidebar-toggle");
+    const sidebar = document.querySelector(".manager-sidebar");
+    const overlay = document.querySelector(".manager-sidebar-overlay");
+
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        overlay.classList.toggle("active");
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+    }
+
+    const logoutBtn = document.getElementById("logout-btn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        await api({ data_type: "logout" });
+        window.location.href = "../common/login.html";
+      });
+    }
+
+    const api = async (data) => {
+      try {
+        const response = await fetch("../../backend/api.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
         });
+        return await response.json();
+      } catch (error) {
+        console.error("API Error:", error);
+        return { error: true, message: "Network error" };
+      }
+    };
+
+    const init = async () => {
+      const userInfo = await api({ data_type: "user_info" });
+      if (!userInfo.logged_in || userInfo.user.role !== "manager") {
+        window.location.href = "../common/login.html";
+        return;
       }
 
-      if (overlay) {
-        overlay.addEventListener("click", () => {
-          sidebar.classList.remove("active");
-          overlay.classList.remove("active");
-        });
+      // Update profile info
+      document.querySelector(".manager-profile-name").textContent =
+        userInfo.user.name;
+      document.querySelector(".manager-profile-role").textContent =
+        userInfo.user.role;
+      if (userInfo.user.image) {
+        document.querySelector(".manager-avatar").src = userInfo.user.image;
       }
 
-      // Logout Logic
-      const logoutBtn = document.getElementById("logout-btn");
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", async (e) => {
-          e.preventDefault();
-          await api({ data_type: "logout" });
-          window.location.href = "../common/login.html";
-        });
+      const shopsResponse = await api({ data_type: "get_shops" });
+      const shops = shopsResponse.shops || [];
+
+      const ordersResponse = await api({ data_type: "get_orders" });
+      const orders = ordersResponse.orders || [];
+
+      updateStats(shops, orders);
+      renderRecentShops(shops, orders);
+    };
+
+    const updateStats = (shops, orders) => {
+      const activeShops = shops.length;
+      document.querySelector(
+        ".manager-stat-card:nth-child(1) .manager-stat-value",
+      ).textContent = activeShops;
+
+      const today = new Date().toISOString().split("T")[0];
+      const todayOrders = orders.filter(
+        (o) => o.created_at && o.created_at.startsWith(today),
+      );
+      document.querySelector(
+        ".manager-stat-card:nth-child(2) .manager-stat-value",
+      ).textContent = todayOrders.length;
+
+      // Revenue (Today) - simplistic calculation
+      // Filter orders that are "delivered" or "completed" logic could be complex, assuming simplistic sum for now or based on status
+      const revenue = todayOrders.reduce(
+        (sum, o) => sum + (parseFloat(o.amount) || 0),
+        0,
+      );
+      document.querySelector(
+        ".manager-stat-card:nth-child(3) .manager-stat-value",
+      ).textContent = "$" + revenue.toFixed(2);
+
+      // Pending Requests (simplistic placeholder or could be pending shop applications if any)
+      // For now, let's show Pending Orders
+      const pendingOrders = orders.filter((o) => o.status === "pending");
+      document.querySelector(
+        ".manager-stat-card:nth-child(4) .manager-stat-value",
+      ).textContent = pendingOrders.length;
+      document.querySelector(
+        ".manager-stat-card:nth-child(4) h3",
+      ).textContent = "Pending Orders";
+    };
+
+    // Render Recent Shops (Top 5)
+    const renderRecentShops = (shops, orders) => {
+      const tbody = document.getElementById("manager-shops-table-body");
+      tbody.innerHTML = "";
+
+      // Just show first 5 shops for dashboard
+      const recentShops = shops.slice(0, 5);
+
+      if (recentShops.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='4'>No shops found.</td></tr>";
+        return;
       }
 
-      // API Helper
-      const api = async (data) => {
-        try {
-          const response = await fetch("../../backend/api.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          });
-          return await response.json();
-        } catch (error) {
-          console.error("API Error:", error);
-          return { error: true, message: "Network error" };
-        }
-      };
-
-      // Check auth & load data
-      const init = async () => {
-        const userInfo = await api({ data_type: "user_info" });
-        if (!userInfo.logged_in || userInfo.user.role !== "manager") {
-          window.location.href = "../common/login.html";
-          return;
-        }
-
-        // Update profile info
-        document.querySelector(".manager-profile-name").textContent =
-          userInfo.user.name;
-        document.querySelector(".manager-profile-role").textContent =
-          userInfo.user.role;
-        if (userInfo.user.image) {
-          document.querySelector(".manager-avatar").src = userInfo.user.image;
-        }
-
-        // Fetch Shops
-        const shopsResponse = await api({ data_type: "get_shops" });
-        const shops = shopsResponse.shops || [];
-
-        // Fetch Orders
-        const ordersResponse = await api({ data_type: "get_orders" });
-        const orders = ordersResponse.orders || [];
-
-        updateStats(shops, orders);
-        renderRecentShops(shops, orders);
-      };
-
-      // Update Stats Cards
-      const updateStats = (shops, orders) => {
-        // Active Shops
-        const activeShops = shops.length; // Managers see all
-        document.querySelector(
-          ".manager-stat-card:nth-child(1) .manager-stat-value",
-        ).textContent = activeShops;
-
-        // Today's Orders
-        const today = new Date().toISOString().split("T")[0];
-        const todayOrders = orders.filter(
-          (o) => o.created_at && o.created_at.startsWith(today),
-        );
-        document.querySelector(
-          ".manager-stat-card:nth-child(2) .manager-stat-value",
-        ).textContent = todayOrders.length;
-
-        // Revenue (Today) - simplistic calculation
-        // Filter orders that are "delivered" or "completed" logic could be complex, assuming simplistic sum for now or based on status
-        const revenue = todayOrders.reduce(
+      recentShops.forEach((shop) => {
+        const shopOrders = orders.filter((o) => o.shopId == shop.id);
+        const todayOrders = shopOrders.filter(
+          (o) =>
+            o.created_at &&
+            o.created_at.startsWith(new Date().toISOString().split("T")[0]),
+        ).length;
+        const shopRev = shopOrders.reduce(
           (sum, o) => sum + (parseFloat(o.amount) || 0),
           0,
         );
-        document.querySelector(
-          ".manager-stat-card:nth-child(3) .manager-stat-value",
-        ).textContent = "$" + revenue.toFixed(2);
 
-        // Pending Requests (simplistic placeholder or could be pending shop applications if any)
-        // For now, let's show Pending Orders
-        const pendingOrders = orders.filter((o) => o.status === "pending");
-        document.querySelector(
-          ".manager-stat-card:nth-child(4) .manager-stat-value",
-        ).textContent = pendingOrders.length;
-        document.querySelector(
-          ".manager-stat-card:nth-child(4) h3",
-        ).textContent = "Pending Orders";
-      };
-
-      // Render Recent Shops (Top 5)
-      const renderRecentShops = (shops, orders) => {
-        const tbody = document.getElementById("manager-shops-table-body");
-        tbody.innerHTML = "";
-
-        // Just show first 5 shops for dashboard
-        const recentShops = shops.slice(0, 5);
-
-        if (recentShops.length === 0) {
-          tbody.innerHTML = "<tr><td colspan='4'>No shops found.</td></tr>";
-          return;
-        }
-
-        recentShops.forEach((shop) => {
-          // Calculated simple stats for display
-          const shopOrders = orders.filter((o) => o.shopId == shop.id);
-          const todayOrders = shopOrders.filter(
-            (o) =>
-              o.created_at &&
-              o.created_at.startsWith(new Date().toISOString().split("T")[0]),
-          ).length;
-          const shopRev = shopOrders.reduce(
-            (sum, o) => sum + (parseFloat(o.amount) || 0),
-            0,
-          );
-
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
                 <td>
                     <div class="manager-shop-info">
                         <img src="/placeholder.svg?height=40&width=40" alt="${shop.name}" class="manager-shop-logo" />
@@ -358,11 +278,12 @@
                 <td>$${shopRev.toFixed(0)}</td>
                 <td><span class="status-badge success">Active</span></td>
             `;
-          tbody.appendChild(tr);
-        });
-      };
+        tbody.appendChild(tr);
+      });
+    };
 
-      init();
-    </script>
-  </body>
+    init();
+  </script>
+</body>
+
 </html>
