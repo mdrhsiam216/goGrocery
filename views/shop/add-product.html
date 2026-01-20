@@ -26,7 +26,6 @@
 
 <body>
   <div class="shop-dashboard">
-    <!-- Sidebar -->
     <aside class="shop-sidebar">
       <nav class="shop-sidebar-nav">
         <div class="shop-nav-section">
@@ -92,9 +91,7 @@
       </nav>
     </aside>
 
-    <!-- Main Content -->
     <main class="shop-main">
-      <!-- Top Header -->
       <header class="shop-top-header">
         <div class="shop-header-left">
           <button class="shop-sidebar-toggle" id="sidebarToggle">
@@ -140,14 +137,12 @@
                   <label class="form-label">Category *</label>
                   <select class="form-select" name="category_id" required>
                     <option value="">Select Category</option>
-                    <!-- Categories loaded via JS -->
                   </select>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Product Image -->
           <div class="shop-card">
             <div class="shop-card-header">
               <h3 class="shop-card-title">Product Image</h3>
@@ -168,7 +163,6 @@
             </div>
           </div>
 
-          <!-- Pricing & Inventory -->
           <div class="shop-card">
             <div class="shop-card-header">
               <h3 class="shop-card-title">Pricing & Inventory</h3>
@@ -198,14 +192,12 @@
       </div>
     </main>
 
-    <!-- Sidebar Overlay -->
     <div class="shop-sidebar-overlay" id="sidebarOverlay"></div>
   </div>
 
   <script>
     let categories = [];
 
-    // Load categories
     async function loadCategories() {
       try {
         const response = await fetch('../../backend/api.php', {
@@ -236,7 +228,6 @@
       }
     }
 
-    // Load user info
     async function loadUserInfo() {
       try {
         const response = await fetch('../../backend/api.php', {
@@ -253,7 +244,6 @@
         if (data.user) {
           document.getElementById('shopName').textContent = data.user.name;
           
-          // Update avatar
           if (data.user.image) {
             document.getElementById('shopAvatar').src = data.user.image;
           }
@@ -263,7 +253,6 @@
       }
     }
 
-    // Image Preview
     const productImage = document.getElementById('productImage');
     const imagePreview = document.getElementById('imagePreview');
 
@@ -280,14 +269,12 @@
       });
     }
 
-    // Make image preview clickable
     if (imagePreview) {
       imagePreview.addEventListener('click', () => {
         if (productImage) productImage.click();
       });
     }
 
-    // Submit form
     const form = document.querySelector('form');
     if (form) {
       form.addEventListener('submit', async function (e) {
@@ -302,14 +289,12 @@
             body: formData
           });
           
-          // Check if response is OK
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           
           const text = await response.text();
           
-          // Check if response is empty
           if (!text) {
             throw new Error('Empty response from server');
           }
@@ -334,13 +319,11 @@
       });
     }
 
-    // Initialize on page load
     window.addEventListener('DOMContentLoaded', () => {
       loadUserInfo();
       loadCategories();
     });
 
-    // Sidebar toggle
     const sidebar = document.querySelector('.shop-sidebar');
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -359,7 +342,6 @@
       });
     }
 
-    // Handle logout
     const logoutBtn = document.querySelector('.logout');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', async (e) => {

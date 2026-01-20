@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details - Shop Panel | GoGrocery</title>
-    <!-- CSS -->
     <link rel="stylesheet" href="../../assets/css/common/base.css">
     <link rel="stylesheet" href="../../assets/css/common/components.css">
     <link rel="stylesheet" href="../../assets/css/shop/layout.css">
@@ -14,7 +13,6 @@
 
 <body>
     <div class="shop-dashboard">
-        <!-- Sidebar -->
         <aside class="shop-sidebar">
             <nav class="shop-sidebar-nav">
                 <div class="shop-nav-section">
@@ -79,9 +77,7 @@
             </nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="shop-main">
-            <!-- Top Header -->
             <header class="shop-top-header">
                 <div class="shop-header-left">
                     <button class="shop-sidebar-toggle" id="sidebarToggle">
@@ -103,9 +99,7 @@
                 </div>
             </header>
 
-            <!-- Content Area -->
             <div class="shop-content">
-                <!-- Page Header -->
                 <div class="shop-page-header">
                     <div>
                         <h2 id="orderIdDisplay">Order #Loading...</h2>
@@ -114,13 +108,9 @@
                     <a href="orders.html" class="btn btn-secondary">Back to Orders</a>
                 </div>
 
-                <!-- Order Detail Grid -->
-                <!-- Use a simple layout since I don't have the exact CSS grid classes structure from memory, I'll stick to a flex or grid style block -->
                 <div style="display: grid; grid-template-columns: 1fr 350px; gap: 24px; align-items: start;">
 
-                    <!-- Left Column -->
                     <div>
-                        <!-- Items -->
                         <div class="shop-card">
                             <div class="shop-card-header">
                                 <h3 class="shop-card-title">Order Items</h3>
@@ -129,14 +119,11 @@
                                 <p>Loading items...</p>
                             </div>
                             <div class="shop-card-footer" id="orderSummaryFooter">
-                                <!-- Order Total -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column -->
                     <div style="display: flex; flex-direction: column; gap: 24px;">
-                        <!-- Status -->
                         <div class="shop-card">
                             <div class="shop-card-header">
                                 <h3 class="shop-card-title">Update Status</h3>
@@ -155,7 +142,6 @@
                             </div>
                         </div>
 
-                        <!-- Customer Info -->
                         <div class="shop-card">
                             <div class="shop-card-header">
                                 <h3 class="shop-card-title">Customer Info</h3>
@@ -167,13 +153,9 @@
                                         <h4 id="customerName" style="margin:0;">Loading...</h4>
                                     </div>
                                 </div>
-                                <!-- Address is stored in 'customers' table location column, but get_orders returns users name. Need to check if I can show location. -->
-                                <!-- The get_orders query in backend doesn't join 'customers' table location, just users name. 
-                                     I will just show name for now. -->
                             </div>
                         </div>
 
-                        <!-- Payment -->
                         <div class="shop-card">
                             <div class="shop-card-header">
                                 <h3 class="shop-card-title">Payment Info</h3>
@@ -239,7 +221,6 @@
                     }
                 }
 
-                // Load Order
                 const oRes = await api({ data_type: 'get_orders', shopId: shopId });
                 const orders = oRes.orders || [];
                 const order = orders.find(o => o.id == orderId);
@@ -256,7 +237,6 @@
                 document.getElementById('paymentMethod').textContent = order.method;
                 document.getElementById('paymentAmount').textContent = '$' + parseFloat(order.amount).toFixed(2);
 
-                // Load Items
                 const iRes = await api({ data_type: 'get_order_items', orderId: orderId });
                 renderItems(iRes.items || []);
 
@@ -272,11 +252,7 @@
             container.innerHTML = '';
 
             items.forEach(item => {
-                const subtotal = item.quantity * item.product_price; // approximate if not stored
-                // Actually item table doesn't store price at time of order in this schema (except in products table)
-                // Assuming product price didn't change or using current product price.
-                // The query returns p.price as product_price.
-
+                const subtotal = item.quantity * item.product_price; 
                 const row = document.createElement('div');
                 row.style.display = 'flex';
                 row.style.alignItems = 'center';
