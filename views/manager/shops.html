@@ -11,7 +11,6 @@
   </head>
   <body>
     <div class="manager-dashboard">
-      <!-- Sidebar -->
       <aside class="manager-sidebar">
         <nav class="manager-sidebar-nav">
           <div class="manager-nav-section">
@@ -110,12 +109,9 @@
         </nav>
       </aside>
 
-      <!-- Sidebar Overlay -->
       <div class="manager-sidebar-overlay"></div>
 
-      <!-- Main Content -->
       <main class="manager-main">
-        <!-- Top Header -->
         <header class="manager-top-header">
           <div class="manager-header-left">
             <button class="manager-sidebar-toggle">
@@ -151,9 +147,7 @@
           </div>
         </header>
 
-        <!-- Content -->
         <div class="manager-content">
-          <!-- Page Header -->
           <div class="manager-page-header">
             <div class="manager-page-header-info">
               <h1>Shop Oversight</h1>
@@ -165,7 +159,6 @@
             </div>
           </div>
 
-          <!-- Shops Grid -->
           <div class="manager-shops-grid" id="shops-grid">
             <!-- Dynamic content loaded here -->
             <div style="grid-column: 1/-1; text-align: center; padding: 2rem">
@@ -176,7 +169,6 @@
       </main>
     </div>
 
-    <!-- Add/Edit Shop Modal -->
     <div class="modal-overlay" id="shop-modal">
       <div class="modal-container">
         <div class="modal-header">
@@ -199,7 +191,6 @@
                 required
               />
             </div>
-            <!-- Manager can optionally assign an Owner ID if they know it, or leave it blank -->
             <div class="form-group">
               <label class="form-label">Owner User ID (Optional)</label>
               <input
@@ -225,7 +216,6 @@
     </div>
 
     <style>
-      /* Modal Styles */
       .modal-overlay {
         position: fixed;
         top: 0;
@@ -287,7 +277,6 @@
     </style>
 
     <script>
-      // Sidebar
       const sidebarToggle = document.querySelector(".manager-sidebar-toggle");
       const sidebar = document.querySelector(".manager-sidebar");
       const overlay = document.querySelector(".manager-sidebar-overlay");
@@ -302,7 +291,6 @@
           overlay.classList.remove("active");
         });
 
-      // Logout Logic
       const logoutBtn = document.getElementById("logout-btn");
       if (logoutBtn) {
         logoutBtn.addEventListener("click", async (e) => {
@@ -334,7 +322,6 @@
       btnClose.addEventListener("click", closeModal);
       btnCancel.addEventListener("click", closeModal);
 
-      // API
       const api = async (data) => {
         try {
           const r = await fetch("../../backend/api.php", {
@@ -349,7 +336,6 @@
         }
       };
 
-      // INIT
       const init = async () => {
         const ui = await api({ data_type: "user_info" });
         if (!ui.logged_in || ui.user.role !== "manager") {
