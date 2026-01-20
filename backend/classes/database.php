@@ -14,7 +14,6 @@ class Database
             $con = new PDO($string, $this->username, $this->password);
             return $con;
         } catch (PDOException $e) {
-            // Return JSON error instead of plain text die
             $info = (object)[];
             $info->message = "Database connection error: " . $e->getMessage();
             $info->error = true;
